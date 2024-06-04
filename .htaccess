@@ -1,7 +1,14 @@
 RewriteEngine On
+# RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.webp|\.gif|\.jpeg|\.zip|\.css|\.svg|\.js|\.pdf)$
+# RewriteRule (.*) routes.php [QSA,L]
+
  
 #####
 RewriteRule ^$                /views/index.php [NC,L]
+
+#####
+RewriteRule ^app.js$          js/app.js [NC,L]
+RewriteRule ^validator.js$    js/validator.js [NC,L]
 
 
 
