@@ -17,11 +17,9 @@ try{
       detective_email        VARCHAR(255) UNIQUE,
       detective_password     TEXT,
       detective_address      VARCHAR(255),
-      detective_role_name    VARCHAR(20),
       detective_created_at   INT,
       detective_updated_at   INT,
       detective_deleted_at   INT,
-      detective_is_blocked   INT,
       PRIMARY KEY (detective_id)
   )
 ');
@@ -40,9 +38,8 @@ $q->execute();
     $detective_created_at = time();
     $detective_updated_at = 0;
     $detective_deleted_at = 0;
-    $detective_is_blocked = rand(0,1);
     $values .= "('$detective_id', '$detective_name', '$detective_last_name', '$detective_email', '$detective_password', 
-    '$detective_address', $detective_created_at, $detective_updated_at, $detective_deleted_at, $detective_is_blocked),";
+    '$detective_address', $detective_created_at, $detective_updated_at, $detective_deleted_at),";
   }
   $values = rtrim($values, ',');  
   $q = $db->prepare("INSERT INTO detectives VALUES $values");

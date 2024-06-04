@@ -21,7 +21,6 @@ try{
       citizen_created_at   INT,
       citizen_updated_at   INT,
       citizen_deleted_at   INT,
-      citizen_is_blocked   INT,
       PRIMARY KEY (citizen_id)
   )
 ');
@@ -40,9 +39,8 @@ $q->execute();
     $citizen_created_at = time();
     $citizen_updated_at = 0;
     $citizen_deleted_at = 0;
-    $citizen_is_blocked = rand(0,1);
     $values .= "('$citizen_id', '$citizen_name', '$citizen_last_name', '$citizen_email', '$citizen_password', 
-    '$citizen_address', $citizen_created_at, $citizen_updated_at, $citizen_deleted_at, $citizen_is_blocked),";
+    '$citizen_address', $citizen_created_at, $citizen_updated_at, $citizen_deleted_at),";
   }
   $values = rtrim($values, ',');  
   $q = $db->prepare("INSERT INTO citizens VALUES $values");

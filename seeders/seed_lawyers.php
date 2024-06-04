@@ -20,7 +20,6 @@ try{
       lawyer_created_at   INT,
       lawyer_updated_at   INT,
       lawyer_deleted_at   INT,
-      lawyer_is_blocked   INT,
       PRIMARY KEY (lawyer_id)
   )
 ');
@@ -39,9 +38,8 @@ $q->execute();
     $lawyer_created_at = time();
     $lawyer_updated_at = 0;
     $lawyer_deleted_at = 0;
-    $lawyer_is_blocked = rand(0,1);
     $values .= "('$lawyer_id', '$lawyer_name', '$lawyer_last_name', '$lawyer_email', '$lawyer_password', 
-    '$lawyer_address', $lawyer_created_at, $lawyer_updated_at, $lawyer_deleted_at, $lawyer_is_blocked),";
+    '$lawyer_address', $lawyer_created_at, $lawyer_updated_at, $lawyer_deleted_at),";
   }
   $values = rtrim($values, ',');  
   $q = $db->prepare("INSERT INTO lawyers VALUES $values");

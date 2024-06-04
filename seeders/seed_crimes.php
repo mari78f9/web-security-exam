@@ -8,11 +8,9 @@ try {
     $q = $db->prepare('DROP TABLE IF EXISTS crimes');
     $q->execute();
 
-
     $q = $db->prepare('
         CREATE TABLE crimes (
             crime_id           VARCHAR(255),
-            crime_name         VARCHAR(255),
             crime_description  TEXT,
             crime_suspect      TEXT,
             crime_category     VARCHAR(50),
@@ -31,9 +29,17 @@ try {
 
     for ($i = 0; $i < 20; $i++) {
         $crime_id = bin2hex(random_bytes(5));
-        $crime_name = str_replace("'", "''", $faker->sentence(3));
-        $crime_description = str_replace("'", "''", $faker->paragraph(3));
-        $crime_suspect = str_replace("'", "''", $faker->firstName, $faker->firstName);
+        $crime_description = $faker->randomElement(['Theft of a Car',
+        'Assault with a Deadly Weapon',
+        'Burglary of a Residence',
+        'Vandalism of Public Property',
+        'Fraudulent Activities',
+        'Murder of a Person',
+        'Rape of a Minor',
+        'Robbery of a Bank',
+        'Arson of a Building',
+        'Kidnapping of a Child']);
+        $crime_suspect = str_replace("'", "''", $faker->firstName);
         $crime_category = $faker->randomElement(['Theft', 'Assault', 'Burglary', 'Vandalism', 'Fraud']);
         $crime_location = str_replace("'", "''", $faker->address);
         $crime_date = strtotime($faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'));
@@ -42,7 +48,7 @@ try {
         $crime_updated_at = 0;
         $crime_deleted_at = 0;
 
-        $values .= "('$crime_id', '$crime_name', '$crime_description', '$crime_suspect', '$crime_category', '$crime_location', $crime_date, $crime_solved, $crime_created_at, $crime_updated_at, $crime_deleted_at),";
+        $values .= "('$crime_id', '$crime_description', '$crime_suspect', '$crime_category', '$crime_location', $crime_date, $crime_solved, $crime_created_at, $crime_updated_at, $crime_deleted_at),";
     }
 
     $values = rtrim($values, ',');
