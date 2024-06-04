@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/database.php'; 
+
 // *Turns the engine on* ... always ... since the masterfile is included on all pages
 session_start();
 
@@ -7,36 +9,6 @@ session_start();
 // ini_set = changes the value of a configuration option
 ini_set('display_errors', 1);
 //ini_set('display_errors', 0) = hide error message 
-
-
-// ##############################
-// The Database connection
-
-function _db(){
-	try{
-
-    // Variables setting the "login-values" of the database, including the host, db-name and character-set
-    $user_name = "root";
-    $user_password = "root";
-	  $db_connection = "mysql:host=localhost; dbname=web-dev-exam; charset=utf8mb4";
-	
-	  // Array of configuration-options for the PDO-connection (PHP Data Objects)
-    // Sets errormode to throw exceptions (in case of DB-errors), and sets fetch mode to be associative arrays
-	  $db_options = array(
-		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // [['id'=>1, 'name'=>'A'],[]]  $user['id']
-	  );
-
-    // Returns new PHP Data Objects – 
-	  return new PDO( $db_connection, $user_name, $user_password, $db_options );
-
-  // If error occurs during db-connection, send back an error-message with a server-http-code
-	}catch( PDOException $e){
-	  throw new Exception('ups... system under maintainance', 500);
-	  exit();
-	}	
-}
-
 
 // ##############################
 // Validator of the User Name

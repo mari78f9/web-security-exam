@@ -6,7 +6,7 @@
 
 <footer id="footer">
     <p style="text-align: left;"> WebDev Exam 2023 </p> 
-    <img src="/img/logo.png" alt="logo">
+    <!-- <img src="/img/logo.png" alt="logo"> -->
     <p style="text-align: right;"> Created by Viktoria Andonovska </p> 
 </footer>
 
