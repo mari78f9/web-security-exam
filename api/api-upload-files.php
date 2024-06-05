@@ -6,13 +6,16 @@ try{
     $db = _db();  
 
     if(isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
-        $file_name = $_POST['file_name'];
-        handleFileUpload($file_name, $_FILES['file']);
+        if (isset($_POST['file_name']) && isset($_POST['case_id']) && !empty($_POST['case_id'])) {
+            $file_name = $_POST['file_name'];
+            $case_id_fk = $_POST['case_id'];
+            handleFileUpload($file_name, $_FILES['file'], $case_id_fk);
+        } else {
+            throw new Exception('File name or case ID is missing.', 400);
+        }
     } else {
         throw new Exception('No file was uploaded.', 400);
     }
-
-    // echo json_encode(['user_id' => $db->lastInsertId()]);
 }catch(Exception $e){                             
     try{
         if(!ctype_digit($e->getCode())){           
@@ -27,10 +30,22 @@ try{
 }
 
 // Function to handle file uploads
-function handleFileUpload($file_name, $file){
+function handleFileUpload($file_name, $file, $case_id_fk){
     $db = _db();
     $file_object = file_get_contents($file['tmp_name']);
-    $sql = "INSERT INTO files (file_name, file_object) VALUES (?, ?)";
-    $stmt = $db->prepare($sql);
-    $stmt->execute([$file_name, $file_object]);
+    
+    // Verify if the case_id_fk exists in the cases table
+    $case_check_sql = "SELECT 1 FROM cases WHERE case_id = ?";
+    $case_check_stmt = $db->prepare($case_check_sql);
+    $case_check_stmt->execute([$case_id_fk]);
+    
+    if ($case_check_stmt->fetch()) {
+        $sql = "INSERT INTO files (file_name, file_object, case_id_fk) VALUES (?, ?, ?)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$file_name, $file_object, $case_id_fk]);
+    } else {
+        throw new Exception('Case ID does not exist.', 400);
+    }
 }
+
+?>

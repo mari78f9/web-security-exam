@@ -5,32 +5,31 @@ require_once __DIR__.'/../_.php';
 try {
     $db = _db();  
 
-    // Check if the request has file_id or file_name
-    if (isset($_GET['file_id'])) {
-        $file_id = $_GET['file_id'];
-        $sql = "SELECT * FROM files WHERE file_id = ?";
+    // Check if the request has case_id
+    if (isset($_GET['case_id'])) {
+        $case_id = $_GET['case_id'];
+        $sql = "SELECT * FROM files WHERE case_id_fk = ?";
         $stmt = $db->prepare($sql);
-        $stmt->execute([$file_id]);
-    } elseif (isset($_GET['file_name'])) {
-        $file_name = $_GET['file_name'];
-        $sql = "SELECT * FROM files WHERE file_name = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$file_name]);
+        $stmt->execute([$case_id]);
+
+        $files = $stmt->fetchAll();
+        
+        if ($files) {
+            foreach ($files as $file) {
+                echo '<div>';
+                echo '<h2>File Name: ' . htmlspecialchars($file['file_name']) . '</h2>';
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($file['file_object']) . '" alt="File Image">';
+                echo '</div>';
+            }
+        } else {
+            throw new Exception('No files found for the given case ID.', 404);
+        }
     } else {
-        throw new Exception('No file identifier provided.', 400);
+        throw new Exception('No case ID provided.', 400);
     }
-
-    $file = $stmt->fetch();
-
-    if ($file) {
-        header('Content-Type: image/jpeg');
-        echo $file['file_object'];
-    } else {
-        throw new Exception('File not found.', 404);
-    }
-
 } catch (Exception $e) {                             
     http_response_code($e->getCode() ?: 500);              
     echo json_encode(['info' => $e->getMessage()]);  
 }
+
 ?>

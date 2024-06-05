@@ -1,13 +1,21 @@
 <?php
 
-if (isset($_GET['file_id']) || isset($_GET['file_name'])) {
-    $query = isset($_GET['file_id']) ? 'file_id=' . $_GET['file_id'] : 'file_name=' . urlencode($_GET['file_name']);
-    $url = '../../api/api-get-files.php?' . $query;
+if (isset($_GET['case_id'])) {
+    // Construct the query based on case_id
+    $query = 'case_id=' . $_GET['case_id'];
 
-    echo '<h1>Displaying File</h1>';
-    echo '<img src="' . $url . '" alt="File Image">';
+    // Construct the full URL for the images
+    $url = 'http://127.0.0.1/api/api-get-files.php?' . $query;
+
+    // Debugging output
+    echo '<h1>Displaying Files for Case ID ' . htmlspecialchars($_GET['case_id']) . '</h1>';
+
+    // Fetch and display the images
+    echo '<div>';
+    echo '<iframe src="' . $url . '" width="100%" height="600px"></iframe>';
+    echo '</div>';
 } else {
-    echo '<p>No file identifier provided.</p>';
+    echo '<p>No case ID provided.</p>';
 }
 
 ?>
