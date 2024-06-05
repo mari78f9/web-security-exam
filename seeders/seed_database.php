@@ -1,9 +1,8 @@
 <?php
 
-require_once __DIR__.'/seed_citizens.php';
-require_once __DIR__.'/seed_detectives.php';
-require_once __DIR__.'/seed_lawyers.php';
-require_once __DIR__.'/seed_crimes.php';
+require_once __DIR__.'/seed_users.php';
+require_once __DIR__.'/seed_cases.php';
+require_once __DIR__.'/seed_roles.php';
 
 
 
