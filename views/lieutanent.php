@@ -25,12 +25,30 @@ require_once __DIR__.'/_header.php';
     </form>
 
     <h1>Search Files by Case ID</h1>
-    <form action="/views/_display-file.php" method="get">
-        <label for="case_id">Case ID:</label>
-        <input type="text" id="case_id" name="case_id">
+    <form id="search-form">
+        <label for="search_case_id">Case ID:</label>
+        <input type="text" id="search_case_id" name="case_id">
         <input type="submit" value="Search">
     </form>
 
-</section>
+    <div id="files-display"></div>
 
+</section>
+<script>
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var caseId = document.getElementById('search_case_id').value;
+
+        fetch('../api/api-display-files.php?case_id=' + caseId)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('files-display').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error fetching files:', error);
+            document.getElementById('files-display').textContent = 'Error fetching files.';
+        });
+    });
+</script>
 <?php require_once __DIR__.'/_footer.php' ?>  

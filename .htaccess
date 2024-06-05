@@ -5,3 +5,4 @@ RewriteEngine On
  
 #####
 RewriteRule ^$                /views/index.php [NC,L]
+RewriteRule ^lieutanent$                /views/lieutanent.php [NC,L]
