@@ -10,22 +10,26 @@ try {
 
     $q = $db->prepare('
         CREATE TABLE cases (
-            case_id           VARCHAR(255),
+            case_id           VARCHAR(10),
             case_description  TEXT,
             case_suspect      TEXT,
             case_type         VARCHAR(50),
             case_location     VARCHAR(255),
-            case_date         INT,
-            case_solved       INT,
-            case_created_at   INT,
-            case_updated_at   INT,
-            case_is_public    INT,
+            case_date         CHAR(10),
+            case_solved       CHAR(10),
+            case_created_at   CHAR(10),
+            case_updated_at   CHAR(10),
+            case_is_public    TINYINT(1),
             PRIMARY KEY (case_id)
         )
     ');
     $q->execute();
 
-    $values = '';
+     // Prepare an SQL template for inserting cases
+     $sql = "INSERT INTO cases (case_id, case_description, case_suspect, case_type, case_location, case_date, case_solved, case_created_at, case_updated_at, case_is_public) VALUES (:case_id, :case_description, :case_suspect, :case_type, :case_location, :case_date, :case_solved, :case_created_at, :case_updated_at, :case_is_public)";
+
+     // Prepare the statement
+     $q = $db->prepare($sql);
 
     for ($i = 0; $i < 20; $i++) {
         $case_id = bin2hex(random_bytes(5));
@@ -45,19 +49,25 @@ try {
         $case_solved = rand(0, 1);
         $case_created_at = time();
         $case_updated_at = 0;
-        $user_is_public = rand(0,1);
+        $case_is_public = rand(0,1);
 
+        // Bind parameters and execute the prepared statement
+        $q->bindParam(':case_id', $case_id);
+        $q->bindParam(':case_description', $case_description);
+        $q->bindParam(':case_suspect', $case_suspect);
+        $q->bindParam(':case_type', $case_type);
+        $q->bindParam(':case_location', $case_location);
+        $q->bindParam(':case_date', $case_date);
+        $q->bindParam(':case_solved', $case_solved);
+        $q->bindParam(':case_created_at', $case_created_at);
+        $q->bindParam(':case_updated_at', $case_updated_at);
+        $q->bindParam(':case_is_public', $case_is_public);
 
-
-        $values .= "('$case_id', '$case_description', '$case_suspect', '$case_type', '$case_location', $case_date, $case_solved, $case_created_at, $case_updated_at, $user_is_public),";
+        $q->execute();
     }
-
-    $values = rtrim($values, ',');
-    $q = $db->prepare("INSERT INTO cases VALUES $values");
-    $q->execute();
 
     echo "+ cases" . PHP_EOL;
 } catch (Exception $e) {
-    echo $e;
+    echo $e->getMessage(); 
 }
 ?>
