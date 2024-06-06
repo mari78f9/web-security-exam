@@ -19,7 +19,7 @@ try {
             case_solved       INT,
             case_created_at   INT,
             case_updated_at   INT,
-            case_deleted_at   INT,
+            case_is_public    INT,
             PRIMARY KEY (case_id)
         )
     ');
@@ -45,9 +45,11 @@ try {
         $case_solved = rand(0, 1);
         $case_created_at = time();
         $case_updated_at = 0;
-        $case_deleted_at = 0;
+        $user_is_public = rand(0,1);
 
-        $values .= "('$case_id', '$case_description', '$case_suspect', '$case_type', '$case_location', $case_date, $case_solved, $case_created_at, $case_updated_at, $case_deleted_at),";
+
+
+        $values .= "('$case_id', '$case_description', '$case_suspect', '$case_type', '$case_location', $case_date, $case_solved, $case_created_at, $case_updated_at, $user_is_public),";
     }
 
     $values = rtrim($values, ',');
