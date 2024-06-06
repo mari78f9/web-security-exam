@@ -115,8 +115,8 @@ async function login(){
 
     // Depending on user_role, from the recieved data in the console, redirect the user to each of the pages (permission-access)
     switch (data.user_role) {
-      case 'lieutanent':
-        location.href = "../views/lieutanent.php";
+      case 'admin':
+        location.href = "../views/admin.php";
         break;
       case 'partner':
         location.href = "../views/partner.php";

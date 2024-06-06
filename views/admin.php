@@ -15,7 +15,7 @@ require_once __DIR__.'/_header.php';
     <h1 class="header-page"> Lieutanent </h1>
 
     <h1>File Upload</h1>
-    <form action="../api/api-upload-files.php" method="post" enctype="multipart/form-data">
+    <form id="file-upload" action="../api/api-upload-files.php" method="post" enctype="multipart/form-data">
         <label for="file_name">File Name:</label>
         <input type="text" id="file_name" name="file_name">
         <label for="case_id">Case ID:</label>
@@ -25,7 +25,7 @@ require_once __DIR__.'/_header.php';
     </form>
 
     <h1>Search Files by Case ID</h1>
-    <form id="search-form">
+    <form id="search-files">
         <label for="search_case_id">Case ID:</label>
         <input type="text" id="search_case_id" name="case_id">
         <input type="submit" value="Search">
@@ -34,8 +34,15 @@ require_once __DIR__.'/_header.php';
     <div id="files-display"></div>
 
 </section>
+
 <script>
-    document.getElementById('search-form').addEventListener('submit', function(event) {
+    //  window.onload = function() {
+    //     document.getElementById("file-upload").reset();
+    //     document.getElementById("search-files").reset();
+    // }
+
+    // Prevent form submission and handle search
+    document.getElementById('search-files').addEventListener('submit', function(event) {
         event.preventDefault();
 
         var caseId = document.getElementById('search_case_id').value;
