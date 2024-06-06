@@ -33,13 +33,61 @@ require_once __DIR__.'/_header.php';
 
     <div id="files-display"></div>
 
+    <form id="create-case-form" onsubmit="makeCase(); return false">
+        <label for="case_description">Description:</label>
+        <textarea id="case_description" name="case_description" required></textarea>
+
+        <label for="case_suspect">Suspect:</label>
+        <input type="text" id="case_suspect" name="case_suspect" required>
+
+        <label for="case_type">Type:</label>
+        <input type="text" id="case_type" name="case_type" required>
+
+        <label for="case_location">Location:</label>
+        <input type="text" id="case_location" name="case_location" required>
+
+        <!-- Additional fields for case_solved, case_is_public, etc., if needed -->
+
+        <button type="submit">Create Case</button>
+    </form>
+
+    <h1>All Cases</h1>
+    <div id="cases-display"></div>
+
 </section>
 
 <script>
-    //  window.onload = function() {
-    //     document.getElementById("file-upload").reset();
-    //     document.getElementById("search-files").reset();
-    // }
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('../api/api-get-cases.php')
+            .then(response => response.json())
+            .then(data => {
+                let casesDisplay = document.getElementById('cases-display');
+                if (data.error) {
+                    casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
+                    return;
+                }
+                data.forEach(caseItem => {
+                    let caseElement = document.createElement('div');
+                    caseElement.innerHTML = `
+                        <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
+                        <p><strong>Description:</strong> ${caseItem.case_description}</p>
+                        <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
+                        <p><strong>Type:</strong> ${caseItem.case_type}</p>
+                        <p><strong>Location:</strong> ${caseItem.case_location}</p>
+                        <p><strong>Solved:</strong> ${caseItem.case_solved ? 'Yes' : 'No'}</p>
+                        <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                        <p><strong>Updated At:</strong> ${caseItem.case_updated_at !== 0 ? new Date(caseItem.case_updated_at * 1000).toLocaleString() : 'Never'}</p>
+                        <p><strong>Public:</strong> ${caseItem.case_is_public ? 'Yes' : 'No'}</p>
+                        <hr>
+                    `;
+                    casesDisplay.appendChild(caseElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching cases:', error);
+                document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
+            });
+    });
 
     // Prevent form submission and handle search
     document.getElementById('search-files').addEventListener('submit', function(event) {

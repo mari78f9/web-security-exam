@@ -1,4 +1,21 @@
+async function makeCase(){
+  const frm = event.target   // A form triggers the event (function is called upon a form-submission)
+  console.log(frm)
 
+  // Send a POST-request to the signup-api (sends the form-data as a FormData-object with key-value pairs)
+  const conn = await fetch("/api/api-make-case.php", {
+    method : "POST",
+    body : new FormData(frm)
+  })
+
+  // Show the expected data from the form-submission in the console
+  const data = await conn.text()
+  console.log(data) 
+
+  // Refresh the window
+  location.reload();
+
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 

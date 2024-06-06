@@ -15,8 +15,7 @@ try {
             case_suspect      TEXT,
             case_type         VARCHAR(50),
             case_location     VARCHAR(255),
-            case_date         CHAR(10),
-            case_solved       CHAR(10),
+            case_solved       TINYINT(1),
             case_created_at   CHAR(10),
             case_updated_at   CHAR(10),
             case_is_public    TINYINT(1),
@@ -26,7 +25,7 @@ try {
     $q->execute();
 
      // Prepare an SQL template for inserting cases
-     $sql = "INSERT INTO cases (case_id, case_description, case_suspect, case_type, case_location, case_date, case_solved, case_created_at, case_updated_at, case_is_public) VALUES (:case_id, :case_description, :case_suspect, :case_type, :case_location, :case_date, :case_solved, :case_created_at, :case_updated_at, :case_is_public)";
+     $sql = "INSERT INTO cases (case_id, case_description, case_suspect, case_type, case_location, case_solved, case_created_at, case_updated_at, case_is_public) VALUES (:case_id, :case_description, :case_suspect, :case_type, :case_location, :case_solved, :case_created_at, :case_updated_at, :case_is_public)";
 
      // Prepare the statement
      $q = $db->prepare($sql);
@@ -45,7 +44,6 @@ try {
         'Kidnapping of a Child']);
         $case_suspect = str_replace("'", "''", $faker->firstName . ' ' . $faker->lastName);        $case_type = $faker->randomElement(['Theft', 'Assault', 'Burglary', 'Vandalism', 'Fraud']);
         $case_location = str_replace("'", "''", $faker->address);
-        $case_date = strtotime($faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'));
         $case_solved = rand(0, 1);
         $case_created_at = time();
         $case_updated_at = 0;
@@ -57,7 +55,6 @@ try {
         $q->bindParam(':case_suspect', $case_suspect);
         $q->bindParam(':case_type', $case_type);
         $q->bindParam(':case_location', $case_location);
-        $q->bindParam(':case_date', $case_date);
         $q->bindParam(':case_solved', $case_solved);
         $q->bindParam(':case_created_at', $case_created_at);
         $q->bindParam(':case_updated_at', $case_updated_at);
