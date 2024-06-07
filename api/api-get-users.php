@@ -5,8 +5,8 @@ header('Content-Type: application/json');
 try {
     $db = _db();
 
-    $publicOnly = isset($_GET['public_only']) ? 'WHERE case_is_public = 1' : '';
-    $q = $db->prepare("SELECT * FROM cases $publicOnly");
+    // Prepare and execute the query to select all cases
+    $q = $db->prepare('SELECT * FROM users');
     $q->execute();
 
     // Fetch all cases

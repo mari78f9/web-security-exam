@@ -35,8 +35,7 @@ try{
     'user_last_name' => $user['user_last_name'],
     'user_email' => $user['user_email'],
     'user_password' => $user['user_password'],
-    'user_address' => $user['user_address'],
-    'user_role' => $user['user_role']
+    'role_id_fk' => $user['role_id_fk']
   ];
 
   // Convert data into json-objects and display in the session_storage

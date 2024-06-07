@@ -12,6 +12,7 @@ try {
         CREATE TABLE cases (
             case_id           VARCHAR(10),
             case_description  TEXT,
+            case_tip          TEXT,
             case_suspect      TEXT,
             case_type         VARCHAR(50),
             case_location     VARCHAR(255),
@@ -25,7 +26,7 @@ try {
     $q->execute();
 
      // Prepare an SQL template for inserting cases
-     $sql = "INSERT INTO cases (case_id, case_description, case_suspect, case_type, case_location, case_solved, case_created_at, case_updated_at, case_is_public) VALUES (:case_id, :case_description, :case_suspect, :case_type, :case_location, :case_solved, :case_created_at, :case_updated_at, :case_is_public)";
+     $sql = "INSERT INTO cases (case_id, case_description, case_tip, case_suspect, case_type, case_location, case_solved, case_created_at, case_updated_at, case_is_public) VALUES (:case_id, :case_description, :case_tip, :case_suspect, :case_type, :case_location, :case_solved, :case_created_at, :case_updated_at, :case_is_public)";
 
      // Prepare the statement
      $q = $db->prepare($sql);
@@ -42,6 +43,7 @@ try {
         'Robbery of a Bank',
         'Arson of a Building',
         'Kidnapping of a Child']);
+        $case_tip = '';
         $case_suspect = str_replace("'", "''", $faker->firstName . ' ' . $faker->lastName);        $case_type = $faker->randomElement(['Theft', 'Assault', 'Burglary', 'Vandalism', 'Fraud']);
         $case_location = str_replace("'", "''", $faker->address);
         $case_solved = rand(0, 1);
@@ -52,6 +54,7 @@ try {
         // Bind parameters and execute the prepared statement
         $q->bindParam(':case_id', $case_id);
         $q->bindParam(':case_description', $case_description);
+        $q->bindParam(':case_tip', $case_tip);
         $q->bindParam(':case_suspect', $case_suspect);
         $q->bindParam(':case_type', $case_type);
         $q->bindParam(':case_location', $case_location);

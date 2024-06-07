@@ -16,20 +16,19 @@ try {
   // matches with the required specifications of the value (fx string-lenght or speciel-characters)
   _validate_user_name();        // Name-validation function from the master-file 
   _validate_user_last_name();   // Last Name-validation function from the master-file 
-  _validate_user_address();     // Address-validation function from the master-file 
   _validate_user_email();       // Email-validation function from the master-file 
   
 
 // Updates the data in the database, based on the user_id, and the new-changed data in the user-info-form
   $db = _db();
   $q = $db->prepare('
-  UPDATE users 
-  SET user_name = :user_name, 
-  user_last_name = :user_last_name,
-  user_email = :user_email,
-  user_address = :user_address,
-  user_updated_at = :time
-  WHERE user_id = :user_id
+    UPDATE users 
+    SET user_name = :user_name, 
+    user_last_name = :user_last_name,
+    user_email = :user_email,
+    role_id_fk = :role_id_fk,
+    user_updated_at = :time,
+    WHERE user_id = :user_id
   ');
 
   // Binds each value of the elements in the query, with each element in the user-info-form
@@ -37,7 +36,7 @@ try {
     $q-> bindValue(':user_id', $user_id);
     $q-> bindValue(':user_last_name', $_POST['user_last_name']);
     $q-> bindValue(':user_email', $_POST['user_email']);
-    $q-> bindValue(':user_address', $_POST['user_address']);
+    $q-> bindValue(':role_id_fk', $_POST['role_id_fk']);
     $q-> bindValue(':time', time());
     $q -> execute();
     $counter = $q->rowCount();

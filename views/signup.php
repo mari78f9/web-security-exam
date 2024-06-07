@@ -18,18 +18,8 @@ require_once __DIR__ . '/../_.php';
 <main class="form">
 
     <div id="signupForm" class="signup">
-        <h4 class="header-form">Signup</h4>
+        <h4 class="header-form">Signup with a citizen account</h4>
         <form class="signup-form" onsubmit="validate(signup); return false">
-
-            <div id="name" class="form-signup-grid">
-                <label class="form-label" for="user_name">
-                    User or Partner?
-                </label>
-                <select class="form-input" id="user_role" name="user_role">
-                    <option value="user">User</option>
-                    <option value="partner">Partner</option>
-                </select>
-            </div>
 
             <div id="name" class="form-signup-grid">
                 <label class="form-label" for="user_name">
@@ -38,24 +28,11 @@ require_once __DIR__ . '/../_.php';
                 <input class="form-input" id="user_namex" name="user_name" placeholder="Name" type="text" data-validate="str" data-min="<?= USER_NAME_MIN ?>" data-max="<?= USER_NAME_MAX ?>" class="">
             </div>
 
-            <div id="nickName" class="form-signup-grid">
-                <label class="form-label" for="user_nickname">
-                    Nickname (<?= USER_NAME_MIN ?> to <?= USER_NAME_MAX ?> characters)
-                </label>
-                <input class="form-input" id="user_nickname" name="user_nickname" placeholder="Nickname" type="text" data-validate="str" data-min="<?= USER_NAME_MIN ?>" data-max="<?= USER_NAME_MAX ?>" class="">
-            </div>
-
             <div id="lastName" class="form-signup-grid">
                 <label class="form-label" for="user_last_name">
                     Last name (<?= USER_LAST_NAME_MIN ?> to <?= USER_LAST_NAME_MAX ?> characters)
                 </label>
                 <input class="form-input" id="user_last_name" name="user_last_name" placeholder="Last name" type="text" data-validate="str" data-min="<?= USER_LAST_NAME_MIN ?>" data-max="<?= USER_LAST_NAME_MAX ?>" class="">
-            </div>
-            
-            <div id="address" class="form-signup-grid">
-                <label class="form-label" for="user_address"> Address (<?= USER_ADDRESS_MIN ?> to <?= USER_ADDRESS_MAX ?> characters)</label>
-                <input class="form-input" id="user_address" name="user_address" placeholder="Address" type="text"
-                data-validate="str" data-min="<?= USER_ADDRESS_MIN ?>" data-max="<?= USER_ADDRESS_MAX ?>"class="">
             </div>
 
             <div id="email" class="form-signup-grid">

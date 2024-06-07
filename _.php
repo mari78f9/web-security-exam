@@ -93,11 +93,11 @@ function _validate_user_confirm_password(){
 }
 
 // ##############################
-function _is_partner() {
+function _is_admin() {
   if (!isset($_SESSION['user'])) {
       return false;
   }
-  return $_SESSION['user']['user_role_name'] = 'partner';
+  return $_SESSION['user']['role_id_fk'] = 4;
 }
 
 // ##############################

@@ -8,7 +8,6 @@ try{
 // matches with the required specifications of the value (fx string-lenght or speciel-characters)
 
   _validate_user_name();                  // Name-validation function from the master-file 
-  _validate_user_nickname();                  // Name-validation function from the master-file 
   _validate_user_last_name();             // Last-name-validation function from the master-file
   _validate_user_email();                 // Email-validation function from the master-file 
   _validate_user_password();              // Password-validation function from the master-file 
@@ -23,12 +22,10 @@ try{
     VALUES (
       :user_id, 
       :user_name, 
-      :user_nickname
       :user_last_name, 
       :user_email, 
-      :user_address,
       :user_password, 
-      :user_role, 
+      :role_id_fk,
       :user_created_at, 
       :user_updated_at,
       :user_deleted_at,
@@ -36,15 +33,13 @@ try{
       )'
   );                                    
 
-  $q->bindValue(':user_id', null);                                                                  // Binds the placeholder value (from the SQL statement in the database) to a NULL (since the user_id is a 'SERIAL' and AUTO INCREMENT the next available id for each new user)
-  $q->bindValue(':user_name', $_POST['user_name']);                                                 // Binds the placeholder value (from the SQL statement in the database) to the user_name fetched from the $_POST request
-  $q->bindValue(':user_nickname', $_POST['user_nickname']);                                                 // Binds the placeholder value (from the SQL statement in the database) to the user_name fetched from the $_POST request
+  $q->bindValue(':user_id', bin2hex(random_bytes(5)));                                                                  // Binds the placeholder value (from the SQL statement in the database) to a NULL (since the user_id is a 'SERIAL' and AUTO INCREMENT the next available id for each new user)
+  $q->bindValue(':user_name', $_POST['user_name']);                                                 // Binds the placeholder value (from the SQL statement in the database) to the user_name fetched from the $_POST request 
   $q->bindValue(':user_last_name', $_POST['user_last_name']);                                       // Binds the placeholder value (from the SQL statement in the database) to the user_last_name fetched from the $_POST request
   $q->bindValue(':user_email', $_POST['user_email']);                                               // Binds the placeholder value (from the SQL statement in the database) to the user_email fetched from the $_POST request
-  $q->bindValue(':user_address', $_POST['user_address']);                                           // Binds the placeholder value (from the SQL statement in the database) to the user_address fetched from the $_POST request
   // $q->bindValue(':user_password', $_POST['user_password']);              
-  $q->bindValue(':user_password', password_hash($_POST['user_password'], PASSWORD_DEFAULT));        // Binds the placeholder value (from the SQL statement in the database) to the user_password fetched from the $_POST request (which is secured by the password_hash() function)    
-  $q->bindValue(':user_role', $_POST['user_role']);                                                 // Binds the placeholder value (from the SQL statement in the database) to the user_role fetched from the $_POST request
+  $q->bindValue(':user_password', password_hash($_POST['user_password'], PASSWORD_DEFAULT));        // Binds the placeholder value (from the SQL statement in the database) to the user_password fetched from the $_POST request (which is secured by the password_hash() function)  
+  $q->bindValue(':role_id_fk', 3); 
   $q->bindValue(':user_created_at', time());                                                        // Binds the placeholder value (from the SQL statement in the database) to the current timestamp from when the user was created
   $q->bindValue(':user_updated_at', 0);                                                             // Binds the placeholder value (from the SQL statement in the database) to the value '0' (the database will simply contain the '0')
   $q->bindValue(':user_deleted_at', 0);                                                             // Binds the placeholder value (from the SQL statement in the database) to the value '0' (the database will simply contain the '0')

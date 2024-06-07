@@ -128,18 +128,21 @@ async function login(){
     // Show the expected data from the form-submission in the console 
     // And sets the data into session_storage inside a key called 'user_info'
     const data = await conn.json();
-    sessionStorage.setItem('user_info', JSON.stringify(data));
+    // sessionStorage.setItem('user_info', JSON.stringify(data));
 
     // Depending on user_role, from the recieved data in the console, redirect the user to each of the pages (permission-access)
-    switch (data.user_role) {
-      case 'admin':
+    switch (data.role_id_fk) {
+      case 1:
+        location.href = "../views/detective.php";
+        break;
+      case 2:
+        location.href = "../views/lawyer.php";
+        break;
+      case 3:
+        location.href = "../views/citizen.php";
+        break;
+      case 4:
         location.href = "../views/admin.php";
-        break;
-      case 'partner':
-        location.href = "../views/partner.php";
-        break;
-      case 'user':
-        location.href = "../views/user.php";
         break;
     }
 
@@ -156,7 +159,7 @@ async function login(){
 
 // When logging out, clear the session-storage for data, and redirect to the logout-page (which is redirecting to the login page)
 function logout() {
-  sessionStorage.clear();
+  // sessionStorage.clear();
   
   location.href="../views/logout.php"
 }
