@@ -1,6 +1,7 @@
 <?php
 // Connects to the master-file, which contains the database connection and validation
 require_once __DIR__.'/../_.php';
+header('Content-Type: application/json');
 
 try{
 
@@ -33,6 +34,11 @@ try{
     throw new Exception('Your account is blocked. Please contact support.', 403);
   }
 
+  // Check if the user has been deleted
+  if ($user['user_deleted_at'] != 0) {
+    throw new Exception('Your account has been deleted and you cannot log in.', 403);
+  }
+
   // Based on the logged-in users information, insert the data into the session (temporary placeholding of the data during login)
   $_SESSION['user'] = [
     'user_id' => $user['user_id'],
@@ -46,7 +52,6 @@ try{
 
   // Convert data into json-objects and display in the session_storage
   http_response_code(200);
-  header('Content-Type: application/json');
   echo json_encode($_SESSION['user']);
 
 }catch(Exception $e){

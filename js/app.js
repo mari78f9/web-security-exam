@@ -1,3 +1,47 @@
+// ##########################################################################################
+
+// SOLVED/NOT SOLVED ////////////////////
+// Handles a case to solved or not solved
+function toggleCaseSolved(caseId, currentStatus) {
+  const newStatus = currentStatus === 1 ? 0 : 1;
+
+  const formData = new FormData();
+  formData.append('case_id', caseId);
+  formData.append('case_solved', newStatus);
+
+  fetch('../api/api-update-case.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.error) {
+          throw new Error(data.error);
+      }
+
+      const caseElement = document.getElementById(`case-${caseId}`);
+      if (caseElement) {
+          const solvedStatusElement = caseElement.querySelector('.case-solved');
+          solvedStatusElement.textContent = newStatus ? 'Yes' : 'No';
+
+          const toggleButton = caseElement.querySelector('.toggle-button');
+          toggleButton.setAttribute('onclick', `toggleCaseSolved('${caseId}', ${newStatus})`);
+      } else {
+          console.error('Case element not found:', caseId);
+      }
+
+      // Reload the page after toggling
+      location.reload();
+  })
+  .catch(error => {
+      console.error('Error updating case solved status:', error);
+  });
+}
+
+// ##########################################################################################
+
+// MAKE CASE ////////////////////
+// Handles to make a case
 async function makeCase(){
   const frm = event.target   // A form triggers the event (function is called upon a form-submission)
   console.log(frm)
@@ -17,6 +61,75 @@ async function makeCase(){
 
 }
 
+// ##########################################################################################
+
+// TIP ////////////////////
+// Handles a case to make a tip
+
+function addTip() {
+  const caseId = document.getElementById('case_id_tip').value;
+  const caseTip = document.getElementById('case_tip').value;
+
+  const formData = new FormData();
+  formData.append('case_id', caseId);
+  formData.append('case_tip', caseTip);
+
+  fetch('../api/api-update-case.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.error) {
+          throw new Error(data.error);
+      }
+      location.reload(); // Reload the page after adding the tip
+  })
+  .catch(error => {
+      console.error('Error adding tip:', error);
+  });
+}
+
+// ##########################################################################################
+
+// PRIVATE/PUBLIC CASES ////////////////////
+// Handles a case that is private or public
+
+function toggleCaseVisibility(caseId, currentStatus) {
+  const newStatus = currentStatus === 1 ? 0 : 1;
+
+  const formData = new FormData();
+  formData.append('case_id', caseId);
+  formData.append('case_is_public', newStatus);
+
+  fetch('../api/api-update-case.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.error) {
+          throw new Error(data.error);
+      }
+
+      const caseElement = document.getElementById(`case-${caseId}`);
+      if (caseElement) {
+          const visibilityStatusElement = caseElement.querySelector('.case-visibility');
+          visibilityStatusElement.textContent = newStatus ? 'Yes' : 'No';
+
+          const toggleVisibilityButton = caseElement.querySelector('.toggle-visibility-button');
+          toggleVisibilityButton.setAttribute('onclick', `toggleCaseVisibility('${caseId}', ${newStatus})`);
+      } else {
+          console.error('Case element not found:', caseId);
+      }
+      // Reload the page after toggling
+      location.reload();
+  })
+  .catch(error => {
+      console.error('Error updating case visibility status:', error);
+  });
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // Hide logout button on signup/login page
@@ -32,51 +145,33 @@ if (window.location.pathname === '../views/signup.php', '../views/login.php') {
   // Call the function when the window has finished loading
   window.onload = hideSection;
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// ##############################
-
-// Function to check if a email is available, so more than one user can't have the same email (just like one id for each)
-// Funtion *commented out* ... because the matching API doesn't exist
-
-
-// async function is_email_available(){
-//     const frm = event.target.form
-//     const conn = await fetch("api/api-is-email-available.php", {
-//       method: "POST",
-//       body: new FormData(frm)
-//     })
-//     if( ! conn.ok ){ // everything that is not a 2xx
-//       console.log("email not available")
-//       document.querySelector("#msg_email_not_available").classList.remove("hidden")
-//       return
-//     }
-//     console.log("email available")
-//   }
-
   
 // ##########################################################################################
   
 // Toggle Blocked ////////////////////
 // Switches between "Blocked" and "Unblocked" inside a user based on the user_id in the query-string
 
-async function toggle_blocked(user_id, user_is_blocked){
-  
-    console.log("user_id", user_id)
-    console.log("user_is_blocked", user_is_blocked)
-  
-    if(user_is_blocked == 0){
-      event.target.innerHTML = "Blocked"
-    }else
-    {
-      event.target.innerHTML = "Unblocked"
-    }
-  
-    // Not using 'method' here, cause it's a GET-request (with a query-string)
-    const conn = await fetch(`../api/api-toggle-user-blocked.php?user_id=${user_id}&user_is_blocked=${user_is_blocked}`)
-    const data = await conn.text()
-    console.log(data)
+function toggleUserBlocked(userId, currentStatus) {
+  const newStatus = currentStatus === 1 ? 0 : 1;
+
+  const formData = new FormData();
+  formData.append('user_id', userId);
+  formData.append('user_is_blocked', newStatus);
+
+  fetch('../api/api-toggle-user-blocked.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.error) {
+          throw new Error(data.error);
+      }
+      location.reload(); // Reload the page after toggling
+  })
+  .catch(error => {
+      console.error('Error updating user blocked status:', error);
+  });
 }
   
 // ##########################################################################################
@@ -122,12 +217,20 @@ async function login(){
 
     if (!conn.ok) {
       const errorData = await conn.json();
+
       // Check if the error message indicates the user is blocked
       if (conn.status === 403 && errorData.info === 'Your account is blocked. Please contact support.') {
         throw new Error('Your account is blocked. Please contact support.');
       }
+
+      // Check if the error message indicates the user account is deleted
+      if (conn.status === 403 && errorData.info === 'Your account has been deleted and you cannot log in.') {
+        throw new Error('Your account has been deleted and you cannot log in.');
+      }
+
       throw new Error("Login failed");
     }
+
 
     // Show the expected data from the form-submission in the console 
     // And sets the data into session_storage inside a key called 'user_info'
@@ -154,13 +257,14 @@ async function login(){
 
     // If error occurs during the login, send back error-message
   } catch (error) {
-    // Check if the error message indicates the user is blocked
-      if (error.message === 'Your account is blocked. Please contact support.') {
-        alert('Your account is blocked. Please contact support.');
-      } else {
-        alert('Invalid email or password');
-      }
-      console.error("Login error:", error.message);
+    if (error.message === 'Your account is blocked. Please contact support.') {
+      alert('Your account is blocked. Please contact support.');
+    } else if (error.message === 'Your account has been deleted and you cannot log in.') {
+      alert('Your account has been deleted and you cannot log in.');
+    } else {
+      alert('Invalid email or password');
+    }
+    console.error("Login error:", error.message);
   }
 }
 
@@ -198,64 +302,27 @@ async function updateUser() {
   alert('User updated successfully');
 }
 
-
 // ##########################################################################################
 
 // DELETE //////////////////
+// Handles a user-delete
 
-// function deleteUser() {
+function deleteUser(userId) {
+  const formData = new FormData();
+  formData.append('user_id', userId);
 
-//   // Ask for confirmation (Double checking before confirming)
-//   var isConfirmed = confirm('Are you sure you want to delete your profile?');
-
-//   if (isConfirmed) {
-//     // Make an asynchronous request to the delete-user API
-//     fetch(`/api/api-delete-user.php`, {
-//       method: 'POST'  // Method is set as 'GET' in default (most commonly used HTTP-method) ... and we're using POST
-//     })
-//     .then(response => {
-
-//       if (response.ok) {
-
-//         // User deleted successfully
-//         alert('User deleted successfully');
-//         sessionStorage.clear();
-//         location.href="../views/logout.php" // Redirects to the home page
-
-//       } else {
-//         // Handle error
-//         alert('Failed to delete user');
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error:', error);
-//     });
-//   } else {
-//     // If not confirmed, do nothing or provide feedback to the user
-//     console.log('Delete canceled');
-//   }
-// }
-
-// function confirmDelete(id) {
-//   // Call the deleteUser function directly
-//   deleteUser();
-// }
-
-
-// ##########################################################################################
-
-
-// Unnesseary code – not linked to anything
-
-// function show_page(page_id){
-//     // Hide all the pages
-//     __(".page").forEach( page => {
-//       page.classList.add("hidden")
-//     })
-//     // Show the one with the id
-//     _("#"+page_id).classList.remove("hidden")
-//   }
-
-
-// ##########################################################################################
-
+  fetch('../api/api-delete-user.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.error) {
+          throw new Error(data.error);
+      }
+      document.getElementById(`user-${userId}`).remove(); // Remove user element from the page
+  })
+  .catch(error => {
+      console.error('Error deleting user:', error);
+  });
+}

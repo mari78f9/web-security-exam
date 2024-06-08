@@ -3,6 +3,8 @@
 
 require_once __DIR__.'/../_.php'; 
 require_once __DIR__.'/_header.php';
+require_once __DIR__.'/../api/search/api-search-all-users.php';
+require_once __DIR__.'/../api/search/api-search-all-cases.php';
 
 // Ensure the user is an admin
 if ($_SESSION['user']['role_id_fk'] !== 4) {
@@ -68,145 +70,6 @@ if ($_SESSION['user']['role_id_fk'] !== 4) {
 </section>
 
 <script>
-
-    function deleteUser(userId) {
-        const formData = new FormData();
-        formData.append('user_id', userId);
-
-        fetch('../api/api-delete-user.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            document.getElementById(`user-${userId}`).remove(); // Remove user element from the page
-        })
-        .catch(error => {
-            console.error('Error deleting user:', error);
-        });
-    }
-
-    function toggleUserBlocked(userId, currentStatus) {
-        const newStatus = currentStatus === 1 ? 0 : 1;
-
-        const formData = new FormData();
-        formData.append('user_id', userId);
-        formData.append('user_is_blocked', newStatus);
-
-        fetch('../api/api-toggle-user-blocked.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            location.reload(); // Reload the page after toggling
-        })
-        .catch(error => {
-            console.error('Error updating user blocked status:', error);
-        });
-    }
-
-    function toggleCaseVisibility(caseId, currentStatus) {
-        const newStatus = currentStatus === 1 ? 0 : 1;
-
-        const formData = new FormData();
-        formData.append('case_id', caseId);
-        formData.append('case_is_public', newStatus);
-
-        fetch('../api/api-update-case.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
-            const caseElement = document.getElementById(`case-${caseId}`);
-            if (caseElement) {
-                const visibilityStatusElement = caseElement.querySelector('.case-visibility');
-                visibilityStatusElement.textContent = newStatus ? 'Yes' : 'No';
-
-                const toggleVisibilityButton = caseElement.querySelector('.toggle-visibility-button');
-                toggleVisibilityButton.setAttribute('onclick', `toggleCaseVisibility('${caseId}', ${newStatus})`);
-            } else {
-                console.error('Case element not found:', caseId);
-            }
-            // Reload the page after toggling
-            location.reload();
-        })
-        .catch(error => {
-            console.error('Error updating case visibility status:', error);
-        });
-    }
-
-    function addTip() {
-        const caseId = document.getElementById('case_id_tip').value;
-        const caseTip = document.getElementById('case_tip').value;
-
-        const formData = new FormData();
-        formData.append('case_id', caseId);
-        formData.append('case_tip', caseTip);
-
-        fetch('../api/api-update-case.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            location.reload(); // Reload the page after adding the tip
-        })
-        .catch(error => {
-            console.error('Error adding tip:', error);
-        });
-    }
-
-    function toggleCaseSolved(caseId, currentStatus) {
-        const newStatus = currentStatus === 1 ? 0 : 1;
-
-        const formData = new FormData();
-        formData.append('case_id', caseId);
-        formData.append('case_solved', newStatus);
-
-        fetch('../api/api-update-case.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
-            const caseElement = document.getElementById(`case-${caseId}`);
-            if (caseElement) {
-                const solvedStatusElement = caseElement.querySelector('.case-solved');
-                solvedStatusElement.textContent = newStatus ? 'Yes' : 'No';
-
-                const toggleButton = caseElement.querySelector('.toggle-button');
-                toggleButton.setAttribute('onclick', `toggleCaseSolved('${caseId}', ${newStatus})`);
-            } else {
-                console.error('Case element not found:', caseId);
-            }
-
-            // Reload the page after toggling
-            location.reload();
-        })
-        .catch(error => {
-            console.error('Error updating case solved status:', error);
-        });
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         fetch('../api/api-get-users.php')
             .then(response => response.json())
@@ -262,8 +125,8 @@ if ($_SESSION['user']['role_id_fk'] !== 4) {
                         <p><strong>Location:</strong> ${caseItem.case_location}</p>
                         <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
                         <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span> <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button></p>
-                        <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
-                        <p><strong>Updated At:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
+                        <p><strong>Created at:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                        <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
                         <p><strong>Public:</strong> <span class="case-visibility">${caseItem.case_is_public ? 'Yes' : 'No'}</span> <button class="toggle-visibility-button" onclick="toggleCaseVisibility('${caseItem.case_id}', ${caseItem.case_is_public})">Toggle</button></p>
                         <hr>
                     `;

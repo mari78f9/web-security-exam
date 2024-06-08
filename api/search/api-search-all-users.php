@@ -21,7 +21,6 @@
         <div> Name </div>
         <div> Last Name </div>
         <div> Email </div>
-        <div> Address </div>
         <div> Role </div>
         <div> Created at </div>
         <div> Updated at </div>
@@ -74,27 +73,32 @@
 
 // Foreach matched found-user inside the 'users'-table 
 
-    // If-else statement: Checks if the result has any matching rows... (more than 0)
-    if (count($users) > 0) {   
+    // Foreach matched found-user inside the 'users'-table 
+if (count($users) > 0) {   
+    // If yes, display the matching results
+    // ... fetch associative arrays with matching results - insert into the "table"
+    foreach ($users as $user) { 
+        // Fetch the role name based on the role ID
+        $role_id = $user['role_id_fk'];
+        $role_query = $db->prepare('SELECT role_name FROM roles WHERE role_id = :role_id');
+        $role_query->bindValue(':role_id', $role_id);
+        $role_query->execute();
+        $role = $role_query->fetchColumn();
 
-        // If yes, display the matching results
-        // ... fetch associative arrays with matching results - insert into the "table"
-        foreach ($users as $user) { 
-            echo "<div class='view-all-users'>";
-            echo "<div class='user-output'>{$user['user_id']}</div>";
-            echo "<div class='user-output'>{$user['user_name']}</div>";
-            echo "<div class='user-output'>{$user['user_last_name']}</div>";
-            echo "<div class='user-output'>{$user['user_email']}</div>";
-            echo "<div class='user-output'>{$user['user_address']}</div>";
-            echo "<div class='user-output'>{$user['user_role']}</div>";
-            echo "<div class='user-output'>{$user['user_created_at']}</div>";
-            echo "<div class='user-output'>{$user['user_updated_at']}</div>";
-            echo "<div class='user-output'>{$user['user_deleted_at']}</div>";
-            echo "<button onclick=\"toggle_blocked({$user['user_id']}, {$user['user_is_blocked']})\">";
-            echo $user['user_is_blocked'] == 0 ? "Unblocked" : "Blocked";
-            echo "</button>";
-            echo "</div>";
-        }
+        echo "<div class='view-all-users'>";
+        echo "<div class='user-output'>{$user['user_id']}</div>";
+        echo "<div class='user-output'>{$user['user_name']}</div>";
+        echo "<div class='user-output'>{$user['user_last_name']}</div>";
+        echo "<div class='user-output'>{$user['user_email']}</div>";
+        echo "<div class='user-output user-role'>$role</div>"; // Display role name instead of role ID
+        echo "<div class='user-output'>{$user['user_created_at']}</div>";
+        echo "<div class='user-output'>{$user['user_updated_at']}</div>";
+        echo "<div class='user-output'>{$user['user_deleted_at']}</div>";
+        echo "<button onclick=\"toggle_blocked({$user['user_id']}, {$user['user_is_blocked']})\">";
+        echo $user['user_is_blocked'] == 0 ? "Unblocked" : "Blocked";
+        echo "</button>";
+        echo "</div>";
+    }
 
     // No matching results (count = 0), display following 'error'-message
     } else {

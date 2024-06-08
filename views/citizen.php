@@ -26,6 +26,7 @@ if ($_SESSION['user']['role_id_fk'] !== 3) {
   <div id="cases-display"></div>
 
 </section>
+
 <script>
       document.addEventListener('DOMContentLoaded', function() {
         fetch('../api/api-get-cases.php?public_only=true')

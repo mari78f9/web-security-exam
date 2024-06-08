@@ -2,13 +2,13 @@
 
 <!-- Creating the setup/layout of the search-output ------------------------------------------>
     <div class="section-header">
-        <h2> Orders </h2>
+        <h2> Cases </h2>
 
         <!-- The search-function: Creates (post) a value inside the form (action = "") -->
         <form class="search-data-function" method="post" action="">
 
             <!-- Text-field, with a given attribute-name (the input field MUST have a value to get submitted) -->
-            <input type="text" name="search" placeholder="🔍 Search by 'Order ID'" required>
+            <input type="text" name="search" placeholder="🔍 Search by 'Case ID'" required>
 
             <!-- The button MUST be inside the form, to tricker the function of the entire search (form) on the 'submit' -->
             <button type="submit">Search</button> 
@@ -17,12 +17,16 @@
     </div>
 
     <div class="view-all-orders-header">
-        <div> Order Id </div>
-        <div> Products </div>
-        <div> Total Price </div>
-        <div> Customer </div>
+        <div> Case Id </div>
+        <div> Description </div>
+        <div> Suspect </div>
+        <div> Type </div>
+        <div> Location </div>
+        <div> Tip </div>
+        <div> Solved </div>
         <div> Created at </div>
-        <div> Status </div>
+        <div> Updated at </div>
+        <div> Public </div>
     </div>
 
 
@@ -41,19 +45,19 @@
 
         // Show an specific order, from the orders table, based on the searched order_id 
         if ($search_query) {
-            $q = $db->prepare(' SELECT * FROM orders 
-                                WHERE order_id LIKE :order_id
+            $q = $db->prepare(' SELECT * FROM cases 
+                                WHERE case_id LIKE :case_id
                                 -- LIMIT 5
                             ');
-            $q->bindValue(':order_id', "%$search_query%");
+            $q->bindValue(':case_id', "%$search_query%");
 
         // Show all the orders as default (if no search is given)
         } else {
-            $q = $db->prepare(' SELECT * FROM orders');
+            $q = $db->prepare(' SELECT * FROM cases');
         }
         
         $q->execute();
-        $orders = $q->fetchAll();
+        $cases = $q->fetchAll();
     
     // If the connection didn't go through, show the occured error/exception during the operation
     }catch(Exception $e){
@@ -71,24 +75,28 @@
 // Foreach matched found-order inside the 'orders'-table 
 
     // If-else statement: Checks if the result has any matching rows... (more than 0)
-    if (count($orders) > 0) {    
+    if (count($cases) > 0) {    
 
         // If yes, display the matching results
         // ... fetch associative arrays with matching results - insert into the "table"
-        foreach ($orders as $row) {    
-            echo "<div class='view-all-orders'>";
-            echo "<div class='order-output'>{$row['order_id']}</div>";
-            echo "<div class='order-output'>{$row['order_product']}</div>";
-            echo "<div class='order-output'>{$row['order_total_price']}</div>";
-            echo "<div class='order-output'>{$row['order_user_fk']}</div>";
-            echo "<div class='order-output'>{$row['order_created_at']}</div>";
-            echo "<div class='order-output'>{$row['order_status']}</div>";
+        foreach ($cases as $row) {    
+            echo "<div class='view-all-cases'>";
+            echo "<div class='case-output'>{$row['case_id']}</div>";
+            echo "<div class='case-output'>{$row['case_description']}</div>";
+            echo "<div class='case-output'>{$row['case_suspect']}</div>";
+            echo "<div class='case-output'>{$row['case_type']}</div>";
+            echo "<div class='case-output'>{$row['case_location']}</div>";
+            echo "<div class='case-output'>{$row['case_tip']}</div>";
+            echo "<div class='case-output'>{$row['case_solved']}</div>";
+            echo "<div class='case-output'>{$row['case_created_at']}</div>";
+            echo "<div class='case-output'>{$row['case_updated_at']}</div>";
+            echo "<div class='case-output'>{$row['case_is_public']}</div>";
             echo "</div>";
         }
         
     // No matching results (count = 0), display following 'error'-message
     } else {
-        echo "<p class='failed-matching-orders'> No matching orders found. </p>";  
+        echo "<p class='failed-matching-cases'> No matching cases found. </p>";  
     }
 ?>
 

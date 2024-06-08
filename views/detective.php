@@ -50,64 +50,6 @@ if ($_SESSION['user']['role_id_fk'] !== 1) {
 </section>
 
 <script>
-
-    function addTip() {
-        const caseId = document.getElementById('case_id_tip').value;
-        const caseTip = document.getElementById('case_tip').value;
-
-        const formData = new FormData();
-        formData.append('case_id', caseId);
-        formData.append('case_tip', caseTip);
-
-        fetch('../api/api-update-case.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            alert('Tip added successfully!');
-        })
-        .catch(error => {
-            console.error('Error adding tip:', error);
-        });
-    }
-
-    function toggleCaseSolved(caseId, currentStatus) {
-        const newStatus = currentStatus === 1 ? 0 : 1;
-
-        const formData = new FormData();
-        formData.append('case_id', caseId);
-        formData.append('case_solved', newStatus);
-
-        fetch('../api/api-update-case.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
-            const caseElement = document.getElementById(`case-${caseId}`);
-            if (caseElement) {
-                const solvedStatusElement = caseElement.querySelector('.case-solved');
-                solvedStatusElement.textContent = newStatus ? 'Yes' : 'No';
-
-                const toggleButton = caseElement.querySelector('.toggle-button');
-                toggleButton.setAttribute('onclick', `toggleCaseSolved('${caseId}', ${newStatus})`);
-            } else {
-                console.error('Case element not found:', caseId);
-            }
-        })
-        .catch(error => {
-            console.error('Error updating case solved status:', error);
-        });
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         fetch('../api/api-get-cases.php')
             .then(response => response.json())

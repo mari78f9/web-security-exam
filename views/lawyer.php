@@ -31,7 +31,6 @@ if ($_SESSION['user']['role_id_fk'] !== 2) {
 </section>
 
 <script>
-
 document.addEventListener('DOMContentLoaded', function() {
         fetch('../api/api-get-cases.php')
             .then(response => response.json())
