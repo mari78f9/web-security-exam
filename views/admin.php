@@ -69,6 +69,26 @@ if ($_SESSION['user']['role_id_fk'] !== 4) {
 
 <script>
 
+    function deleteUser(userId) {
+        const formData = new FormData();
+        formData.append('user_id', userId);
+
+        fetch('../api/api-delete-user.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            document.getElementById(`user-${userId}`).remove(); // Remove user element from the page
+        })
+        .catch(error => {
+            console.error('Error deleting user:', error);
+        });
+    }
+
     function toggleUserBlocked(userId, currentStatus) {
         const newStatus = currentStatus === 1 ? 0 : 1;
 
@@ -91,42 +111,6 @@ if ($_SESSION['user']['role_id_fk'] !== 4) {
             console.error('Error updating user blocked status:', error);
         });
     }
-
-    // function toggleUserBlocked(userId, currentStatus) {
-    //     const newStatus = currentStatus === 1 ? 0 : 1;
-
-    //     const formData = new FormData();
-    //     formData.append('user_id', userId);
-    //     formData.append('user_is_blocked', newStatus);
-
-    //     fetch('../api/api-toggle-user-blocked.php', {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         if (data.error) {
-    //             throw new Error(data.error);
-    //         }
-
-    //         const userElement = document.getElementById(`user-${userId}`);
-    //         if (userElement) {
-    //             const blockedStatusElement = userElement.querySelector('.user-blocked');
-    //             blockedStatusElement.textContent = newStatus ? 'Yes' : 'No';
-
-    //             const toggleButton = userElement.querySelector('.toggle-blocked');
-    //             toggleButton.setAttribute('onclick', `toggleUserBlocked('${userId}', ${newStatus})`);
-    //         } else {
-    //             console.error('User not found:', userId);
-    //         }
-
-    //         // Reload the page after toggling
-    //         location.reload();
-    //     })
-    //     .catch(error => {
-    //         console.error('Error updating user solved status:', error);
-    //     });
-    // }
 
     function toggleCaseVisibility(caseId, currentStatus) {
         const newStatus = currentStatus === 1 ? 0 : 1;
@@ -243,8 +227,9 @@ if ($_SESSION['user']['role_id_fk'] !== 4) {
                         <p><strong>Role ID:</strong> ${userItem.role_id_fk}</p>
                         <p><strong>User created at:</strong> ${new Date(userItem.user_created_at * 1000).toLocaleString()}</p>
                         <p><strong>User updated at:</strong> ${userItem.user_updated_at == 0 ? 'Never' : new Date(userItem.case_updated_at * 1000).toLocaleString()}</p>
-                        <p><strong>User deleted at:</strong> ${userItem.user_deleted_at == 0 ? 'Never' : new Date(userItem.case_updated_at * 1000).toLocaleString()}</p>
+                        <p><strong>User deleted at:</strong> ${userItem.user_deleted_at == 0 ? 'Never' : new Date(userItem.user_deleted_at * 1000).toLocaleString()}</p>
                         <p><strong>User is blocked:</strong> <span class="user-blocked">${userItem.user_is_blocked ? 'Yes' : 'No'}</span> <button class="toggle-blocked" onclick="toggleUserBlocked('${userItem.user_id}', ${userItem.user_is_blocked})">Toggle</button></p>
+                        <button onclick="deleteUser('${userItem.user_id}')">Delete user</button>
                         <hr>
                     `;
                     usersDisplay.appendChild(userElement);

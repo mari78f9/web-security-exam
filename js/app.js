@@ -203,38 +203,38 @@ async function updateUser() {
 
 // DELETE //////////////////
 
-function deleteUser() {
+// function deleteUser() {
 
-  // Ask for confirmation (Double checking before confirming)
-  var isConfirmed = confirm('Are you sure you want to delete your profile?');
+//   // Ask for confirmation (Double checking before confirming)
+//   var isConfirmed = confirm('Are you sure you want to delete your profile?');
 
-  if (isConfirmed) {
-    // Make an asynchronous request to the delete-user API
-    fetch(`/api/api-delete-user.php`, {
-      method: 'POST'  // Method is set as 'GET' in default (most commonly used HTTP-method) ... and we're using POST
-    })
-    .then(response => {
+//   if (isConfirmed) {
+//     // Make an asynchronous request to the delete-user API
+//     fetch(`/api/api-delete-user.php`, {
+//       method: 'POST'  // Method is set as 'GET' in default (most commonly used HTTP-method) ... and we're using POST
+//     })
+//     .then(response => {
 
-      if (response.ok) {
+//       if (response.ok) {
 
-        // User deleted successfully
-        alert('User deleted successfully');
-        sessionStorage.clear();
-        location.href="../views/logout.php" // Redirects to the home page
+//         // User deleted successfully
+//         alert('User deleted successfully');
+//         sessionStorage.clear();
+//         location.href="../views/logout.php" // Redirects to the home page
 
-      } else {
-        // Handle error
-        alert('Failed to delete user');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  } else {
-    // If not confirmed, do nothing or provide feedback to the user
-    console.log('Delete canceled');
-  }
-}
+//       } else {
+//         // Handle error
+//         alert('Failed to delete user');
+//       }
+//     })
+//     .catch(error => {
+//       console.error('Error:', error);
+//     });
+//   } else {
+//     // If not confirmed, do nothing or provide feedback to the user
+//     console.log('Delete canceled');
+//   }
+// }
 
 // function confirmDelete(id) {
 //   // Call the deleteUser function directly
