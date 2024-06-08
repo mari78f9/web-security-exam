@@ -4,23 +4,27 @@ require_once __DIR__ . '/../_.php';
 
 try {
 
-  // Checks if there's an exisiting user inside the session ... if not, show error-message that the user is not logged in
-  if( ! isset($_SESSION['user']['user_id']) ){
+  // Check if the user is logged in
+  if ( ! isset($_SESSION['user']['user_id']) ) {
     throw new Exception('user not logged in', 400);
   }
 
-  // Fetches the user_id based on the logged-in user in the session
+  // Get the user ID from the session
   $user_id = $_SESSION['user']['user_id'];  
 
-  // Checks if the exisiting data of different informations, 
-  // matches with the required specifications of the value (fx string-lenght or speciel-characters)
-  _validate_user_name();        // Name-validation function from the master-file 
-  _validate_user_last_name();   // Last Name-validation function from the master-file 
-  _validate_user_email();       // Email-validation function from the master-file 
+  // Validate user name using function from the master-file
+  _validate_user_name();   
   
+  // Validate user last name using function from the master-file
+  _validate_user_last_name();    
+  
+  // Validate user email using function from the master-file
+  _validate_user_email();   
 
-// Updates the data in the database, based on the user_id, and the new-changed data in the user-info-form
+  // Connect to the database
   $db = _db();
+
+  // Prepare the SQL query to update user information
   $q = $db->prepare('
     UPDATE users 
     SET user_name = :user_name, 
@@ -31,34 +35,50 @@ try {
     WHERE user_id = :user_id
   ');
 
-  // Binds each value of the elements in the query, with each element in the user-info-form
-    $q-> bindValue(':user_name', $_POST['user_name']);
-    $q-> bindValue(':user_id', $user_id);
-    $q-> bindValue(':user_last_name', $_POST['user_last_name']);
-    $q-> bindValue(':user_email', $_POST['user_email']);
-    $q-> bindValue(':role_id_fk', $_POST['role_id_fk']);
-    $q-> bindValue(':time', time());
-    $q -> execute();
-    $counter = $q->rowCount();
+  // Bind parameters to the prepared statement
+  $q-> bindValue(':user_name', $_POST['user_name']);
+  $q-> bindValue(':user_id', $user_id);
+  $q-> bindValue(':user_last_name', $_POST['user_last_name']);
+  $q-> bindValue(':user_email', $_POST['user_email']);
+  $q-> bindValue(':role_id_fk', $_POST['role_id_fk']);
+  $q-> bindValue(':time', time());
 
-  // If a user doesn't get updated (effected), show error message
-  if( $counter != 1 ){
+  // Execute the query
+  $q -> execute();
+
+  // Get the number of affected rows
+  $counter = $q->rowCount();
+
+  // Check if the user was successfully updated
+  if ( $counter != 1 ) {
     throw new Exception('could not update user', 500);
   }
-  // If a user gets updated, show "User updated"
+
+  // Set HTTP response code to 200 (OK)
   http_response_code(200);
+
+  // Output success message in JSON format
   echo json_encode('User updated');
 
-}catch(Exception $e){
-  try{
-    if( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
+} catch(Exception $e) {
+
+  // Handle exceptions
+  try {
+
+    // Check if the exception has a code and message
+    if ( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
+
+    // Set HTTP response code to the exception code
     http_response_code($e->getCode());
+
+    // Output error message in JSON format
     echo json_encode(['info'=>$e->getMessage()]);
-  }catch(Exception $ex){
+  } catch(Exception $ex) {
+
+    // Set HTTP response code to 500 (Internal Server Error)
     http_response_code(500);
+
+    // Output error message in JSON format
     echo json_encode($ex); 
   }
 }
-
-
-
