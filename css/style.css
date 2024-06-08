@@ -55,18 +55,14 @@ body {
 }
 
 .landingpage-redirect {
-    margin-left: 70vh;
-    margin-right: 70vh;
+   max-width: 30%;
+   margin: 0 auto;
 }
 
 .redirect-containers {
     margin-top: 4rem;
     display: flex;
     justify-content: space-around;
-}
-
-.redirect-containers a {
-    width: 50%;
 }
 
 .redirect-containers button {
