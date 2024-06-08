@@ -4,10 +4,11 @@
 require_once __DIR__.'/../_.php';
 require_once __DIR__.'/_header.php';
 
-// // If there's no user in the session, return to the login-page
-// if (! isset($_SESSION['user'])){
-//     header("Location: /login");
-// }
+// Ensure the user is an admin
+if ($_SESSION['user']['role_id_fk'] !== 2) {
+    header("Location: /error"); // Redirect to an unauthorized access page if the user is not an admin
+    exit();
+}
 
 ?>
 

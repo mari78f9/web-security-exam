@@ -4,10 +4,17 @@
 require_once __DIR__.'/../_.php';
 require_once __DIR__.'/_header.php';
 
-// // If there's no user in the session, return to the login-page
-// if (! isset($_SESSION['user'])){
-//   header("Location: /login");
+// if (!isset($_SESSION['user']) || $_SESSION['user']['user_is_blocked'] == 1) {
+//     http_response_code(403);
+//     echo json_encode(['error' => 'Access denied.']);
+//     exit();
 // }
+
+// Ensure the user is an admin
+if ($_SESSION['user']['role_id_fk'] !== 3) {
+    header("Location: /error"); // Redirect to an unauthorized access page if the user is not an admin
+    exit();
+}
 
 ?>
 

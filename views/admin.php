@@ -4,13 +4,11 @@
 require_once __DIR__.'/../_.php'; 
 require_once __DIR__.'/_header.php';
 
-// If there's no user in the session, return to the login-page
-// if (! isset($_SESSION['user'])){
-//     header("Location: /login");
-//     // exit();
-// }
-
-// _is_admin();
+// Ensure the user is an admin
+if ($_SESSION['user']['role_id_fk'] !== 4) {
+    header("Location: /error"); // Redirect to an unauthorized access page if the user is not an admin
+    exit();
+}
 
 ?>
 
@@ -71,7 +69,7 @@ require_once __DIR__.'/_header.php';
 
 <script>
 
-function toggleUserBlocked(userId, currentStatus) {
+    function toggleUserBlocked(userId, currentStatus) {
         const newStatus = currentStatus === 1 ? 0 : 1;
 
         const formData = new FormData();
@@ -87,25 +85,48 @@ function toggleUserBlocked(userId, currentStatus) {
             if (data.error) {
                 throw new Error(data.error);
             }
-
-            const userElement = document.getElementById(`user-${userId}`);
-            if (userElement) {
-                const blockedStatusElement = userElement.querySelector('.user-blocked');
-                blockedStatusElement.textContent = newStatus ? 'Yes' : 'No';
-
-                const toggleButton = userElement.querySelector('.toggle-blocked');
-                toggleButton.setAttribute('onclick', `toggleUserBlocked('${userId}', ${newStatus})`);
-            } else {
-                console.error('User not found:', userId);
-            }
-
-            // Reload the page after toggling
-            location.reload();
+            location.reload(); // Reload the page after toggling
         })
         .catch(error => {
-            console.error('Error updating user solved status:', error);
+            console.error('Error updating user blocked status:', error);
         });
     }
+
+    // function toggleUserBlocked(userId, currentStatus) {
+    //     const newStatus = currentStatus === 1 ? 0 : 1;
+
+    //     const formData = new FormData();
+    //     formData.append('user_id', userId);
+    //     formData.append('user_is_blocked', newStatus);
+
+    //     fetch('../api/api-toggle-user-blocked.php', {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         if (data.error) {
+    //             throw new Error(data.error);
+    //         }
+
+    //         const userElement = document.getElementById(`user-${userId}`);
+    //         if (userElement) {
+    //             const blockedStatusElement = userElement.querySelector('.user-blocked');
+    //             blockedStatusElement.textContent = newStatus ? 'Yes' : 'No';
+
+    //             const toggleButton = userElement.querySelector('.toggle-blocked');
+    //             toggleButton.setAttribute('onclick', `toggleUserBlocked('${userId}', ${newStatus})`);
+    //         } else {
+    //             console.error('User not found:', userId);
+    //         }
+
+    //         // Reload the page after toggling
+    //         location.reload();
+    //     })
+    //     .catch(error => {
+    //         console.error('Error updating user solved status:', error);
+    //     });
+    // }
 
     function toggleCaseVisibility(caseId, currentStatus) {
         const newStatus = currentStatus === 1 ? 0 : 1;

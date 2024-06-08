@@ -28,6 +28,11 @@ try{
     throw new Exception('invalid credentials', 400);
   }
 
+  // Check if the user is blocked
+  if ($user['user_is_blocked'] == 1) {
+    throw new Exception('Your account is blocked. Please contact support.', 403);
+  }
+
   // Based on the logged-in users information, insert the data into the session (temporary placeholding of the data during login)
   $_SESSION['user'] = [
     'user_id' => $user['user_id'],
@@ -35,7 +40,8 @@ try{
     'user_last_name' => $user['user_last_name'],
     'user_email' => $user['user_email'],
     'user_password' => $user['user_password'],
-    'role_id_fk' => $user['role_id_fk']
+    'role_id_fk' => $user['role_id_fk'],
+    'user_is_blocked' => $user['user_is_blocked']
   ];
 
   // Convert data into json-objects and display in the session_storage
@@ -46,8 +52,8 @@ try{
 }catch(Exception $e){
   try{
     if( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
-    http_response_code($e->getCode());
-    echo json_encode(['info'=>$e->getMessage()]);
+      http_response_code($e->getCode());
+      echo json_encode(['info'=>$e->getMessage()]);
   }catch(Exception $ex){
     http_response_code(500);
     echo json_encode($ex);    

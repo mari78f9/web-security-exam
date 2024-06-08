@@ -5,6 +5,8 @@ require_once __DIR__.'/database.php';
 ini_set('display_errors', 1);
 //ini_set('display_errors', 0) = hide error message 
 
+session_start();
+
 // ##############################
 define('USER_NAME_MIN', 2);
 define('USER_NAME_MAX', 20);

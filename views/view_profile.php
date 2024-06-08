@@ -25,9 +25,6 @@ if (!isset($_SESSION['user'])){
                 <label class="profile-form-label" for="user_last_name"> Lastname <br> Your name must be min <?= USER_LAST_NAME_MIN?> and max <?= USER_LAST_NAME_MAX?> </label> 
                     <input id="user_last_name" class="profile-form-input" type="text" name="user_last_name" data-validate="str" data-min="<?= USER_LAST_NAME_MIN?>" data-max="<?= USER_LAST_NAME_MAX?>" value="<?= $user['user_last_name'] ?>">
 
-                <label class="profile-form-label" for="user_address"> Address <br> Your name must be min <?= USER_ADDRESS_MIN?> and max <?= USER_ADDRESS_MAX?> </label> 
-                    <input id="user_address" class="profile-form-input" type="text" name="user_address" data-validate="str" data-min="<?= USER_ADDRESS_MIN?>" data-max="<?= USER_ADDRESS_MAX?>" value="<?= $user['user_address'] ?>">
-
                 <label class="profile-form-label" for="user_email"> Email </label> 
                     <input id="user_email" class="profile-form-input" type="email" name="user_email" data-validate="email" value="<?= $user['user_email'] ?>">
 

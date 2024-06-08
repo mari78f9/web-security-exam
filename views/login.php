@@ -4,8 +4,6 @@ require_once __DIR__ . '/../_.php';
 ?>
 
 <section class="project-header">
-    <h1> WebDev Exam 2023 </h1>
-    <p>  Created by Viktoria Andonovska </p>
 </section>
 
 

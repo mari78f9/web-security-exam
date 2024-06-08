@@ -120,9 +120,13 @@ async function login(){
       body : new FormData(frm)
     });
 
-    // If the request isn't 'ok', show error-message with failed login
-    if(!conn.ok ){
-        throw new Error ("Login failed");
+    if (!conn.ok) {
+      const errorData = await conn.json();
+      // Check if the error message indicates the user is blocked
+      if (conn.status === 403 && errorData.info === 'Your account is blocked. Please contact support.') {
+        throw new Error('Your account is blocked. Please contact support.');
+      }
+      throw new Error("Login failed");
     }
 
     // Show the expected data from the form-submission in the console 
@@ -144,12 +148,19 @@ async function login(){
       case 4:
         location.href = "../views/admin.php";
         break;
+      default:
+      throw new Error("Unknown user role");
     }
 
     // If error occurs during the login, send back error-message
   } catch (error) {
-    alert('Invalid email or password');
-    console.error("Login error:", error.message);
+    // Check if the error message indicates the user is blocked
+      if (error.message === 'Your account is blocked. Please contact support.') {
+        alert('Your account is blocked. Please contact support.');
+      } else {
+        alert('Invalid email or password');
+      }
+      console.error("Login error:", error.message);
   }
 }
 
