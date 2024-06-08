@@ -3,26 +3,34 @@ require_once __DIR__ . '/_header.php';
 require_once __DIR__ . '/../_.php';
 ?>
 
-<section class="project-header">
+<!-- <section class="project-header">
     <h1> Secret Undercover Crime Knights  </h1>
-</section>
+</section> -->
 
 <main class="landingpage">  
 
+    <section class="index-header">
+        <div class="index-icon">
+            <!-- <img> -->
+        </div>
+        <h1> Welcome to the SUCK Database </h1>
+        <h2> Choose your user-condition </h2>
+
+    </section>
+
     <section class="landingpage-redirect">
-        <div class="signup-container">
-            <h2> Make a citizen acoount today! </h2>
+
+        <div class="redirect-containers">
             <a href="/views/signup.php">
-                <button> SIGNUP</button>
+                <button> Citizen</button>
             </a>
+
+            <a href="/views/login.php">
+                <button> Team </button>
+            </a>
+
         </div>
 
-        <div class="login-container">
-            <h2> Master Login </h2>
-            <a href="/views/login.php">
-                <button> LOGIN </button>
-            </a>
-        </div>
 
     </section> 
 
