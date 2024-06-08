@@ -81,6 +81,10 @@
     color: var(--colorLightMain);
 }
 
+#user_role {
+    text-transform: capitalize;
+}
+
 /* DASHBOARD NAVIGATION  */
 
 .dashboard-menu-bottom {
