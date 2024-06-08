@@ -1,0 +1,138 @@
+{
+    user_api_endpoints: {
+        signup: {
+            url: '127.0.0.1/signup',
+            method: 'POST',
+            shape: {
+                user_name:              { type: string, required: true, min: 2, max: 20 },
+                user_last_name:         { type: string, required: true, min: 2, max: 20 },
+                user_email:             { type: string, required: true, validate: regex },
+                user_password:          { type: string, required: true, min: 6, max: 50, feature: password_hash },
+                user_confirm_password:  { type: string, required: true, match: user_password }
+            }
+        },
+        login: {
+            url: '127.0.0.1/login',
+            method: 'POST',
+            shape: {
+                user_email:             { type: string, required: true, validate: regex },
+                user_password:          { type: string, required: true, min: 6, max: 50, feature: password_hash }
+            }
+        },
+        update: {
+            url: '127.0.0.1/view_profile',
+            method: 'POST',
+            shape: {
+                user_name:              { type: string, required: true, min: 2, max: 20 },
+                user_last_name:         { type: string, required: true, min: 2, max: 20 },
+                user_email:             { type: string, required: true, validate: regex }
+            }
+        },
+        delete: {
+            url: '127.0.0.1/view_profile',
+            method: 'POST',
+            shape: {
+                user_id:                { type: serial, required: true }
+            }
+        }
+    },
+    
+    
+    case_endpoints {
+        create {
+            url: '127.0.0.1/create_case',
+            method: 'POST',
+            shape: {
+                case_description:       { type: string, required: true },
+                case_suspect:           { type: string, required: true },
+                case_type:              { type: string, required: true },
+                case_location:          { type: string, required: true }
+            }
+        },
+        read {
+            url: '127.0.0.1/read_case',
+            method: 'POST',
+            shape: {
+                case_id:                { type: string, required: true, feature: random_bytes(5) },
+                case_description:       { type: string, required: true },
+                case_suspect:           { type: string, required: true },
+                case_type:              { type: string, required: true },
+                case_location:          { type: string, required: true }
+            }
+        },
+        update {
+            url: '127.0.0.1/update_case',
+            method: 'POST',
+            shape: {
+                case_solved:            { type: tinyint, required: false },
+                case_tip:               { type: string,  required: false },
+                case_is_public:         { type: tinyint, required: false }
+            }
+        }
+    },
+
+
+    file_endpoints {
+        create {
+
+        },
+        read {
+            
+        }
+    },
+    tips_endpoints {
+        create {
+
+        },
+        read {
+            
+        }
+    },
+
+    permissions {
+        citizen {
+            user_api_endpoints {
+                signup {},
+                login {},
+                update {}
+            },
+            case_endpoints {
+                read_citizen_case {}
+            }
+        },
+        lawyer {
+            user_api_endpoints {
+                login {}
+            }, 
+            case_endpoints {
+                read_case {}
+            },
+            file_endpoints {
+                read_file {}
+            },
+            tips_endpoints {
+                read_tips {}
+            }
+        },
+        detective {
+            user_api_endpoints {
+                login {}
+            }, 
+            case_endpoints {
+                read_case {}
+            },
+            file_endpoints {
+                read_file {}
+            },
+            tips_endpoints {
+                create_tips {}
+                read_tips {}
+            }
+        },
+        lietenant {
+
+        },
+
+    }
+
+}
