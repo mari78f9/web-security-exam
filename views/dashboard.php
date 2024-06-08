@@ -4,6 +4,8 @@ require_once __DIR__ . '/_header.php';
 
 $user = $_SESSION['user'];
 $user_id = $_SESSION['user']['user_id'];
+// var_dump($_SESSION['user']);
+
 ?>
 
 <main class="dashboard">

@@ -20,9 +20,10 @@ if (!isset($_SESSION['user'])){
         <!-- Top-Left -->
         <div class="dashboard-menu-top">
             
+            <!-- Make sure to sanitize output with htmlspecialchars to prevent XSS attacks -->
             <img src="/images/profile-dark.png" alt="user_profile"> <br>
-            <span id="user_name"> <?= $user['user_name'] ?> </span> <span id="user_last_name"> <?= $user['user_last_name'] ?> </span> </span>
-            <p id="user_role"> <?= $user['role_id_fk'] ?> </p>
+            <span id="user_name"> <?= htmlspecialchars($user['user_name']) ?> </span> <span id="user_last_name"> <?= htmlspecialchars($user['user_last_name']) ?> </span> </span>
+            <p id="user_role"> <?= htmlspecialchars($user['role_name']) ?> </p>
 
         </div>
        

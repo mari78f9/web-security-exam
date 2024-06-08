@@ -305,7 +305,7 @@ async function signup(){
 // Handles a user-login, when submitting a form via POST-request
 
 async function login(){
-  
+
   // Get the form element
   const frm = event.target 
   console.log(frm)
