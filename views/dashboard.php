@@ -6,15 +6,6 @@ $user = $_SESSION['user'];
 $user_id = $_SESSION['user']['user_id'];
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
 <main class="dashboard">
 
     <!-- Left side -->
@@ -36,32 +27,32 @@ $user_id = $_SESSION['user']['user_id'];
 
                 <div class="dashboard-menu-links-active">
                     <img src="/images/dashboard-light.png" alt="Dashboard">
-                    <a href=""> Dashboard </a>
+                    <a href="/views/dashboard.php"> Dashboard </a>
                 </div>
 
                 <div class="dashboard-menu-links">
                     <img src="/images/profile-dark.png" alt="Profile">
-                    <a href=""> View profile </a>
+                    <a href="/views/view_profile.php"> View profile </a>
                 </div>
 
                 <div class="dashboard-menu-links">
                     <img src="/images/users-dark.png" alt="Users">
-                    <a href=""> View users </a>
+                    <a href="/views/users.php"> View users </a>
                 </div>
 
                 <div class="dashboard-menu-links">
                     <img src="/images/case-dark.png" alt="Case">
-                    <a href=""> Create new case </a>
+                    <a href="/views/create-case.php"> Create new case </a>
                 </div>
 
                 <div class="dashboard-menu-links">
                     <img src="/images/cases-dark.png" alt="Cases">
-                    <a href=""> View cases </a>
+                    <a href="/views/cases.php"> View cases </a>
                 </div>
 
                 <div class="dashboard-menu-links">
                     <img src="/images/file-dark.png" alt="File">
-                    <a href=""> File registry </a>
+                    <a href="/views/files.php"> File registry </a>
                 </div>
 
             </div>
@@ -116,9 +107,6 @@ $user_id = $_SESSION['user']['user_id'];
     
     
 </main>
-
-
-
 
 
 
