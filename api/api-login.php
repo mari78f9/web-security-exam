@@ -17,8 +17,13 @@ try {
   // Connect to the database
   $db = _db();
 
-  // Prepare SQL query to select user based on email
-  $q = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
+  // Prepare SQL query to select user based on email and join with roles to get role_name
+  $q = $db->prepare('
+    SELECT users.*, roles.role_name 
+    FROM users 
+    JOIN roles ON users.role_id_fk = roles.role_id 
+    WHERE users.user_email = :user_email
+  ');
   $q->bindValue(':user_email', $_POST['user_email']);
   $q->execute();
   
@@ -53,6 +58,7 @@ try {
     'user_email' => $user['user_email'],
     'user_password' => $user['user_password'],
     'role_id_fk' => $user['role_id_fk'],
+    'role_name' => $user['role_name'],
     'user_is_blocked' => $user['user_is_blocked']
   ];
 
