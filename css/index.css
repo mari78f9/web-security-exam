@@ -1,0 +1,62 @@
+/* //////////////////////////////////////////////////////////////////////// */
+
+/* INDEX  */
+
+
+.index-header {
+    margin-top: 25vh;
+    text-align: center;
+}
+
+.index-header h1 {
+    font-size: 30px;
+}
+
+.index-header h2 {
+    font-size: 18px;
+}
+
+.index-icon {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    background-color: var(--colorLightMain);
+    border-radius: 50px;
+    width: 4rem;
+    height: 4rem;
+}
+
+.index-icon img {
+    width: 50%;
+}
+
+.landingpage-redirect {
+    max-width: 30%;
+    margin: 0 auto;
+}
+
+.redirect-containers {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.redirect-containers button {
+    border: 2px solid var(--colorRedMain);
+    background-color: var(--colorDarkMain);
+    padding: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-radius: 10px;
+    color: var(--colorRedMain);
+    font-size: 20px;
+    margin: 0;
+}
+
+.redirect-containers button:hover {
+    background-color: var(--colorRedMain);
+    color: var(--colorLightMain);
+}
+
+
+/* //////////////////////////////////////////////////////////////////////// */
