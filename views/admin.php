@@ -216,6 +216,7 @@ if ($_SESSION['user']['role_id_fk'] !== 4) {
                     usersDisplay.innerHTML = `<p>Error fetching users: ${data.error}</p>`;
                     return;
                 }
+            
                 data.forEach(userItem => {
                     let userElement = document.createElement('div');
                     userElement.id = `user-${userItem.user_id}`;
