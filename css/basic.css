@@ -1,0 +1,30 @@
+/* FOR ICONS – insert into 'icon'-folder */
+/* https://svgicons.sparkk.fr/ */
+
+
+/* Variables and design throughout the document */
+:root {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --colorDarkMain:        #262626;
+    --colorDarkSecondary:   #444444;
+    --colorDarkThirdly:     #9c9c9c;
+    --colorDarkBlack:       #000000;
+    --colorRedMain:         #b91010;
+    --colorRedSecondary:    #810505;
+    --colorLightMain:       #e5e5e5;
+    --colorLightSecondary:  #bcbcbc;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to bottom, #000000 0%, #444444 100%);
+    /* width: 100vh; */
+    height: 80vh;
+    color: var(--colorLightMain);
+}
