@@ -11,7 +11,7 @@ require_once __DIR__ . '/../_.php';
 
     <section class="index-header">
         <div class="index-icon">
-            <img href="../icons/lock.png" alt="Lock">
+            <img src="/images/lock.png" alt="Lock">
         </div>
         <h1> Welcome to the SUCK Database </h1>
         <h2> Choose your user-condition </h2>
