@@ -3,12 +3,6 @@ require_once __DIR__ . '/_header.php';
 require_once __DIR__ . '/../_.php';
 ?>
 
-<section class="project-header">
-    <h1> WebDev Exam 2023 </h1>
-    <p>  Created by Viktoria Andonovska </p>
-</section>
-
-
 <section class="form-switch">
     <a id="formSignupButton" class="form-switch-button-active" href="../views/signup.php"> Signup </a>
     <a id="formLoginButton" class="form-switch-button" href="../views/login.php"> Login </a>

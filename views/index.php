@@ -22,11 +22,11 @@ require_once __DIR__ . '/../_.php';
 
         <div class="redirect-containers">
             <a href="/views/signup.php">
-                <button> Citizen</button>
+                <button> Citizen </button>
             </a>
 
             <a href="/views/login.php">
-                <button> Team-member </button>
+                <button> Team </button>
             </a>
 
         </div>

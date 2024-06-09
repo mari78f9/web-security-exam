@@ -1,0 +1,37 @@
+/* VIEW 'ALL' USERS */
+
+.view-all-users-header {
+    background-color: var(--colorTextSecondary);
+    padding: 10px;
+    color: var(--colorText);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin-bottom: 10px;
+}
+
+.view-all-users-header div{
+    background-color: var(--colorTextSecondary);
+    color: var(--colorText);
+}
+
+.view-all-users {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.view-all-users button {
+    border: solid;
+    border-width: 0.5px;
+    border-color: var(--colorSecondary);
+    border-radius: 10px;
+    color: var(--colorSecondary);
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.user-output {
+    background-color: var(--colorMainSecondary);
+    color: var(--colorText);
+    margin-bottom: 10px;
+    padding: 10px;
+}

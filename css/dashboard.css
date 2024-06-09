@@ -44,6 +44,7 @@
     background-color: var(--colorDarkMain);
     color: var(--colorDarkBlack);
 
+    overflow: hidden;
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
@@ -145,6 +146,7 @@
 
 .dashboard-content {
     padding: 3rem;
+    overflow: auto;
 }
 
 .dashboard-content span {
