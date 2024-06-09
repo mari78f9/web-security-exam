@@ -1,6 +1,6 @@
 <div>
 
-    <div class="dashboard-menu-links-active">
+    <div class="dashboard-menu-links">
         <img src="/images/dashboard-light.png" alt="Dashboard">
         <a href="/views/dashboard.php"> Dashboard </a>
     </div>
