@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Location:</strong> ${caseItem.case_location}</p>
                         <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
                         <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
-                        <p><strong>Updated At:</strong> ${caseItem.case_updated_at !== 0 ? new Date(caseItem.case_updated_at * 1000).toLocaleString() : 'Never'}</p>
+                        <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
                         <hr>
                     `;
                     casesDisplay.appendChild(caseElement);
