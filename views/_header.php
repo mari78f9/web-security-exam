@@ -11,6 +11,6 @@
 <body>   
   <section class="project-header">
                                    
-   <button class="logout" onclick="logout()"> Log out </button>   
+   <!-- <button class="logout" onclick="logout()"> Log out </button>    -->
 
   </section>

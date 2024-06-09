@@ -4,8 +4,4 @@
 <script src="/js/app.js" defer></script>
 <script src="/js/validator.js" defer></script>
 
-<footer id="footer">
-
-</footer>
-
 </html>
