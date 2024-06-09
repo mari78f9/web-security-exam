@@ -1,0 +1,90 @@
+/* //////////////////////////////////////////////////////////////////////// */
+
+/* signup  */
+
+#signup-header {
+    font-size: 2rem;
+    padding-top: 2rem;
+    width: 100vw;
+    text-align: center;
+}
+
+#signupForm {
+    width: 100vw;
+    text-align: center;
+}
+
+#signupForm label {
+    padding-bottom: 1rem;
+}
+
+#signupForm input {
+    padding: 1rem;
+    border-radius: 35px;
+    width: 33%;
+}
+
+.form-signup-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+
+
+#signup-btn {
+    width: auto;
+    padding: 1rem 2rem;
+    margin: auto;
+    text-align: center;
+    border-radius: 36px;
+    border: none;
+    background-color: var(--colorRedSecondary);
+    color: var(--colorLightMain);
+}
+
+
+
+/* //////////////////////////////////////////////////////////////////////// */
+
+/* login  */
+
+#login-header {
+    font-size: 2rem;
+    padding-top: 2rem;
+    width: 100vw;
+    text-align: center;
+}
+
+#loginForm {
+    text-align: center;
+}
+
+#loginForm label {
+    padding-bottom: 1rem;
+}
+
+#loginForm input {
+    padding: 1rem;
+    border-radius: 35px;
+    width: 33%;
+}
+
+.form-login-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+
+
+#login-btn {
+    width: auto !important;
+    padding: 1rem 2rem !important;
+    margin: auto;
+    text-align: center;
+    border-radius: 36px;
+    border: none;
+    background-color: var(--colorRedSecondary);
+    color: var(--colorLightMain);
+}

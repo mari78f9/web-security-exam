@@ -17,7 +17,7 @@ require_once __DIR__ . '/../_.php';
 
     <div id="loginForm" class="login">
 
-        <h4 class="header-form">Login</h4>
+        <h4 class="header-form" id="login-header">Login</h4>
 
         <form class="login-form" method="post" onsubmit="validate(login); return false">
 

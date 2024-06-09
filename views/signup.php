@@ -12,7 +12,7 @@ require_once __DIR__ . '/../_.php';
 <main class="form">
 
     <div id="signupForm" class="signup">
-        <h4 class="header-form">Signup with a citizen account</h4>
+        <h4 class="header-form" id="signup-header">Signup with a citizen account</h4>
         <form class="signup-form" onsubmit="validate(signup); return false">
 
             <div id="name" class="form-signup-grid">
