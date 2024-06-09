@@ -43,42 +43,17 @@ if (!isset($_SESSION['user'])){
     <!-- Right side -->
     <section class="dashboard-content">
 
-        <h2>Search Files by Case ID</h2>
-        <form id="search-files">
-            <label for="search_case_id">Case ID:</label>
-            <input type="text" id="search_case_id" name="case_id">
-            <input type="submit" value="Search">
+        <h2>File Upload</h2>
+        <form id="file-upload" action="../api/api-upload-files.php" method="post" enctype="multipart/form-data">
+            <label for="file_name">File Name:</label>
+            <input type="text" id="file_name" name="file_name">
+            <label for="case_id">Case ID:</label>
+            <input type="text" id="case_id" name="case_id">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
         </form>
-
-        <div id="files-display"></div>
         
     </section>
 
-    <script>
-
-        // Prevent form submission and handle search
-    document.getElementById('search-files').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var caseId = document.getElementById('search_case_id').value;
-
-        fetch('../api/api-display-files.php?case_id=' + caseId)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('files-display').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error fetching files:', error);
-            document.getElementById('files-display').textContent = 'Error fetching files.';
-        });
-    });
-
-    </script>
     
 </main>
-
-
-
-
-
-

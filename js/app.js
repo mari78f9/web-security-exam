@@ -337,25 +337,27 @@ async function login(){
     }
 
     // If login is successful, parse the response data
-    const data = await conn.json();
+    // const data = await conn.json();
 
     // Redirect the user based on their role
-    switch (data.role_id_fk) {
-      case 1:
-        location.href = "../views/detective.php";
-        break;
-      case 2:
-        location.href = "../views/lawyer.php";
-        break;
-      case 3:
-        location.href = "../views/citizen.php";
-        break;
-      case 4:
-        location.href = "../views/admin.php";
-        break;
-      default:
-      throw new Error("Unknown user role");
-    }
+    // switch (data.role_id_fk) {
+    //   case 1:
+    //     location.href = "../views/detective.php";
+    //     break;
+    //   case 2:
+    //     location.href = "../views/lawyer.php";
+    //     break;
+    //   case 3:
+    //     location.href = "../views/citizen.php";
+    //     break;
+    //   case 4:
+    //     location.href = "../views/admin.php";
+    //     break;
+    //   default:
+    //   throw new Error("Unknown user role");
+    // }
+
+    location.href = "../views/dashboard.php";
 
   } catch (error) {
 

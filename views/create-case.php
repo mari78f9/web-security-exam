@@ -97,8 +97,4 @@ if (!isset($_SESSION['user'])){
     
 </main>
 
-
-
-
-
-
+<?php require_once __DIR__ . '/_footer.php'  ?>
