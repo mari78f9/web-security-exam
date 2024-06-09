@@ -11,7 +11,6 @@ if (!isset($_SESSION['user'])){
 }
 ?>
 
-
 <main class="dashboard">
 
     <!-- Left side -->
