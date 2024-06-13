@@ -84,13 +84,13 @@
     <?php elseif ($user['role_id_fk'] === 2): ?>
 
     <div class="dashboard-menu-links">
-        <img src="/images/file-dark.png" alt="File">
-        <a href="/views/files.php"> File registry </a>
-    </div>
-
-    <div class="dashboard-menu-links">
         <img src="/images/cases-dark.png" alt="Cases">
         <a href="/views/cases.php"> View cases </a>
+    </div>
+    
+    <div class="dashboard-menu-links">
+        <img src="/images/file-dark.png" alt="File">
+        <a href="/views/files.php"> File registry </a>
     </div>
 
     <!-- Citizen -->
