@@ -11,13 +11,15 @@ try {
     // Connect to the database
     $db = _db();
 
-    // Check if 'public_only' parameter is present in the GET request
-    // If present, filter only public cases, otherwise retrieve all cases
-    $publicOnly = isset($_GET['public_only']) ? 'WHERE case_is_public = 1' : '';
+    $publicOnly = isset($_GET['public_only']) ? true : false;
 
     // Prepare the SQL query to fetch cases
-    // If 'public_only' is set, add WHERE clause to filter public cases
-    $q = $db->prepare("SELECT * FROM cases $publicOnly");
+    $sql = "SELECT * FROM cases";
+    if ($publicOnly) {
+        $sql .= " WHERE case_is_public = 1";
+    }
+
+    $q = $db->prepare($sql);
 
     // Execute the query
     $q->execute();
@@ -27,8 +29,16 @@ try {
 
     // Encode the result as JSON and output it
     echo json_encode($cases);
-} catch (Exception $e) {
 
-    // If an exception occurs, encode the error message as JSON and output it
-    echo json_encode(['error' => $e->getMessage()]);
+// PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+} catch (PDOException $e) {
+
+    // Handle PDO exceptions (database-related errors)
+    http_response_code(500);
+    echo json_encode(['info' => 'Database error: '.$e->getMessage()]);
+} catch (Exception $e) {
+    
+    // Handle other exceptions
+    http_response_code($e->getCode() ?: 500);
+    echo json_encode(['info' => $e->getMessage()]);
 }

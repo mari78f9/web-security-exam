@@ -24,11 +24,15 @@ try {
     JOIN roles ON users.role_id_fk = roles.role_id 
     WHERE users.user_email = :user_email
   ');
-  $q->bindValue(':user_email', $_POST['user_email']);
+
+  // PDO::PARAM_STR is used to explicitly bind the email as a string. 
+  // This ensures that the data type is correctly interpreted by the database engine.
+  $q->bindValue(':user_email', $_POST['user_email'], PDO::PARAM_STR);
   $q->execute();
   
   // Fetch the user data
-  $user = $q->fetch();
+  // PDO::FETCH_ASSOC to fetch the user data ensures that an associative array is returned, which is more readable and secure.
+  $user = $q->fetch(PDO::FETCH_ASSOC);
 
   // If user does not exist, throw an exception
   if ( ! $user ){
@@ -68,23 +72,15 @@ try {
   // Encode user session data as JSON and output it
   echo json_encode($_SESSION['user']);
 
-} catch(Exception $e) {
+// PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+} catch (PDOException $e) {
 
-  // If an exception occurs, handle it
-  try {
-
-    // Check if exception code or message is not set
-    if ( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
-
-      // Set HTTP response code based on exception code
-      http_response_code($e->getCode());
-
-      // Encode exception message as JSON and output it
-      echo json_encode(['info'=>$e->getMessage()]);
-  } catch (Exception $ex) {
-
-    // If an exception occurs during exception handling, set HTTP response code to 500 and output the exception
-    http_response_code(500);
-    echo json_encode($ex);    
-  }
+  // Handle PDO exceptions (database-related errors)
+  http_response_code(500);
+  echo json_encode(['info' => 'Database error: '.$e->getMessage()]);
+} catch (Exception $e) {
+  
+  // Handle other exceptions
+  http_response_code($e->getCode() ?: 500);
+  echo json_encode(['info' => $e->getMessage()]);
 }
