@@ -18,6 +18,13 @@ try {
   // Get the user ID from the POST request
   $user_id = $_POST['user_id'];
 
+  // Validate the user ID to ensure it is an integer
+  // Use filter_var to validate the user ID as an integer.
+  // 
+  if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
+    throw new Exception('Invalid User ID', 400);
+  }
+
   // Connect to the database
   $db = _db();
 
@@ -27,8 +34,11 @@ try {
   ');
 
   // Bind the user ID and current time to the SQL statement
-  $q->bindValue(':user_id', $user_id);
-  $q->bindValue(':user_deleted_at', time());
+  // PDO::PARAM_STR is used to explicitly bind the email as a string. 
+  // This ensures that the data type is correctly interpreted by the database engine.
+  // Explicitly specify the parameter type using PDO::PARAM_INT to bind the user ID and timestamp.
+  $q->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+  $q->bindValue(':user_deleted_at', time(), PDO::PARAM_INT);
 
   // Execute the SQL statement
   $q->execute();
@@ -44,11 +54,16 @@ try {
   // If the operation was successful, set the HTTP response code to 200 and return a success message
   http_response_code(200);
   echo json_encode(['info' => 'User deleted']);
+  
+// PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+} catch (PDOException $e) {
+
+  // Handle PDO exceptions (database-related errors)
+  http_response_code(500);
+  echo json_encode(['info' => 'Database error: '.$e->getMessage()]);
 } catch (Exception $e) {
-
-  // If an exception occurs, set the HTTP response code to the exception code or 500 if not specified
+  
+  // Handle other exceptions
   http_response_code($e->getCode() ?: 500);
-
-  // Return the exception message as a JSON response
   echo json_encode(['info' => $e->getMessage()]);
 }

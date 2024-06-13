@@ -60,8 +60,6 @@ if (!isset($_SESSION['user'])){
         </form>
         
     </section>
-
-    
     
 </main>
 

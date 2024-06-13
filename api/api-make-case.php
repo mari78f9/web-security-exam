@@ -14,11 +14,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         isset($_POST['case_location'])
     ) {
      
-        // Retrieve data from POST parameters
-        $case_description = $_POST['case_description'];
-        $case_suspect = $_POST['case_suspect'];
-        $case_type = $_POST['case_type'];
-        $case_location = $_POST['case_location'];
+        // Retrieve and sanitize data from POST parameters
+        // Sanitizes the input data using htmlspecialchars() to prevent XSS attacks.
+        // ENT_QUOTES and 'UTF-8' are parameters used with the 
+        // htmlspecialchars() function in PHP to ensure proper sanitization of input data.
+        $case_description = htmlspecialchars($_POST['case_description'], ENT_QUOTES, 'UTF-8');
+        $case_suspect = htmlspecialchars($_POST['case_suspect'], ENT_QUOTES, 'UTF-8');
+        $case_type = htmlspecialchars($_POST['case_type'], ENT_QUOTES, 'UTF-8');
+        $case_location = htmlspecialchars($_POST['case_location'], ENT_QUOTES, 'UTF-8');
+
+         // Validate the sanitized inputs
+         // Ensuring that the sanitized input is not empty.
+         if (empty($case_description) || empty($case_suspect) || empty($case_type) || empty($case_location)) {
+            http_response_code(400); 
+            echo json_encode(array("error" => "Invalid input provided."));
+            exit;
+        }
 
         // Generate a random case ID
         $case_id = bin2hex(random_bytes(5));
@@ -35,12 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ');
 
             // Bind parameters to the prepared statement
-            $q->bindParam(':case_id', $case_id);
-            $q->bindParam(':description', $case_description);
-            $q->bindParam(':suspect', $case_suspect);
-            $q->bindParam(':type', $case_type);
-            $q->bindParam(':location', $case_location);
-            $q->bindValue(':created_at', time());
+            // Explicitly specifying the parameter types when binding them to the prepared statement 
+            // using PDO::PARAM_STR and PDO::PARAM_INT.
+            $q->bindParam(':case_id', $case_id, PDO::PARAM_STR);
+            $q->bindParam(':description', $case_description, PDO::PARAM_STR);
+            $q->bindParam(':suspect', $case_suspect, PDO::PARAM_STR);
+            $q->bindParam(':type', $case_type, PDO::PARAM_STR);
+            $q->bindParam(':location', $case_location, PDO::PARAM_STR);
+            $q->bindValue(':created_at', time(), PDO::PARAM_INT);
 
             // Execute the prepared statement to insert the case into the database
             $q->execute();
@@ -50,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Output JSON response indicating successful case creation and the generated case ID
             echo json_encode(array("message" => "Case created successfully.", "case_id" => $case_id));
+
+        // PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
         } catch (PDOException $e) {
          
             // If an exception occurs during database operation, set HTTP response code to 500 and output error message

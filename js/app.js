@@ -68,28 +68,35 @@ function toggleCaseSolved(caseId, currentStatus) {
 
 // MAKE CASE ////////////////////
 // Handles to make a case
-async function makeCase(){
-
+async function makeCase() {
   // Access the form element triggering the event
-  const frm = event.target  
-  console.log(frm)
+  const frm = event.target;  
+  console.log(frm);
 
-  // Send a POST request to the api-make-case.php endpoint
-  const conn = await fetch("/api/api-make-case.php", {
+  try {
+      // Send a POST request to the api-make-case.php endpoint
+      const conn = await fetch("/api/api-make-case.php", {
+          // Use POST method
+          method: "POST",
+          // Attach form data to the request
+          body: new FormData(frm)
+      });
 
-    // Use POST method
-    method : "POST",
+      // Parse the response as text
+      const data = await conn.text();
+      console.log(data);
 
-    // Attach form data to the request
-    body : new FormData(frm)
-  })
-
-  // Parse the response as text
-  const data = await conn.text()
-  console.log(data) 
-
-  // Reload the page to reflect the changes
-  location.reload();
+      // Check the response text for success or error messages
+      if (data.includes('Case created successfully.')) {
+          alert('Case created successfully.');
+          location.reload(); // Reload the page to reflect the changes
+      } else {
+          alert(data); // Show the response text as an alert if not successful
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while creating the case.');
+  }
 }
 
 // ##########################################################################################

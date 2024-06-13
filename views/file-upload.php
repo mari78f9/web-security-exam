@@ -52,14 +52,6 @@ if (!isset($_SESSION['user'])){
             <input type="file" name="file">
             <input type="submit" value="Upload">
         </form>
-        <!-- <form id="file-upload" action="../api/api-upload-files.php" method="post" enctype="multipart/form-data">
-            <label for="file_name">File Name:</label>
-            <input type="text" id="file_name" name="file_name">
-            <label for="case_id">Case ID:</label>
-            <input type="text" id="case_id" name="case_id">
-            <input type="file" name="file">
-            <input type="submit" value="Upload">
-        </form> -->
 
         <script>
             document.getElementById('file-upload').addEventListener('submit', function(event) {
