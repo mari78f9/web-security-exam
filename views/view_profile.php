@@ -46,7 +46,7 @@ if (!isset($_SESSION['user'])){
         <section class="view-profile">
         <h2> View Profile </h2>
 
-        <div class="view-profile-form">
+            <div class="view-profile-form">
                 <form class="view-profile-form-input" onsubmit="validate(updateUser); return false">
 
                     <label class="profile-form-label" for="user_id"> ID </label> 
@@ -62,7 +62,7 @@ if (!isset($_SESSION['user'])){
                     <label class="profile-form-label" for="user_email"> Email </label> 
                         <input id="user_email" class="profile-form-input" type="email" name="user_email" data-validate="email" value="<?= $user['user_email'] ?>">
 
-                    <button id="edit-profile" class="edit-profile"> Edit profile </button>
+                    <button id="edit-profile" class="edit-profile"> Save changes </button>
                 
                 </form>
 
