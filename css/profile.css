@@ -1,0 +1,74 @@
+.view-profile h2 {
+    color: var(--colorLightMain);
+    /* margin-top: 1rem; */
+    font-size: 30px;
+}
+
+
+
+.view-profile-form-input {
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--colorLightMain);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.view-profile-form-input label {
+    color: var(--colorLightMain);
+    margin-bottom: 2rem;
+}
+
+.view-profile-form-input input {
+    color: var(--colorLightMain);
+    font-style: normal;
+}
+
+.profile-form-input {
+    background-color: var(--colorDarkSecondary);
+    color: var(--colorDarkThirdly); 
+    font-style: italic;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    font-size: 14px;
+}
+
+.edit-profile {
+    position: absolute;
+    margin-top: 24rem;
+    padding: 0.8rem;
+    background-color: var(--colorDarkSecondary);
+    border: 1px solid var(--colorDarkSecondary);
+    color: var(--colorLightMain);
+    border-radius: 10px;
+    /* color: var(--colorLightMain); */
+}
+
+.edit-profile:hover {
+    border: 1px solid var(--colorDarkThirdly);
+    background-color: var(--colorDarkThirdly);
+    color: var(--colorDarkMain);
+    font-weight: bold;
+}
+
+.delete-profile {
+    position: absolute;
+    float: right;
+    padding: 0.8rem;
+    margin-top: -4px;
+    margin-left: 10rem;
+    border: 1px solid var(--colorLightMain);
+    background-color: var(--colorDarkMain);
+    border-radius: 10px;
+    color: var(--colorLightMain);
+}
+
+.delete-profile:hover {
+    background-color: var(--colorRedMain);
+    border: none;
+    font-weight: bold;
+}
