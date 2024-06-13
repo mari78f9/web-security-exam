@@ -1,5 +1,12 @@
 /* VIEW 'ALL' USERS */
 
+.dashboard-content h2 {
+    color: var(--colorLightMain);
+    margin-bottom: 3rem;
+}
+
+
+
 .view-all-users-header {
     background-color: var(--colorTextSecondary);
     padding: 10px;

@@ -50,7 +50,11 @@ if (!isset($_SESSION['user'])){
             <input type="submit" value="Search">
         </form>
 
-        <div id="files-display"></div>
+        <div id="files-display">
+
+            <?php require_once __DIR__ . '/../api/api-display-files.php'  ?>
+       
+        </div>
 
         <script>
             // Prevent form submission and handle search

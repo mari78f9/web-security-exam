@@ -27,11 +27,11 @@ $user_id = $_SESSION['user']['user_id'];
         <!-- Bottom-Left -->
         <div class="dashboard-menu-bottom">
 
-        <?php require_once __DIR__ . '/../api/api-navigation.php'  ?>
-
             <div class="logout">
                 <button onclick="logout()"> Log out </button>
             </div>
+
+            <?php require_once __DIR__ . '/../api/api-navigation.php'  ?>
 
         </div>
 
