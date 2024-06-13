@@ -74,6 +74,13 @@
   </button>
 </a>
 
+<a href="/views/search-cases.php">
+  <button class="dashboard-button" id="dashboard-new-case">
+    <img src="/images/cases-light.png" alt="Case"> <br>
+    <h2 href=""> Search Cases </h2>
+  </button>
+</a>
+
 <a href="/views/tip.php">
   <button class="dashboard-button" id="dashboard-users">
     <img src="/images/add-light.png" alt="Tip"> <br>
