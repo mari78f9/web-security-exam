@@ -21,11 +21,11 @@ require_once __DIR__ . '/../_.php';
     <section class="landingpage-redirect">
 
         <div class="redirect-containers">
-            <a href="/views/signup.php">
+            <a href="/views/citizen.php">
                 <button> Citizen </button>
             </a>
 
-            <a href="/views/login.php">
+            <a href="/views/team.php">
                 <button> Team </button>
             </a>
 
