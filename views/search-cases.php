@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../_.php';
 require_once __DIR__ . '/_header.php';  
+require_once __DIR__ . '/../_.php';
 
 $user = $_SESSION['user'];
 $user_id = $_SESSION['user']['user_id'];
@@ -10,7 +10,6 @@ if (!isset($_SESSION['user'])){
     header("Location: login");
 }
 ?>
-
 
 <main class="dashboard">
 
@@ -30,7 +29,7 @@ if (!isset($_SESSION['user'])){
         <!-- Bottom-Left -->
         <div class="dashboard-menu-bottom">
 
-            <?php require_once __DIR__ . '/../api/api-navigation.php'  ?>
+        <?php require_once __DIR__ . '/../api/api-navigation.php'  ?>
 
             <div class="logout">
                 <button onclick="logout()"> Log out </button>
@@ -43,21 +42,10 @@ if (!isset($_SESSION['user'])){
     <!-- Right side -->
     <section class="dashboard-content">
 
-        <form id="create-case-form" onsubmit="makeCase(); return false">
-            <label for="case_description">Description:</label>
-            <textarea id="case_description" name="case_description" required></textarea>
+        <h2>All Cases</h2>
+            <?php require_once __DIR__ . '/../api/search/api-search-all-cases.php'  ?>
+        </div>
 
-            <label for="case_suspect">Suspect:</label>
-            <input type="text" id="case_suspect" name="case_suspect" required>
-
-            <label for="case_type">Type:</label>
-            <input type="text" id="case_type" name="case_type" required>
-
-            <label for="case_location">Location:</label>
-            <input type="text" id="case_location" name="case_location" required>
-
-            <button type="submit">Create Case</button>
-        </form>
         
     </section>
 

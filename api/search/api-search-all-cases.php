@@ -2,7 +2,6 @@
 
     <!-- Section header with a title and a search form -->
     <div class="section-header">
-        <h2> Cases </h2>
 
         <!-- Form for searching cases by ID -->
         <form class="search-data-function" method="post" action="">

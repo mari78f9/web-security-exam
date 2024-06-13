@@ -1,7 +1,7 @@
 <div>
 
     <div class="dashboard-menu-links">
-        <img src="/images/dashboard-light.png" alt="Dashboard">
+        <img src="/images/dashboard-dark.png" alt="Dashboard">
         <a href="/views/dashboard.php"> Dashboard </a>
     </div>
 
@@ -19,7 +19,7 @@
 
     <div class="dashboard-menu-links">
         <img src="/images/users-dark.png" alt="Users">
-        <a href="/views/users.php"> Search users </a>
+        <a href="/views/search-users.php"> Search users </a>
     </div>
 
     <div class="dashboard-menu-links">
@@ -29,7 +29,7 @@
 
     <div class="dashboard-menu-links">
         <img src="/images/cases-dark.png" alt="Cases">
-        <a href="/views/cases.php"> Search cases </a>
+        <a href="/views/search-cases.php"> Search cases </a>
     </div>
 
     <div class="dashboard-menu-links">
@@ -39,11 +39,11 @@
 
     <div class="dashboard-menu-links">
         <img src="/images/add-dark.png" alt="File">
-        <a href="/views/files.php"> Add tip </a>
+        <a href="/views/tip.php"> Add tip </a>
     </div>
 
     <div class="dashboard-menu-links">
-        <img src="/images/file-dark.png" alt="File">
+        <img src="/images/upload-file-dark.png" alt="File">
         <a href="/views/file-upload.php"> File upload </a>
     </div>
 

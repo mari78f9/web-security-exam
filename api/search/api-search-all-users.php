@@ -2,7 +2,6 @@
 
     <!-- Section header with a title and a search form -->
     <div class="section-header">
-        <h2> Users </h2>
 
         <!-- Form for searching users by User ID -->
         <form class="search-data-function" method="post" action="">

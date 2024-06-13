@@ -43,15 +43,6 @@ $q->execute();
 
   $values = '';
 
-  // Admin/lieutenant details, create one with role_id = 4 and id = 1
-  $admin_password = password_hash('password', PASSWORD_DEFAULT);
-  $admin_created_at = time();
-  $admin_updated_at = 0;
-  $admin_deleted_at = 0;  
-  $values .= "('1', 'Admin', 'Admin', 'admin@company.com', 
-  '$admin_password', 4, $admin_created_at, $admin_updated_at, $admin_deleted_at, 0),";
-
-
   $user_password = password_hash('password', PASSWORD_DEFAULT); // Hashing the passwords
   
   // Loop to generate 10 fake users

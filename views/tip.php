@@ -43,34 +43,36 @@ if (!isset($_SESSION['user'])){
     <!-- Right side -->
     <section class="dashboard-content">
 
-        <h2>Search Files by Case ID</h2>
-        <form id="search-files">
-            <label for="search_case_id">Case ID:</label>
-            <input type="text" id="search_case_id" name="case_id">
-            <input type="submit" value="Search">
+        <h2>Add tip by Case ID</h2>
+        <form id="add-tip-form" onsubmit="addTip(); return false;">
+            <label for="case_id_tip">Case ID:</label>
+            <input type="text" id="case_id_tip" name="case_id" required>
+            <label for="case_tip">Tip:</label>
+            <textarea id="case_tip" name="case_tip" required></textarea>
+            <button type="submit">Add Tip</button>
         </form>
-
-        <div id="files-display"></div>
-
-        <script>
-            // Prevent form submission and handle search
-            document.getElementById('search-files').addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                var caseId = document.getElementById('search_case_id').value;
-
-                fetch('../api/api-display-files.php?case_id=' + caseId)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('files-display').innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error fetching files:', error);
-                    document.getElementById('files-display').textContent = 'Error fetching files.';
-                });
-            });
-        </script>
         
     </section>
+
+    <script>
+
+        // Prevent form submission and handle search
+    document.getElementById('search-files').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var caseId = document.getElementById('search_case_id').value;
+
+        fetch('../api/api-display-files.php?case_id=' + caseId)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('files-display').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error fetching files:', error);
+            document.getElementById('files-display').textContent = 'Error fetching files.';
+        });
+    });
+
+    </script>
     
 </main>

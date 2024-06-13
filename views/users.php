@@ -44,7 +44,42 @@ if (!isset($_SESSION['user'])){
 
         <h2>All Users</h2>
         <div id="users-display">
-            <?php require_once __DIR__.'/../api/search/api-search-all-users.php'; ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('../api/api-get-users.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            let usersDisplay = document.getElementById('users-display');
+                            if (data.error) {
+                                usersDisplay.innerHTML = `<p>Error fetching users: ${data.error}</p>`;
+                                return;
+                            }
+                        
+                            data.forEach(userItem => {
+                                let userElement = document.createElement('div');
+                                userElement.id = `user-${userItem.user_id}`;
+                                userElement.innerHTML = `
+                                    <p><strong>User ID:</strong> ${userItem.user_id}</p>
+                                    <p><strong>First name:</strong> ${userItem.user_name}</p>
+                                    <p><strong>Last name:</strong> ${userItem.user_last_name}</p>
+                                    <p><strong>Email:</strong> ${userItem.user_email}</p>
+                                    <p><strong>Role ID:</strong> ${userItem.role_id_fk}</p>
+                                    <p><strong>User created at:</strong> ${new Date(userItem.user_created_at * 1000).toLocaleString()}</p>
+                                    <p><strong>User updated at:</strong> ${userItem.user_updated_at == 0 ? 'Never' : new Date(userItem.case_updated_at * 1000).toLocaleString()}</p>
+                                    <p><strong>User deleted at:</strong> ${userItem.user_deleted_at == 0 ? 'Never' : new Date(userItem.user_deleted_at * 1000).toLocaleString()}</p>
+                                    <p><strong>User is blocked:</strong> <span class="user-blocked">${userItem.user_is_blocked ? 'Yes' : 'No'}</span> <button class="toggle-blocked" onclick="toggleUserBlocked('${userItem.user_id}', ${userItem.user_is_blocked})">Toggle</button></p>
+                                    <button onclick="deleteUser('${userItem.user_id}')">Delete user</button>
+                                    <hr>
+                                `;
+                                usersDisplay.appendChild(userElement);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching users:', error);
+                            document.getElementById('users-display').innerHTML = 'Error fetching users.';
+                        });
+                });
+            </script>
         </div>
 
         
