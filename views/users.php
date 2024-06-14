@@ -44,7 +44,6 @@ if (!isset($_SESSION['user'])){
         
         <?php require_once __DIR__ . '/../api/search/api-search-all-users.php'  ?>
         
-        <img src="/images/surprice.jpg" alt="user_profile">
     </section>
 
 
