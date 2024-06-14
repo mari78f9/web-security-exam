@@ -2,106 +2,233 @@
 
     <!-- Section header with a title and a search form -->
     <div class="section-header">
-
-        <h2> View Cases </h2>  
+        <h2> View Cases </h2>
 
         <!-- Form for searching cases by ID -->
-        <form class="search-data-function" method="post" action="">
-
-            <!-- Input field for entering the case ID to search -->
-            <input type="text" name="search" placeholder="🔍 Search by 'Case ID'" required>
-
-            <!-- Submit button for the search form -->
-            <button type="submit">Search</button> 
+        <form class="search-data-function" id="searchForm">
+            <input type="text" name="searchCase" id="searchInput" placeholder="🔍 Search by 'Case ID'" required>
+            <button type="submit">Search</button>
+            <button type="button" onclick="resetSearch()">Reset</button>
         </form>
     </div>
 
-    <div class="case-display"> </div>
-        <?php
+    <!-- Update this to use an ID instead of a class -->
+    <div id="cases-display"> </div>
 
-            // Error handling in case of potential errors during database operation
-            try {
-
-                // Connect to the database
-                $db = _db();
-
-                // Check if the search query exists, otherwise leave it as an empty string
-                $search_query = isset($_POST['search']) ? $_POST['search'] : '';
-
-                // If a search query is provided, search for cases with the matching case_id
-                if ($search_query) {
-                    $q = $db->prepare(' SELECT * FROM cases 
-                                        WHERE case_id LIKE :case_id
-                                    ');
-                    $q->bindValue(':case_id', "%$search_query%");
-                } else {
-
-                    // If no search query is provided, retrieve all cases
-                    $q = $db->prepare(' SELECT * FROM cases');
-                }
-                
-                // Execute the query
-                $q->execute();
-
-                // Fetch all matching cases
-                $cases = $q->fetchAll();
-            
-            // Handle exceptions during the database operation
-            } catch (Exception $e) {
-                try {
-
-                    // If the exception has no code or message, throw a new exception
-                    if ( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
-
-                    // Set HTTP response code to the exception code and output the exception message as JSON
-                    http_response_code($e->getCode());
-                    echo json_encode(['info'=>$e->getMessage()]);
-                } catch (Exception $ex) {
-
-                    // If another exception occurs, set HTTP response code to 500 and output the exception as JSON
-                    http_response_code(500);
-                    echo json_encode($ex); 
-                }
-            }
-
-            // Check if there are any matching cases
-            if (count($cases) > 0) {    
-
-                $layer = 1500;
-                $marginLeft = 10;
-                $marginRight = 10;
-
-                
-                // Loop through each case and display the information
-                foreach ($cases as $row) {    
-                    echo "<div class='view-each-case' style='z-index: {$layer}; margin-left: {$marginLeft}px;' margin-right: {$marginRight}px;'>";
-                    echo "<div class='case-template'> Case {$row['case_id']}</div>";
-                    echo "<br>";
-                    // echo "<div class='case-output'>{$row['case_description']}</div>";
-                    // echo "<div class='case-output'>{$row['case_suspect']}</div>";
-                    // echo "<div class='case-output'>{$row['case_type']}</div>";
-                    // echo "<div class='case-output'>{$row['case_location']}</div>";
-                    // echo "<div class='case-output'>{$row['case_tip']}</div>";
-                    // echo "<div class='case-output'>{$row['case_solved']}</div>";
-                    // echo "<div class='case-output'>{$row['case_created_at']}</div>";
-                    // echo "<div class='case-output'>{$row['case_updated_at']}</div>";
-                    // echo "<div class='case-output'>{$row['case_is_public']}</div>";
-                    echo "</div>";
-
-                    $layer++;
-                    $marginLeft -= 20;
-                    $marginRight -= 20;
-                }
-
-            } else {
-
-                // If no matching cases are found, display an error message
-                echo "<p class='failed-matching-cases'> No matching cases found. </p>";  
-            }
+    <?php
+    // PHP conditional blocks to fetch and display cases based on user role
+    if ($user['role_id_fk'] === 4) {
+        // Admin role
         ?>
-    </div>
+        <script>
+              document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(searchForm);
+                const searchQuery = formData.get('searchCase');
+                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+            });
+            fetchCases('../api/api-get-cases.php');
+        });
 
+            function fetchCases(apiUrl) {
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        let casesDisplay = document.getElementById('cases-display');
+                        casesDisplay.innerHTML = ''; // Clear previous content
+                        if (data.error) {
+                            casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
+                            return;
+                        }
+                        data.forEach(caseItem => {
+                            let caseElement = document.createElement('div');
+                            caseElement.id = `case-${caseItem.case_id}`;
+                            caseElement.innerHTML = `
+                                <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
+                                <p><strong>Description:</strong> ${caseItem.case_description}</p>
+                                <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
+                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
+                                <p><strong>Location:</strong> ${caseItem.case_location}</p>
+                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
+                                <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span>
+                                    <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button>
+                                </p>
+                                <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                                <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
+                                <p><strong>Public:</strong> <span class="case-visibility">${caseItem.case_is_public ? 'Yes' : 'No'}</span>
+                                    <button class="toggle-visibility-button" onclick="toggleCaseVisibility('${caseItem.case_id}', ${caseItem.case_is_public})">Toggle</button>
+                                </p>
+                                <hr>
+                            `;
+                            casesDisplay.appendChild(caseElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cases:', error);
+                        document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
+                    });
+            }
+        </script>
+    <?php
+    } elseif ($user['role_id_fk'] === 1) {
+        // Detective role
+        ?>
+        <script>
+             document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(searchForm);
+                const searchQuery = formData.get('searchCase');
+                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+            });
+            fetchCases('../api/api-get-cases.php');
+        });
+
+            function fetchCases(apiUrl) {
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        let casesDisplay = document.getElementById('cases-display');
+                        casesDisplay.innerHTML = ''; // Clear previous content
+                        if (data.error) {
+                            casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
+                            return;
+                        }
+                        data.forEach(caseItem => {
+                            let caseElement = document.createElement('div');
+                            caseElement.id = `case-${caseItem.case_id}`;
+                            caseElement.innerHTML = `
+                                <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
+                                <p><strong>Description:</strong> ${caseItem.case_description}</p>
+                                <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
+                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
+                                <p><strong>Location:</strong> ${caseItem.case_location}</p>
+                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
+                                <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span>
+                                    <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button>
+                                </p>
+                                <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                                <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
+                                <hr>
+                            `;
+                            casesDisplay.appendChild(caseElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cases:', error);
+                        document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
+                    });
+            }
+        </script>
+    <?php
+    } elseif ($user['role_id_fk'] === 2) {
+        // Lawyer role
+        ?>
+        <script>
+             document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(searchForm);
+                const searchQuery = formData.get('searchCase');
+                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+            });
+            fetchCases('../api/api-get-cases.php');
+        });
+
+            function fetchCases(apiUrl) {
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        let casesDisplay = document.getElementById('cases-display');
+                        casesDisplay.innerHTML = ''; // Clear previous content
+                        if (data.error) {
+                            casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
+                            return;
+                        }
+                        data.forEach(caseItem => {
+                            let caseElement = document.createElement('div');
+                            caseElement.id = `case-${caseItem.case_id}`;
+                            caseElement.innerHTML = `
+                                <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
+                                <p><strong>Description:</strong> ${caseItem.case_description}</p>
+                                <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
+                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
+                                <p><strong>Location:</strong> ${caseItem.case_location}</p>
+                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
+                                <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                                <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
+                                <hr>
+                            `;
+                            casesDisplay.appendChild(caseElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cases:', error);
+                        document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
+                    });
+            }
+        </script>
+    <?php
+    } elseif ($user['role_id_fk'] === 3) {
+        // Citizen role
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(searchForm);
+                const searchQuery = formData.get('searchCase');
+                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}&public_only=true`);
+            });
+            fetchCases('../api/api-get-cases.php?public_only=true');
+        });
+
+            function fetchCases(apiUrl) {
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        let casesDisplay = document.getElementById('cases-display');
+                        casesDisplay.innerHTML = ''; // Clear previous content
+                        if (data.error) {
+                            casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
+                            return;
+                        }
+                        data.forEach(caseItem => {
+                            let caseElement = document.createElement('div');
+                            caseElement.id = `case-${caseItem.case_id}`;
+                            caseElement.innerHTML = `
+                                <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
+                                <p><strong>Description:</strong> ${caseItem.case_description}</p>
+                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
+                                <p><strong>Location:</strong> ${caseItem.case_location}</p>
+                                <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                                <hr>
+                            `;
+                            casesDisplay.appendChild(caseElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cases:', error);
+                        document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
+                    });
+            }
+        </script>
+    <?php
+    }
+    ?>
+
+    <script>
+         // Function to reset search and display all cases
+         function resetSearch() {
+            document.getElementById('searchInput').value = ''; // Clear search input
+            fetchCases('../api/api-get-cases.php'); // Fetch all cases
+        }
+    </script>
 </section>
 
-</body>
-</html>
+<?php require_once __DIR__ . '/../../views/_footer.php'  ?>
