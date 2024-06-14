@@ -36,12 +36,13 @@ try {
   ');
 
   // Bind parameters to the prepared statement
-  $q-> bindValue(':user_name', $_POST['user_name']);
-  $q-> bindValue(':user_id', $user_id);
-  $q-> bindValue(':user_last_name', $_POST['user_last_name']);
-  $q-> bindValue(':user_email', $_POST['user_email']);
-  $q-> bindValue(':role_id_fk', $_POST['role_id_fk']);
-  $q-> bindValue(':time', time());
+  // Using PDO::PARAM_* constants in bindValue is a good practice to ensure the correct data types are used and to enhance security. 
+  $q-> bindValue(':user_name', $_POST['user_name'], PDO::PARAM_STR);
+  $q-> bindValue(':user_id', $user_id, PDO::PARAM_INT);
+  $q-> bindValue(':user_last_name', $_POST['user_last_name'], PDO::PARAM_STR);
+  $q-> bindValue(':user_email', $_POST['user_email'], PDO::PARAM_STR);
+  $q-> bindValue(':role_id_fk', $_POST['role_id_fk'], PDO::PARAM_STR);
+  $q-> bindValue(':time', time(), PDO::PARAM_INT);
 
   // Execute the query
   $q -> execute();
@@ -60,25 +61,16 @@ try {
   // Output success message in JSON format
   echo json_encode('User updated');
 
-} catch(Exception $e) {
+// PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+} catch (PDOException $e) {
 
-  // Handle exceptions
-  try {
+  // Handle database-related exceptions
+  http_response_code(500);
+  echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
 
-    // Check if the exception has a code and message
-    if ( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
+} catch (Exception $e) {
 
-    // Set HTTP response code to the exception code
-    http_response_code($e->getCode());
-
-    // Output error message in JSON format
-    echo json_encode(['info'=>$e->getMessage()]);
-  } catch(Exception $ex) {
-
-    // Set HTTP response code to 500 (Internal Server Error)
-    http_response_code(500);
-
-    // Output error message in JSON format
-    echo json_encode($ex); 
-  }
+  // Handle general exceptions
+  http_response_code($e->getCode() ?: 500);
+  echo json_encode(['error' => $e->getMessage()]);
 }

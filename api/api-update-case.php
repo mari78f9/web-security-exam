@@ -10,14 +10,23 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Extract case ID, case solved status, case tip, and case public status from POST data
-    $caseId = $_POST['case_id'] ?? null;
-    $caseId = $_POST['case_id'] ?? null;
-    $caseSolved = $_POST['case_solved'] ?? null;
-    $caseTip = $_POST['case_tip'] ?? null;
-    $caseIsPublic = $_POST['case_is_public'] ?? null;
+
+    // Extract and sanitize inputs
+    // Sanitizes the input data using htmlspecialchars() to prevent XSS attacks.
+    // ENT_QUOTES and 'UTF-8' are parameters used with the 
+    // htmlspecialchars() function in PHP to ensure proper sanitization of input data.
+    $caseId = htmlspecialchars($_POST['case_id'] ?? '', ENT_QUOTES, 'UTF-8');
+    $caseTip = htmlspecialchars($_POST['case_tip'] ?? '', ENT_QUOTES, 'UTF-8');
+
+    // Used FILTER_VALIDATE_BOOLEAN to clean boolean inputs.
+    // $caseSolved = filter_var($_POST['case_solved'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    // $caseIsPublic = filter_var($_POST['case_is_public'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    $caseSolved = filter_input(INPUT_POST, 'case_solved', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    $caseIsPublic = filter_input(INPUT_POST, 'case_is_public', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 
     // Check if the case ID is provided
-    if ($caseId) {
+    // Used preg_match to validate case_id to ensure it contains only alphanumeric characters.
+    if ($caseId && preg_match('/^[a-zA-Z0-9]+$/', $caseId)) {
         try {
 
             // Connect to the database
@@ -41,18 +50,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $q->execute([':case_is_public' => $caseIsPublic, ':updated_at' => time(), ':case_id' => $caseId]);
             }
 
-            // Output success message in JSON format
-            echo json_encode(['success' => true]);
+           // Output success message in JSON format
+           echo json_encode(['success' => true]);
+
+        // PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+        } catch (PDOException $e) {
+
+            // Output error message in JSON format if a PDO exception occurs
+            http_response_code(500);
+            echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
         } catch (Exception $e) {
 
-            // Output error message in JSON format if an exception occurs during database operation
-            echo json_encode(['error' => $e->getMessage()]);
+            // Output error message in JSON format if a general exception occurs
+            http_response_code(500);
+            echo json_encode(['error' => 'Error: ' . $e->getMessage()]);
         }
     } else {
 
         // Output error message in JSON format if case ID is invalid or not provided
+        http_response_code(400);
         echo json_encode(['error' => 'Invalid case ID']);
     }
+} else {
+
+    // Output error message in JSON format if the request method is not POST
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(['error' => 'Invalid request method']);
 }
 
 ?>

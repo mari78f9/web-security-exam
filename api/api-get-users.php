@@ -18,18 +18,26 @@ try {
     $q->execute();
 
     // Fetch all rows returned by the query
-    $users = $q->fetchAll();
+    // Use PDO::FETCH_ASSOC to fetch associative array
+    $users = $q->fetchAll(PDO::FETCH_ASSOC);
 
     // Set HTTP response code to indicate success
     http_response_code(200);
 
     // Encode the user data as JSON and output it
     echo json_encode($users);
-} catch (Exception $e) {
 
-    // If an exception occurs, set HTTP response code to indicate server error
+  // PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+  } catch (PDOException $e) {
+    // If a PDO exception occurs (including SQL errors), set HTTP response code to indicate server error
     http_response_code(500);
 
     // Encode the error message as JSON and output it
-    echo json_encode(['info' => $e->getMessage()]);
+    echo json_encode(['info' => 'Database error: ' . $e->getMessage()]);
+} catch (Exception $e) {
+    // Catch other exceptions
+    http_response_code(500);
+
+    // Encode the error message as JSON and output it
+    echo json_encode(['info' => 'Unexpected error: ' . $e->getMessage()]);
 }
