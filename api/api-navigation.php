@@ -18,18 +18,8 @@
     </div>
 
     <div class="dashboard-menu-links">
-        <img src="/images/users-dark.png" alt="Users">
-        <a href="/views/search-users.php"> Search users </a>
-    </div>
-
-    <div class="dashboard-menu-links">
         <img src="/images/cases-dark.png" alt="Cases">
         <a href="/views/cases.php"> View cases </a>
-    </div>
-
-    <div class="dashboard-menu-links">
-        <img src="/images/cases-dark.png" alt="Cases">
-        <a href="/views/search-cases.php"> Search cases </a>
     </div>
 
     <div class="dashboard-menu-links">
@@ -58,11 +48,6 @@
     <div class="dashboard-menu-links">
         <img src="/images/cases-dark.png" alt="Cases">
         <a href="/views/cases.php"> View cases </a>
-    </div>
-
-    <div class="dashboard-menu-links">
-        <img src="/images/cases-dark.png" alt="Cases">
-        <a href="/views/cases.php"> Search cases </a>
     </div>
 
     <div class="dashboard-menu-links">

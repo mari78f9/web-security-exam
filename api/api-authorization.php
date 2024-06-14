@@ -15,13 +15,6 @@
   </button>
 </a>
 
-<a href="/views/search-users.php">
-  <button class="dashboard-button" id="dashboard-new-case">
-    <img src="/images/users-light.png" alt="Case"> <br>
-    <h2 href=""> Search Users </h2>
-  </button>
-</a>
-
 <a href="/views/cases.php">
   <button class="dashboard-button" id="dashboard-cases">
     <img src="/images/cases-light.png" alt="Cases"> <br>

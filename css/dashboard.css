@@ -17,15 +17,28 @@
 
 /* LOGOUT */
 
+.logout {
+    background-color: var(--colorRedSecondary);
+    /* padding: 10px; */
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    width: 20%;
+}
+
 .logout button {
     border: 1px solid var(--colorLightMain);
-    background-color: var(--colorDarkSecondary);
+    background-color: var(--colorRedSecondary);
     color: var(--colorLightMain);
     border-radius: 10px;
     padding: 0.7rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 75%;
 }
 
 .logout button:hover {
@@ -40,10 +53,8 @@
 .dashboard {
     margin: 0;
     height: 100vh;
-
     background-color: var(--colorDarkMain);
     color: var(--colorDarkBlack);
-
     overflow: hidden;
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -63,6 +74,12 @@
     background-color: var(--colorRedSecondary);
     text-align: center;
     padding: 3rem 0;
+    
+    width: 20%;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
 }
 
 .dashboard-menu-top img {
@@ -92,6 +109,11 @@
 .dashboard-menu-bottom {
     background-color: var(--colorDarkSecondary);
     padding: 1rem;
+    margin-top: 15rem;
+    height: 90%;
+    overflow: hidden;
+    overflow-y: scroll;
+
 }
 
 .dashboard-menu-links {
@@ -145,7 +167,8 @@
 
 .dashboard-content {
     padding: 3rem;
-    overflow: auto;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .dashboard-content span {
