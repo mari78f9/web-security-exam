@@ -39,7 +39,7 @@
                 } else {
 
                     // If no search query is provided, retrieve all users
-                    $q = $db->prepare(' SELECT * FROM users ');
+                    $q = $db->prepare('SELECT * FROM users WHERE user_deleted_at = 0');
                 }
 
                 // Execute the query
