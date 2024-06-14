@@ -1,4 +1,6 @@
 <?php
+
+header('Content-Type: application/json');
 // Connects to the master-file, which contains the database connection and validation
 require_once __DIR__ . '/../_.php';
 
@@ -30,19 +32,16 @@ try {
     SET user_name = :user_name, 
     user_last_name = :user_last_name,
     user_email = :user_email,
-    role_id_fk = :role_id_fk,
-    user_updated_at = :time,
+    user_updated_at = :time
     WHERE user_id = :user_id
   ');
 
   // Bind parameters to the prepared statement
-  // Using PDO::PARAM_* constants in bindValue is a good practice to ensure the correct data types are used and to enhance security. 
-  $q-> bindValue(':user_name', $_POST['user_name'], PDO::PARAM_STR);
-  $q-> bindValue(':user_id', $user_id, PDO::PARAM_INT);
-  $q-> bindValue(':user_last_name', $_POST['user_last_name'], PDO::PARAM_STR);
-  $q-> bindValue(':user_email', $_POST['user_email'], PDO::PARAM_STR);
-  $q-> bindValue(':role_id_fk', $_POST['role_id_fk'], PDO::PARAM_STR);
-  $q-> bindValue(':time', time(), PDO::PARAM_INT);
+  $q-> bindValue(':user_name', $_POST['user_name']);
+  $q-> bindValue(':user_id', $user_id);
+  $q-> bindValue(':user_last_name', $_POST['user_last_name']);
+  $q-> bindValue(':user_email', $_POST['user_email']);
+  $q-> bindValue(':time', time());
 
   // Execute the query
   $q -> execute();

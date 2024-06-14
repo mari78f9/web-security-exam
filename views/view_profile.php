@@ -77,10 +77,7 @@ if (!isset($_SESSION['user'])){
             <img src="/images/logo.png" alt="Logo">
         </div>
 
-        
     </section>
-
-    
     
 </main>
 

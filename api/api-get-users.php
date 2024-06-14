@@ -1,43 +1,43 @@
 <?php
 
-// Connects to the master-file, which contains the database connection and validation
 require_once __DIR__.'/../_.php';
 
-// Set the response header to indicate JSON content type
 header('Content-Type: application/json');
 
 try {
-
-    // Connect to the database
     $db = _db();
 
-    // Prepare SQL query to select all users where user_deleted_at is 0 (not deleted)
-    $q = $db->prepare('SELECT * FROM users WHERE user_deleted_at = 0');
+    $searchQuery = isset($_GET['searchUser']) ? $_GET['searchUser'] : '';
 
-    // Execute the query
+    if ($searchQuery) {
+        $q = $db->prepare('
+            SELECT u.*, r.role_name 
+            FROM users u 
+            LEFT JOIN roles r ON u.role_id_fk = r.role_id 
+            WHERE u.user_id LIKE :user_id AND u.user_deleted_at = 0
+        ');
+        $q->bindValue(':user_id', "%$searchQuery%");
+    } else {
+        $q = $db->prepare('
+            SELECT u.*, r.role_name 
+            FROM users u 
+            LEFT JOIN roles r ON u.role_id_fk = r.role_id 
+            WHERE u.user_deleted_at = 0
+        ');
+    }
+
     $q->execute();
-
-    // Fetch all rows returned by the query
-    // Use PDO::FETCH_ASSOC to fetch associative array
     $users = $q->fetchAll(PDO::FETCH_ASSOC);
 
-    // Set HTTP response code to indicate success
     http_response_code(200);
-
-    // Encode the user data as JSON and output it
     echo json_encode($users);
 
-  // PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
-  } catch (PDOException $e) {
-    // If a PDO exception occurs (including SQL errors), set HTTP response code to indicate server error
+} catch (PDOException $e) {
     http_response_code(500);
-
-    // Encode the error message as JSON and output it
     echo json_encode(['info' => 'Database error: ' . $e->getMessage()]);
 } catch (Exception $e) {
-    // Catch other exceptions
     http_response_code(500);
-
-    // Encode the error message as JSON and output it
     echo json_encode(['info' => 'Unexpected error: ' . $e->getMessage()]);
 }
+
+?>

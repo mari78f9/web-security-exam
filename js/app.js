@@ -396,23 +396,29 @@ function logout() {
 // Handles a user-update, when submitting a form via POST-request
 
 async function updateUser() {
+  const frm = event.target;
+  const formData = new FormData(frm);
 
-  // Get the form element from the event target
-  const frm = event.target; 
-  console.log(frm);
-
-  // Send a POST request to update the user information
   const conn = await fetch("/api/api-update-user.php", {
     method: 'POST',
-    body: new FormData(frm)
+    body: formData
   });
-  
-  // Get the response data as text
-  const data = await conn.text();
-  console.log(data);
 
-  // Alert the user about the successful update
-  alert('User updated successfully');
+  const response = await conn.json(); // Assuming JSON response from server
+
+  if (response === 'User updated') {
+    // Update DOM elements with new data
+    document.getElementById('user_name').textContent = formData.get('user_name');
+    document.getElementById('user_last_name').textContent = formData.get('user_last_name');
+
+    // Optionally update other fields like user email, etc.
+    document.getElementById('user_email').value = formData.get('user_email');
+
+    // Inform user about successful update
+    alert('User updated successfully');
+  } else {
+    alert('Failed to update user'); // Handle error case
+  }
 }
 
 // ##########################################################################################

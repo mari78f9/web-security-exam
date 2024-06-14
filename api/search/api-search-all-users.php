@@ -18,101 +18,72 @@
 
     </div>
 
-    <div class="view-users">
-        <?php
-
-            // Error handling in case of potential errors during database operation
-            try {
-
-                // Connect to the database
-                $db = _db();
-
-                // Check if the search query exists, otherwise leave it as an empty string
-                $search_query = isset($_POST['searchUser']) ? $_POST['searchUser'] : '';
-
-                // If a search query is provided, search for users with the matching user_id
-                if ($search_query) {
-                    $q = $db->prepare(' SELECT * FROM users 
-                                        WHERE user_id LIKE :user_id
-                                    ');
-                    $q->bindValue(':user_id', "%$search_query%");
-                } else {
-
-                    // If no search query is provided, retrieve all users
-                    $q = $db->prepare('SELECT * FROM users WHERE user_deleted_at = 0');
+    <div id="users-display" class="view-users"></div>
+        
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to fetch and display users
+            function fetchUsers(query = '') {
+                let url = '../api/api-get-users.php';
+                if (query) {
+                    url += `?searchUser=${encodeURIComponent(query)}`;
                 }
 
-                // Execute the query
-                $q->execute();
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        let usersDisplay = document.getElementById('users-display');
+                        usersDisplay.innerHTML = ''; // Clear existing content
 
-                // Fetch all matching users
-                $users = $q->fetchAll();
+                        if (data.error) {
+                            usersDisplay.innerHTML = `<p>Error fetching users: ${data.error}</p>`;
+                            return;
+                        }
 
-            // Handle exceptions during the database operation
-            } catch(Exception $e) {
-                try {
+                        if (data.length === 0) {
+                            usersDisplay.innerHTML = `<p>No matching users found.</p>`;
+                            return;
+                        }
 
-                    // If the exception has no code or message, throw a new exception
-                    if ( ! $e->getCode() || ! $e->getMessage()){ throw new Exception(); }
-
-                    // Set HTTP response code to the exception code and output the exception message as JSON
-                    http_response_code($e->getCode());
-                    echo json_encode(['info'=>$e->getMessage()]);
-                } catch (Exception $ex) {
-
-                    // If another exception occurs, set HTTP response code to 500 and output the exception as JSON
-                    http_response_code(500);
-                    echo json_encode($ex); 
-                }
+                        data.forEach(userItem => {
+                            let userElement = document.createElement('div');
+                            userElement.id = `user-${userItem.user_id}`;
+                            userElement.innerHTML = `
+                                <div class="view-user">
+                                    <div class="user-user-id"> 
+                                        <p><strong>ID</strong> ${userItem.user_id}</p>
+                                    </div>
+                                    <img src="/images/profile-dark.png" alt="user_profile"> <br>
+                                    <div class="user-user-name"> <span>${userItem.user_name}</span> <span>${userItem.user_last_name}</span> </div>
+                                     <div class="user-user-role"> <p><strong>Role:</strong> ${userItem.role_name}</p> </div>
+                                    <p><strong>Email:</strong> ${userItem.user_email}</p>
+                                    <p><strong>User created at:</strong> ${new Date(userItem.user_created_at * 1000).toLocaleString()}</p>
+                                    <p><strong>User updated at:</strong> ${userItem.user_updated_at == 0 ? 'Never' : new Date(userItem.user_updated_at * 1000).toLocaleString()}</p>
+                                    <p><strong>User is blocked:</strong> <span class="user-blocked">${userItem.user_is_blocked ? 'Yes' : 'No'}</span> <button class="toggle-blocked" onclick="toggleUserBlocked('${userItem.user_id}', ${userItem.user_is_blocked})">Toggle</button></p>
+                                    <button onclick="deleteUser('${userItem.user_id}')">Delete user</button>
+                                </div>
+                            `;
+                            usersDisplay.appendChild(userElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching users:', error);
+                        document.getElementById('users-display').innerHTML = 'Error fetching users.';
+                    });
             }
 
-        // Check if there are any matching users
-        if (count($users) > 0) {   
+            // Fetch all users on page load
+            fetchUsers();
 
-            // Loop through each user and display the information
-            foreach ($users as $user) { 
-
-                // Get the role name from the roles table
-                $role_id = $user['role_id_fk'];
-                $role_query = $db->prepare('SELECT role_name FROM roles WHERE role_id = :role_id');
-                $role_query->bindValue(':role_id', $role_id);
-                $role_query->execute();
-                $role = $role_query->fetchColumn();
-
-                // Display user information
-                echo "<div class='view-user'>";
-                echo "<div class='user-user-id'> ID {$user['user_id']}</div>";
-                echo "<img src='/images/profile-dark.png' alt='user_profile'>";
-                echo "<div class='user-user-name'>{$user['user_name']} {$user['user_last_name']}</div>";
-                echo "<div class='user-user-role'>$role</div>";
-                echo "<div class='user-output'>{$user['user_email']}</div>";
-
-                echo "<div class='user-info'>";
-                echo "<div class='info-label'> Created </div>";
-                echo "<div class='user-output'>{$user['user_created_at']}</div>";
-                echo "<div class='info-label'> Updated </div>";
-                echo "<div class='user-output'>{$user['user_updated_at']}</div>";
-                echo "<div class='info-label'> Deleted </div>";
-                echo "<div class='user-output'>{$user['user_deleted_at']}</div>";
-                echo "</div>";
-
-                echo "<button onclick=\"toggle_blocked({$user['user_id']}, {$user['user_is_blocked']})\">";
-                echo $user['user_is_blocked'] == 0 ? "Unblocked" : "Blocked";
-                echo "</button>";
-
-                // echo "<button onclick=\"deleteUser('{$userItem->user_id}')\">Delete user</button>";
-
-                
-                echo "</div>";
-            }
-
-            } else {
-
-                // If no matching users are found, display an error message
-                echo "<p class='failed-matching-orders'>No matching users found.</p>"; 
-            }
-
-            ?>
-    </div>
+            // Handle the search form submission
+            document.querySelector('.search-data-function').addEventListener('submit', function(event) {
+                event.preventDefault();
+                let searchQuery = document.querySelector('input[name="searchUser"]').value;
+                fetchUsers(searchQuery);
+            });
+        });
+    </script>
 
 </section>
+
+<?php require_once __DIR__ . '/../../views/_footer.php'  ?>

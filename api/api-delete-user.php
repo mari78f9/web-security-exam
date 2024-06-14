@@ -18,13 +18,6 @@ try {
   // Get the user ID from the POST request
   $user_id = $_POST['user_id'];
 
-  // Validate the user ID to ensure it is an integer
-  // Use filter_var to validate the user ID as an integer.
-  // 
-  if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
-    throw new Exception('Invalid User ID', 400);
-  }
-
   // Connect to the database
   $db = _db();
 
