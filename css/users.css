@@ -1,5 +1,4 @@
 /* VIEW 'ALL' USERS */
-
 .section-header {
     top: 0;
     margin-left: -3rem;
@@ -62,6 +61,7 @@
     margin-top: 5rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 30rem;
 }
 
 .view-user {

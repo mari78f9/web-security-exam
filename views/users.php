@@ -43,9 +43,10 @@ if (!isset($_SESSION['user'])){
     <section class="dashboard-content">
         
         <?php require_once __DIR__ . '/../api/search/api-search-all-users.php'  ?>
-
         
+        <img src="/images/surprice.jpg" alt="user_profile">
     </section>
+
 
     
     
