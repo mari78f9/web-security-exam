@@ -85,8 +85,9 @@
                 echo "<img src='/images/profile-dark.png' alt='user_profile'>";
                 echo "<div class='user-user-name'>{$user['user_name']} {$user['user_last_name']}</div>";
                 echo "<div class='user-user-role'>$role</div>";
-                echo "<div class='user-output'>{$user['user_email']}</div>";
+                echo "<div class='user-user-email'>{$user['user_email']}</div>";
 
+                echo "<div class='info-header'> Account Status </div>"; 
                 echo "<div class='user-info'>";
                 echo "<div class='info-label'> Created </div>";
                 echo "<div class='user-output'>{$user['user_created_at']}</div>";
@@ -96,10 +97,14 @@
                 echo "<div class='user-output'>{$user['user_deleted_at']}</div>";
                 echo "</div>";
 
-                echo "<button onclick=\"toggle_blocked({$user['user_id']}, {$user['user_is_blocked']})\">";
+                echo "<div class='view-user-buttons'>";
+                echo "<div class='blocked-button'> <button onclick=\"toggle_blocked({$user['user_id']}, {$user['user_is_blocked']})\">";
                 echo $user['user_is_blocked'] == 0 ? "Unblocked" : "Blocked";
-                echo "</button>";
+                echo "</button> </div>";
 
+                // Bare en placeholder – bare udskift den
+                echo "<div class='delete-button'> <button> Delete </button> </div>";
+                echo "</div>";
                 // echo "<button onclick=\"deleteUser('{$userItem->user_id}')\">Delete user</button>";
 
                 
