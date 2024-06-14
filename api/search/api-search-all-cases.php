@@ -69,10 +69,12 @@
 
                 $layer = 1500;
                 $marginLeft = 10;
+                $marginRight = 10;
+
                 
                 // Loop through each case and display the information
                 foreach ($cases as $row) {    
-                    echo "<div class='view-each-case' style='z-index: {$layer}; margin-left: {$marginLeft}px;'>";
+                    echo "<div class='view-each-case' style='z-index: {$layer}; margin-left: {$marginLeft}px;' margin-right: {$marginRight}px;'>";
                     echo "<div class='case-template'> Case {$row['case_id']}</div>";
                     echo "<br>";
                     // echo "<div class='case-output'>{$row['case_description']}</div>";
@@ -88,6 +90,7 @@
 
                     $layer++;
                     $marginLeft -= 20;
+                    $marginRight -= 20;
                 }
 
             } else {

@@ -41,6 +41,14 @@ if (!isset($_SESSION['user'])){
 
     <!-- Right side -->
     <section class="dashboard-content">
+       
+        <div id="newCase" class="new-case">
+            <?php require_once __DIR__ . '/../views/create-case.php'  ?>
+        </div>
+
+        <div class="create-case">
+            <button onclick="createCrime()"> + </button>
+        </div>
 
         <div class="case-folder">
             <p> Cases </p>
@@ -49,12 +57,7 @@ if (!isset($_SESSION['user'])){
         <div class="case-folder-back">
             <p> . </p>
         </div>
-
-        <!-- <div class="case-template">
-            <p> Case 2cdafe1c33 </p>
-            <h2> Kidnapping of a Child </h2>
-        </div> -->
-
+        
         <?php require_once __DIR__ . '/../api/search/api-search-all-cases.php'  ?>
     
     </section>

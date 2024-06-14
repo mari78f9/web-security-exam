@@ -1,5 +1,60 @@
-/* VIEW 'ALL' CASES */
+/* CASES */
 
+/* CREATE NEW CASE */
+
+.new-case {
+    display: none;
+}
+
+.display-new-case {
+    margin-left: -19rem;
+    margin-top: -6em;
+    z-index: 90000;
+    position: absolute;
+    background-color: rgba(24, 24, 24, 0.7);
+    padding: 13.5rem;
+    width: 50%;
+    height: 45%;
+}
+
+.create-case button {
+    right: 0;
+    margin-top: 10rem;
+    margin-right: 15rem;
+    border: none;
+    padding: 0.7rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    background-color: var(--colorDarkThirdly);
+    position: absolute;
+    border-radius: 100%;
+    color: var(--colorLightMain);
+}
+
+.cancel-case button {
+    right: 0;
+    margin-right: 15rem;
+    border: none;
+    padding: 0.7rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    background-color: var(--colorDarkThirdly);
+    position: absolute;
+    border-radius: 100%;
+    color: var(--colorLightMain);
+}
+
+.create-new-case {
+    padding: 2rem;
+    background-color: var(--colorLightMain);
+}
+
+
+
+
+
+
+/* VIEW ALL CASES */
 
 .case-folder {
     background-color: var(--colorDarkSecondary);
@@ -10,10 +65,10 @@
     border-radius: 10px 10px 0px 0px;
     padding: 3rem;
     width: 65%;
-    text-align: center;
+    text-align: left;
     font-size: 30px;
     font-weight: bold;
-    box-shadow: 10px 10px 5px 15px rgb(42, 42, 42);
+    /* box-shadow: 10px 10px 5px 15px rgb(42, 42, 42); */
 }
 
 .case-folder-back {
@@ -33,22 +88,22 @@
 }
 
 .case-display {
-    margin-top: 5rem;
+    margin-top: 21rem;
     height: 300%;
     overflow-y: hidden;
 }
 
 .case-template {
-    width: 15%;
+    width: 110%;
     background-color: var(--colorLightMain);
     color: var(--colorDarkBlack);
     position: relative; /* Change from absolute to relative */
     z-index: 1500;
-    margin-bottom: -4rem; /* Adjust margin to separate elements */
-    margin-right: 1.5rem;
-    margin-left: 8rem;
+    margin-bottom: -13rem; /* Adjust margin to separate elements */
+    margin-right: 30rem;
+    margin-left: 25rem;
     padding-top: 1rem;
-    padding-bottom: 3rem;
+    padding-bottom: 10rem;
     padding-left: 1rem;
     box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
     border-radius: 5px; /* Optional: to give rounded corners */
@@ -59,6 +114,7 @@
     flex-direction: column;
     align-items: flex-start;
     position: relative;
+    margin-right: 25rem;
 }
 
 
