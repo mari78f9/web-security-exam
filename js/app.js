@@ -456,3 +456,26 @@ function deleteUser(userId) {
       console.error('Error deleting user:', error);
   });
 }
+
+function createCrime() {
+  var element = document.getElementById("newCase");
+  
+  if (element.style.display === "none") {
+      element.style.display = "block";
+
+  } else {
+      element.style.display = "block";
+  }
+
+}
+
+function hideNewCrime() {
+  var element = document.getElementById("newCase");
+  
+  if (element.style.display === "block") {
+      element.style.display = "none";
+
+  } else {
+      element.style.display = "none";
+  }
+}

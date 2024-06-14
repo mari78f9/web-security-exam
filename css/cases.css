@@ -1,40 +1,123 @@
-/* VIEW 'ALL' CASES */
+/* CASES */
 
-.view-all-cases-header {
-    background-color: var(--colorTextSecondary);
-    padding: 10px;
-    color: var(--colorText);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    margin-bottom: 10px;
+/* CREATE NEW CASE */
+
+.new-case {
+    display: none;
 }
 
-.view-all-cases-header div{
-    background-color: var(--colorTextSecondary);
-    color: var(--colorText);
+.display-new-case {
+    margin-left: -19rem;
+    margin-top: -6em;
+    z-index: 90000;
+    position: absolute;
+    background-color: rgba(24, 24, 24, 0.7);
+    padding: 13.5rem;
+    width: 50%;
+    height: 45%;
 }
 
-.view-all-cases {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+.create-case button {
+    right: 0;
+    margin-top: 10rem;
+    margin-right: 15rem;
+    border: none;
+    padding: 0.7rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    background-color: var(--colorDarkThirdly);
+    position: absolute;
+    border-radius: 100%;
+    color: var(--colorLightMain);
 }
 
-.view-all-cases button {
-    border: solid;
-    border-width: 0.5px;
-    border-color: var(--colorSecondary);
-    border-radius: 10px;
-    color: var(--colorSecondary);
-    margin-bottom: 10px;
-    margin-left: 10px;
+.cancel-case button {
+    right: 0;
+    margin-right: 15rem;
+    border: none;
+    padding: 0.7rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    background-color: var(--colorDarkThirdly);
+    position: absolute;
+    border-radius: 100%;
+    color: var(--colorLightMain);
 }
 
-.case-output {
-    background-color: var(--colorMainSecondary);
-    color: var(--colorText);
-    margin-bottom: 10px;
-    padding: 10px;
+.create-new-case {
+    padding: 2rem;
+    background-color: var(--colorLightMain);
 }
+
+
+
+
+
+
+/* VIEW ALL CASES */
+
+.case-folder {
+    background-color: var(--colorDarkSecondary);
+    color: var(--colorDarkMain);
+    position: absolute;
+    z-index: 2000;
+    bottom: 0;
+    border-radius: 10px 10px 0px 0px;
+    padding: 3rem;
+    width: 65%;
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+    /* box-shadow: 10px 10px 5px 15px rgb(42, 42, 42); */
+}
+
+.case-folder-back {
+    background-color: rgb(28, 28, 28);
+    color: var(--colorDarkThirdly);
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    border-radius: 10px 10px 0px 0px;
+    padding: 3rem;
+    width: 64%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    margin-left: 0.5rem;
+}
+
+.case-display {
+    margin-top: 21rem;
+    height: 300%;
+    overflow-y: hidden;
+}
+
+.case-template {
+    width: 110%;
+    background-color: var(--colorLightMain);
+    color: var(--colorDarkBlack);
+    position: relative; /* Change from absolute to relative */
+    z-index: 1500;
+    margin-bottom: -13rem; /* Adjust margin to separate elements */
+    margin-right: 30rem;
+    margin-left: 25rem;
+    padding-top: 1rem;
+    padding-bottom: 10rem;
+    padding-left: 1rem;
+    box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+    border-radius: 5px; /* Optional: to give rounded corners */
+}
+
+.view-each-case {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    margin-right: 25rem;
+}
+
+
 
 
 

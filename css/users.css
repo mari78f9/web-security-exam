@@ -4,7 +4,7 @@
     margin-left: -3rem;
     background-color: var(--colorDarkMain);
     width: 80%;
-    z-index: 1000;
+    z-index: 8000;
     position: fixed;
     padding-left: 3rem;
     padding-top: 3rem;
@@ -61,7 +61,6 @@
     margin-top: 5rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin-bottom: 30rem;
 }
 
 .view-user {
@@ -72,6 +71,48 @@
     background-color: var(--colorDarkSecondary);
     border-radius: 15px;
     color: var(--colorLightMain);
+}
+
+.view-user-buttons {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.blocked-button button {
+    background-color: var(--colorDarkSecondary);
+    color: var(--colorLightMain);
+    border: 1px solid var(--colorLightMain);
+    border-radius: 5px;
+    padding: 0.7rem;
+    font-size: 14px;
+    width: 100%;
+}
+
+.blocked-button button:hover {
+    border: 1px solid var(--colorDarkThirdly);
+    background-color: var(--colorDarkThirdly);
+    color: var(--colorDarkBlack);
+    font-weight: bold;
+}
+
+.delete-button button {
+    background-color: var(--colorDarkSecondary);
+    color: var(--colorDarkBlack);
+    border: 1px solid var(--colorDarkBlack);
+    border-radius: 5px;
+    padding: 0.7rem;
+    margin-top: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.delete-button button:hover {
+    border: 1px solid var(--colorRedMain);
+    background-color: var(--colorRedMain);
+    color: var(--colorLightMain);
+    font-weight: bold;
 }
 
 .view-user img {
@@ -106,15 +147,37 @@
 
 .user-user-role {
     color: var(--colorLightMain);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-size: 14px;
     text-transform: capitalize;
     color: var(--colorDarkThirdly);
 }
 
+.user-user-email {
+    background-color: var(--colorDarkThirdly);
+    margin-bottom: 2rem;
+    color: var(--colorDarkMain);
+    border-radius: 5px;
+    text-align: center;
+    padding: 0.2rem;
+    font-style: italic;
+}
+
+.info-header {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--colorDarkThirdly);
+}
+
 .user-info {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 35% 65%;
     font-size: 13px;
+    margin-bottom: 1rem;
+    color: var(--colorDarkMain);
+}
+
+.info-label {
+    font-weight: bold;
 }

@@ -23,11 +23,6 @@
     </div>
 
     <div class="dashboard-menu-links">
-        <img src="/images/case-dark.png" alt="Case">
-        <a href="/views/create-case.php"> Create new case </a>
-    </div>
-
-    <div class="dashboard-menu-links">
         <img src="/images/add-dark.png" alt="File">
         <a href="/views/tip.php"> Add tip </a>
     </div>

@@ -22,20 +22,6 @@
   </button>
 </a>
 
-<a href="/views/search-cases.php">
-  <button class="dashboard-button" id="dashboard-new-case">
-    <img src="/images/cases-light.png" alt="Case"> <br>
-    <h2 href=""> Search Cases </h2>
-  </button>
-</a>
-
-<a href="/views/create-case.php">
-  <button class="dashboard-button" id="dashboard-new-case">
-    <img src="/images/case-light.png" alt="Case"> <br>
-    <h2 href=""> Create Case </h2>
-  </button>
-</a>
-
 <a href="/views/tip.php">
   <button class="dashboard-button" id="dashboard-users">
     <img src="/images/add-light.png" alt="Tip"> <br>
@@ -64,13 +50,6 @@
   <button class="dashboard-button" id="dashboard-cases">
     <img src="/images/cases-light.png" alt="Cases"> <br>
     <h2> View Cases </h2>
-  </button>
-</a>
-
-<a href="/views/search-cases.php">
-  <button class="dashboard-button" id="dashboard-new-case">
-    <img src="/images/cases-light.png" alt="Case"> <br>
-    <h2 href=""> Search Cases </h2>
   </button>
 </a>
 
