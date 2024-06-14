@@ -53,26 +53,7 @@ if (!isset($_SESSION['user'])){
         </form>
         
     </section>
-
-    <script>
-
-        // Prevent form submission and handle search
-    document.getElementById('search-files').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var caseId = document.getElementById('search_case_id').value;
-
-        fetch('../api/api-display-files.php?case_id=' + caseId)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('files-display').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error fetching files:', error);
-            document.getElementById('files-display').textContent = 'Error fetching files.';
-        });
-    });
-
-    </script>
     
 </main>
+
+<?php require_once __DIR__ . '/_footer.php'  ?>

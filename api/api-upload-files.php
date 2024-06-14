@@ -30,15 +30,27 @@ header('Content-Type: application/json');
 try {
     // Check if a file was uploaded and there were no errors
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
+
         // Check if file name and case ID are provided
         if (isset($_POST['file_name']) && isset($_POST['case_id']) && !empty($_POST['case_id'])) {
-            $file_name = $_POST['file_name'];
+
+            // Sanitizes the input data using htmlspecialchars() to prevent XSS attacks.
+            // ENT_QUOTES and 'UTF-8' are parameters used with the 
+            // htmlspecialchars() function in PHP to ensure proper sanitization of input data.
+            $file_name = htmlspecialchars($_POST['file_name'], ENT_QUOTES, 'UTF-8');
             $case_id_fk = $_POST['case_id'];
 
-            // Call function to handle file upload
-            handleFileUpload($file_name, $_FILES['file'], $case_id_fk);
-            http_response_code(200);
-            echo json_encode(['info' => 'File uploaded successfully.']);
+            // Validate inputs
+            if ($file_name && preg_match('/^[a-zA-Z0-9]+$/', $case_id_fk)) { // Ensure case_id_fk is alphanumeric
+
+                // Call function to handle file upload
+                handleFileUpload($file_name, $_FILES['file'], $case_id_fk);
+                http_response_code(200);
+                echo json_encode(['info' => 'File uploaded successfully.']);
+            } else {
+                http_response_code(400);
+                echo json_encode(['info' => 'Invalid file name or case ID.']);
+            }
         } else {
             http_response_code(400);
             echo json_encode(['info' => 'File name or case ID is missing.']);
@@ -47,8 +59,16 @@ try {
         http_response_code(400);
         echo json_encode(['info' => 'No file was uploaded.']);
     }
-} catch(Exception $e) {
-    // Set HTTP response code to the exception code or 500
+
+// PDOException handles exceptions specific to PDO operations, such as database connection errors, query execution errors, etc.
+} catch (PDOException $e) {
+
+    // Handle PDO exceptions (database-related errors)
+    http_response_code(500);
+    echo json_encode(['info' => 'Database error: ' . $e->getMessage()]);
+} catch (Exception $e) {
+
+    // Handle other exceptions
     http_response_code($e->getCode() ?: 500);
     echo json_encode(['info' => $e->getMessage()]);
 }
