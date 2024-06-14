@@ -1,7 +1,9 @@
 <?php
 
+// Connects to the master-file, which contains the database connection and validation
 require_once __DIR__.'/../_.php';
 
+// Set the response content type to JSON
 header('Content-Type: application/json');
 
 try {
