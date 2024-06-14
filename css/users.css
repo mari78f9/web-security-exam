@@ -5,40 +5,55 @@
     margin-bottom: 3rem;
 }
 
-
-
-.view-all-users-header {
-    background-color: var(--colorTextSecondary);
-    padding: 10px;
-    color: var(--colorText);
+.view-users {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.view-user {
+    /* border: 1px solid var(--colorLightMain); */
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--colorDarkSecondary);
+    border-radius: 15px;
+    color: var(--colorLightMain);
+}
+
+.view-user img {
+    width: 20%;
+    border-radius: 100%;
+    border: 2px solid var(--colorLightMain);
+    margin-left: 7.5rem;
     margin-bottom: 10px;
 }
 
-.view-all-users-header div{
-    background-color: var(--colorTextSecondary);
-    color: var(--colorText);
+.user-user-id {
+    background-color: var(--colorRedMain);
+    color: var(--colorLightMain);
+    text-align: center;
+    font-size: 13px;
+    padding: 1rem;
+    margin-top: -1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px 15px 0px 0px;
 }
 
-.view-all-users {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+.user-user-name {
+    color: var(--colorLightMain);
+    text-align: center;
 }
 
-.view-all-users button {
-    border: solid;
-    border-width: 0.5px;
-    border-color: var(--colorSecondary);
-    border-radius: 10px;
-    color: var(--colorSecondary);
-    margin-bottom: 10px;
-    margin-left: 10px;
+.user-user-name span {
+    font-size: 22px;
 }
 
-.user-output {
-    background-color: var(--colorMainSecondary);
-    color: var(--colorText);
-    margin-bottom: 10px;
-    padding: 10px;
+.user-user-role {
+    color: var(--colorLightMain);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 14px;
+    text-transform: capitalize;
 }
