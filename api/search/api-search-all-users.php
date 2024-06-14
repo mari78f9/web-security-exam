@@ -3,6 +3,8 @@
     <!-- Section header with a title and a search form -->
     <div class="section-header">
 
+        <h2> View Users </h2>
+
         <!-- Form for searching users by User ID -->
         <form class="search-data-function" method="post" action="">
             
@@ -11,7 +13,9 @@
 
             <!-- Submit button for the search form -->
             <button type="submit">Search</button>
+
         </form>
+
     </div>
 
     <div class="view-users">
@@ -77,17 +81,28 @@
 
                 // Display user information
                 echo "<div class='view-user'>";
-                echo "<div class='user-user-id'>{$user['user_id']}</div>";
+                echo "<div class='user-user-id'> ID {$user['user_id']}</div>";
                 echo "<img src='/images/profile-dark.png' alt='user_profile'>";
                 echo "<div class='user-user-name'>{$user['user_name']} {$user['user_last_name']}</div>";
                 echo "<div class='user-user-role'>$role</div>";
                 echo "<div class='user-output'>{$user['user_email']}</div>";
+
+                echo "<div class='user-info'>";
+                echo "<div class='info-label'> Created </div>";
                 echo "<div class='user-output'>{$user['user_created_at']}</div>";
+                echo "<div class='info-label'> Updated </div>";
                 echo "<div class='user-output'>{$user['user_updated_at']}</div>";
+                echo "<div class='info-label'> Deleted </div>";
                 echo "<div class='user-output'>{$user['user_deleted_at']}</div>";
+                echo "</div>";
+
                 echo "<button onclick=\"toggle_blocked({$user['user_id']}, {$user['user_is_blocked']})\">";
                 echo $user['user_is_blocked'] == 0 ? "Unblocked" : "Blocked";
                 echo "</button>";
+
+                // echo "<button onclick=\"deleteUser('{$userItem->user_id}')\">Delete user</button>";
+
+                
                 echo "</div>";
             }
 

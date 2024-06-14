@@ -41,8 +41,6 @@ if (!isset($_SESSION['user'])){
 
     <!-- Right side -->
     <section class="dashboard-content">
-
-        <h2>All Users</h2>
         
         <?php require_once __DIR__ . '/../api/search/api-search-all-users.php'  ?>
 
