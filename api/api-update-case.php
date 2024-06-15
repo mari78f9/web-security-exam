@@ -23,6 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Connect to the database
             $db = _db();
 
+            // Check if the case ID exists
+            $q = $db->prepare('SELECT * FROM cases WHERE case_id = :case_id');
+            $q->execute([':case_id' => $caseId]);
+            $case = $q->fetch(PDO::FETCH_ASSOC);
+
+            if (!$case) {
+                // Output error message in JSON format if case ID does not exist
+                http_response_code(400);
+                echo json_encode(['error' => 'Invalid case ID']);
+                exit();
+            }
+
             // Update case solved status if provided
             if ($caseSolved !== null) {
                 $q = $db->prepare('UPDATE cases SET case_solved = :case_solved, case_updated_at = :updated_at WHERE case_id = :case_id');
