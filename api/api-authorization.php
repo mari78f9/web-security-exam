@@ -29,13 +29,6 @@
   </button>
 </a>
 
-<a href="/views/file-upload.php">
-  <button class="dashboard-button" id="dashboard-users">
-    <img src="/images/upload-file-light.png" alt="Tip"> <br>
-    <h2> File Upload </h2>
-  </button>
-</a>
-
 <a href="/views/files.php">
   <button class="dashboard-button" id="dashboard-file">
     <img src="/images/file-light.png" alt="File"> <br>
@@ -57,13 +50,6 @@
   <button class="dashboard-button" id="dashboard-users">
     <img src="/images/add-light.png" alt="Tip"> <br>
     <h2> Add Tip </h2>
-  </button>
-</a>
-
-<a href="/views/file-upload.php">
-  <button class="dashboard-button" id="dashboard-users">
-    <img src="/images/upload-file-light.png" alt="Tip"> <br>
-    <h2> File Upload </h2>
   </button>
 </a>
 

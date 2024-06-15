@@ -106,12 +106,12 @@
 /* DASHBOARD NAVIGATION  */
 
 .dashboard-menu-bottom {
+    position: fixed;
     background-color: var(--colorDarkSecondary);
     padding: 1rem;
     margin-top: 15rem;
     height: 90%;
-    /* overflow: hidden; */
-    overflow-y: scroll;
+    width: 17.7%;
 
 }
 
