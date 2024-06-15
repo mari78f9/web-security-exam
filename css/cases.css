@@ -1,5 +1,110 @@
 /* CASES */
 
+
+/* ADD TIP */
+
+.add-tip-function {
+    display: none;
+}
+
+.add-tip {
+    margin-left: 20rem;
+    position: absolute;
+    background-color: var(--colorRedMain);
+    border: none;
+    padding: 0.5rem;
+    width: 11%;
+    border-radius: 20px;
+    color: var(--colorLightMain);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    font-size: 15px;
+}
+
+.add-tip img {
+    width: 60%;
+    border-radius: 100%;
+}
+
+.add-tip p {
+    padding-top: 0.3rem;
+    margin-left: -1rem;
+    font-weight: bold;
+}
+
+.display-tip {
+    margin-left: -3rem;
+    margin-top: -5em;
+    z-index: 90000;
+    position: absolute;
+    background-color: rgba(24, 24, 24, 0.7);
+    padding: 13.5rem;
+    width: 50%;
+    height: 48%;
+}
+
+.cancel-tip button {
+    right: 0;
+    margin-right: 15rem;
+    border: none;
+    padding: 0.7rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    background-color: var(--colorDarkThirdly);
+    position: absolute;
+    border-radius: 100%;
+    color: var(--colorLightMain);
+}
+
+.display-add-tip {
+    background-color: var(--colorDarkSecondary);
+    padding: 2rem;
+}
+
+.display-add-tip h2 {
+    color: var(--colorLightMain);
+    font-size: 20px;
+    margin-bottom: 2rem;
+}
+
+/* TIP UPLOAD */
+
+.tip-upload {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.tip-upload input {
+    padding: 1rem;
+    height: 3vh;
+}
+
+.tip-upload textarea {
+    margin-top: -2rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 10vh;
+}
+
+.tip-upload button {
+    background-color: var(--colorDarkSecondary);
+    border: 1px solid var(--colorLightMain);
+    width: 20%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 10px;
+    color: var(--colorLightMain);
+}
+
+.tip-upload button:hover {
+    background-color: var(--colorRedMain);
+    border: 1px solid var(--colorRedMain);
+}
+
+
 /* CREATE NEW CASE */
 
 .new-case {

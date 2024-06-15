@@ -23,11 +23,6 @@
     </div>
 
     <div class="dashboard-menu-links">
-        <img src="/images/add-dark.png" alt="File">
-        <a href="/views/tip.php"> Add tip </a>
-    </div>
-
-    <div class="dashboard-menu-links">
         <img src="/images/file-dark.png" alt="File">
         <a href="/views/files.php"> File registry </a>
     </div>
@@ -38,11 +33,6 @@
     <div class="dashboard-menu-links">
         <img src="/images/cases-dark.png" alt="Cases">
         <a href="/views/cases.php"> View cases </a>
-    </div>
-
-    <div class="dashboard-menu-links">
-        <img src="/images/add-dark.png" alt="File">
-        <a href="/views/tip.php"> Add tip </a>
     </div>
 
     <div class="dashboard-menu-links">

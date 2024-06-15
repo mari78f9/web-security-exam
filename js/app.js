@@ -578,3 +578,31 @@ function hideFileUpload() {
       element.style.display = "none";
   }
 }
+
+// ##########################################################################################
+
+// ADD TIP //////////////////
+
+
+function showAddTip() {
+  var element = document.getElementById("addNewTip");
+  
+  if (element.style.display === "none") {
+      element.style.display = "block";
+
+  } else {
+      element.style.display = "none";
+  }
+
+}
+
+function hideTip() {
+  var element = document.getElementById("addNewTip");
+  
+  if (element.style.display === "block") {
+      element.style.display = "none";
+
+  } else {
+      element.style.display = "none";
+  }
+}

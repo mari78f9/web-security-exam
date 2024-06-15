@@ -42,6 +42,10 @@ if (!isset($_SESSION['user'])){
 
     <!-- Right side -->
     <section class="dashboard-content">
+
+        <div id="addNewTip" class="add-tip-function">
+            <?php require_once __DIR__ . '/../views/tip.php' ?>
+        </div>
        
         <div id="newCase" class="new-case">
             <?php require_once __DIR__ . '/../views/create-case.php'  ?>

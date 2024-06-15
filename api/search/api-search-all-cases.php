@@ -2,6 +2,11 @@
 
     <div class="section-header">
 
+        <button class="add-tip" onclick="showAddTip()">
+            <img src="/images/add-light.png" alt="Users">
+            <p> Add tip </p> 
+        </button>
+
         <h2> View Cases </h2>
 
         <form class="search-data-function" id="searchForm">
@@ -13,7 +18,7 @@
             <div class="reset-users">
                 <button type="button" onclick="resetSearch()"> ⟳ </button>
             </div>
-            
+
         </form>
 
     </div>
