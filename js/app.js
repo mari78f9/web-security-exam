@@ -522,6 +522,12 @@ function deleteProfile() {
   }
 }
 
+
+// ##########################################################################################
+
+// CREATE CRIME //////////////////
+
+
 function createCrime() {
   var element = document.getElementById("newCase");
   
@@ -543,4 +549,21 @@ function hideNewCrime() {
   } else {
       element.style.display = "none";
   }
+}
+
+// ##########################################################################################
+
+// UPLOAD FILE //////////////////
+
+
+function uploadFile() {
+  var element = document.getElementById("file-upload");
+  
+  if (element.style.display === "none") {
+      element.style.display = "block";
+
+  } else {
+      element.style.display = "block";
+  }
+
 }
