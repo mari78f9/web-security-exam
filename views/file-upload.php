@@ -6,15 +6,13 @@
             <button onclick="hideFileUpload()"> X </button>
         </div>
 
-        <h2>File Upload</h2>
+        <h2> Upload new file </h2>
         
-        <form id="file-upload" method="post" enctype="multipart/form-data">
-            <label for="file_name">File Name:</label>
-            <input type="text" id="file_name" name="file_name">
-            <label for="case_id">Case ID:</label>
-            <input type="text" id="case_id" name="case_id">
+        <form class="file-upload" id="file-upload" method="post" enctype="multipart/form-data">
+            <input type="text" id="file_name" name="file_name" placeholder="Name the file">
+            <input type="text" id="case_id" name="case_id" placeholder="Insert case-id">
             <input type="file" name="file">
-            <input type="submit" value="Upload">
+            <button type="submit"> Upload </button>
         </form>
 
     </div>

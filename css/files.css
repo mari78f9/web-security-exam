@@ -127,4 +127,40 @@
     color: var(--colorLightMain);
 }
 
+.upload-new-file {
+    background-color: var(--colorDarkSecondary);
+    padding: 2rem;
+}
 
+.upload-new-file h2 {
+    color: var(--colorLightMain);
+    font-size: 20px;
+    margin-bottom: 2rem;
+}
+
+.file-upload {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.file-upload input {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.file-upload button {
+    background-color: var(--colorDarkSecondary);
+    border: 1px solid var(--colorLightMain);
+    width: 20%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 10px;
+    color: var(--colorLightMain);
+}
+
+.file-upload button:hover {
+    background-color: var(--colorRedMain);
+    border: 1px solid var(--colorRedMain);
+}

@@ -22,8 +22,8 @@ if (isset($_GET['case_id'])) {
 
     // Construct the full URL for fetching the images
 
-    $url = 'http://127.0.0.1/api/api-get-files.php?';    // For windows
-    // $url = 'http://localhost:8888/api/api-get-files.php?';  // For mac
+    // $url = 'http://127.0.0.1/api/api-get-files.php?';    // For windows
+    $url = 'http://localhost:8888/api/api-get-files.php?';  // For mac
 
     echo '<p class="display-files-header"> Files provided for Case ' . htmlspecialchars($case_id) . '</p>';
     
