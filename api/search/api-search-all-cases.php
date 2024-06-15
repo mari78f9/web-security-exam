@@ -1,12 +1,23 @@
 <section class="admin-view-all-cases">
+
     <div class="section-header">
+
         <h2> View Cases </h2>
+
         <form class="search-data-function" id="searchForm">
             <input type="text" name="searchCase" id="searchInput" placeholder="🔍 Search by 'Case ID'" required>
+            
             <button type="submit">Search</button>
-            <button type="button" onclick="resetSearch()">Reset</button>
+
+            <!-- Reset button to clear search results -->
+            <div class="reset-users">
+                <button type="button" onclick="resetSearch()"> ⟳ </button>
+            </div>
+            
         </form>
+
     </div>
+    
     <div id="cases-display"></div>
 
     <?php if ($user['role_id_fk'] === 4): ?>
