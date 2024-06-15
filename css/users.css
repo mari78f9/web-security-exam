@@ -22,11 +22,11 @@
     right: 0;
     top: 0;
     margin-top: 3rem;
-    margin-right: 10rem; 
+    margin-right: 5rem; 
     position: absolute;
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    width: 40%;
+    grid-template-columns: 4fr 1.5fr 1fr;
+    width: 50%;
 }
 
 .search-data-function input {
@@ -52,6 +52,23 @@
     color: var(--colorLightMain);
     font-weight: bold;
     border: none;
+}
+
+.reset-users button {
+    background-color: var(--colorRedMain);
+    border: 1px solid var(--colorRedMain);
+    /* padding-top: 0.1rem; */
+    padding-bottom: 0.2rem;
+    padding-left: 0.6rem;
+    padding-right: 0.5rem;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+    font-size: 30px;
+}
+
+.reset-users button:hover {
+    background-color: var(--colorRedSecondary);
+    border: 1px solid var(--colorRedSecondary);
 }
 
 
@@ -167,7 +184,7 @@
 .info-header {
     font-weight: bold;
     font-size: 18px;
-    color: var(--colorDarkThirdly);
+    color: var(--colorLightMain);
 }
 
 .user-info {
@@ -175,7 +192,7 @@
     grid-template-columns: 35% 65%;
     font-size: 13px;
     margin-bottom: 1rem;
-    color: var(--colorDarkMain);
+    color: var(--colorDarkThirdly);
 }
 
 .info-label {

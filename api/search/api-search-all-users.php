@@ -15,7 +15,9 @@
             <button type="submit">Search</button>
 
             <!-- Reset button to clear search results -->
-            <button type="button" onclick="resetSearch()">Reset</button>
+            <div class="reset-users">
+                <button type="button" onclick="resetSearch()"> ⟳ </button>
+            </div>
 
         </form>
 
@@ -55,14 +57,24 @@
                                 <div class="user-user-id"> 
                                     <p><strong>ID</strong> ${userItem.user_id}</p>
                                 </div>
+
                                 <img src="/images/profile-dark.png" alt="user_profile"> <br>
                                 <div class="user-user-name"> <span>${userItem.user_name}</span> <span>${userItem.user_last_name}</span> </div>
-                                <div class="user-user-role"> <p><strong>Role:</strong> ${userItem.role_name}</p> </div>
-                                <p><strong>Email:</strong> ${userItem.user_email}</p>
-                                <p><strong>User created at:</strong> ${new Date(userItem.user_created_at * 1000).toLocaleString()}</p>
-                                <p><strong>User updated at:</strong> ${userItem.user_updated_at == 0 ? 'Never' : new Date(userItem.user_updated_at * 1000).toLocaleString()}</p>
-                                <p><strong>User is blocked:</strong> <span class="user-blocked">${userItem.user_is_blocked ? 'Yes' : 'No'}</span> <button class="toggle-blocked" onclick="toggleUserBlocked('${userItem.user_id}', ${userItem.user_is_blocked})">Toggle</button></p>
-                                <button onclick="deleteUser('${userItem.user_id}')">Delete user</button>
+                                <div class="user-user-role"> <p> ${userItem.role_name}</p> </div>
+                                <p class="user-user-email" > ${userItem.user_email}</p>
+
+                                <p class="info-header"> Account Status </p>
+                                <div class="user-info">
+                                    <p class="info-label"> Created at </p>
+                                    <p> ${new Date(userItem.user_created_at * 1000).toLocaleString()}</p>
+                                    <p class="info-label"> Updated at </p>
+                                    <p> ${userItem.user_updated_at == 0 ? 'Never' : new Date(userItem.user_updated_at * 1000).toLocaleString()}</p>
+                                </div>
+
+                                <div class="view-user-buttons">
+                                    <div class="blocked-button"> <button class="toggle-blocked" onclick="toggleUserBlocked('${userItem.user_id}', ${userItem.user_is_blocked})"> ${userItem.user_is_blocked ? 'Blocked' : 'Unblocked'} </button></p> </div>
+                                    <div class="delete-button"> <button onclick="deleteUser('${userItem.user_id}')">Delete user</button> </div>
+                                </div>
                             </div>
                         `;
                         usersDisplay.appendChild(userElement);

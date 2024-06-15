@@ -9,7 +9,7 @@
 .view-profile-form-input {
     display: grid; 
     grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--colorLightMain);
+    border: 3px solid var(--colorRedMain);
     padding: 2rem;
     border-radius: 15px;
     margin-top: 2rem;
@@ -19,11 +19,14 @@
 .view-profile-form-input label {
     color: var(--colorLightMain);
     margin-bottom: 2rem;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .view-profile-form-input input {
     color: var(--colorLightMain);
     font-style: normal;
+    font-size: 16px;
 }
 
 .profile-form-input {
@@ -59,7 +62,7 @@
     position: absolute;
     float: right;
     padding: 0.8rem;
-    margin-top: -4px;
+    margin-top: -13px;
     margin-left: 10rem;
     border: 1px solid var(--colorLightMain);
     background-color: var(--colorDarkMain);

@@ -1,7 +1,7 @@
 <a href="/views/view-profile.php">
   <button class="dashboard-button" id="dashboard-profile">
     <img src="/images/profile-light.png" alt="Profile"> <br>
-    <h2> View Profile </h2>
+    <p> View Profile </p>
   </button>
 </a>
 
@@ -11,35 +11,28 @@
 <a href="/views/users.php">
   <button class="dashboard-button" id="dashboard-users">
     <img src="/images/users-light.png" alt="Users"> <br>
-    <h2> View Users </h2>
+    <p> View Users </p>
   </button>
 </a>
 
 <a href="/views/cases.php">
   <button class="dashboard-button" id="dashboard-cases">
     <img src="/images/cases-light.png" alt="Cases"> <br>
-    <h2> View Cases </h2>
+    <p> View Cases </p>
   </button>
 </a>
 
 <a href="/views/tip.php">
   <button class="dashboard-button" id="dashboard-users">
     <img src="/images/add-light.png" alt="Tip"> <br>
-    <h2> Add Tip </h2>
-  </button>
-</a>
-
-<a href="/views/file-upload.php">
-  <button class="dashboard-button" id="dashboard-users">
-    <img src="/images/upload-file-light.png" alt="Tip"> <br>
-    <h2> File Upload </h2>
+    <p> Add Tip </p>
   </button>
 </a>
 
 <a href="/views/files.php">
   <button class="dashboard-button" id="dashboard-file">
     <img src="/images/file-light.png" alt="File"> <br>
-    <h2> File Registry </h2>
+    <p> File Registry </p>
   </button>
 </a>
 
@@ -49,28 +42,21 @@
 <a href="/views/cases.php">
   <button class="dashboard-button" id="dashboard-cases">
     <img src="/images/cases-light.png" alt="Cases"> <br>
-    <h2> View Cases </h2>
+    <p> View Cases </p>
   </button>
 </a>
 
 <a href="/views/tip.php">
   <button class="dashboard-button" id="dashboard-users">
     <img src="/images/add-light.png" alt="Tip"> <br>
-    <h2> Add Tip </h2>
-  </button>
-</a>
-
-<a href="/views/file-upload.php">
-  <button class="dashboard-button" id="dashboard-users">
-    <img src="/images/upload-file-light.png" alt="Tip"> <br>
-    <h2> File Upload </h2>
+    <p> Add Tip </p>
   </button>
 </a>
 
 <a href="/views/files.php">
   <button class="dashboard-button" id="dashboard-file">
     <img src="/images/file-light.png" alt="File"> <br>
-    <h2> File Registry </h2>
+    <p> File Registry </p>
   </button>
 </a>
 
@@ -80,14 +66,14 @@
 <a href="/views/cases.php">
   <button class="dashboard-button" id="dashboard-cases">
     <img src="/images/cases-light.png" alt="Cases"> <br>
-    <h2> View Cases </h2>
+    <p> View Cases </p>
   </button>
 </a>
 
 <a href="/views/files.php">
   <button class="dashboard-button" id="dashboard-file">
     <img src="/images/file-light.png" alt="File"> <br>
-    <h2> File Registry </h2>
+    <p> File Registry </p>
   </button>
 </a>
 
@@ -97,7 +83,7 @@
 <a href="/views/cases.php">
   <button class="dashboard-button" id="dashboard-cases">
     <img src="/images/cases-light.png" alt="Cases"> <br>
-    <h2> View Cases </h2>
+    <p> View Cases </p>
   </button>
 </a>
 
