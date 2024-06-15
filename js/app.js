@@ -312,7 +312,7 @@ async function signup(){
   console.log(data) 
 
   // Redirect the user to the login page after successful signup
-  location.href="../views/login.php"
+  location.reload(); 
 
 }
 
