@@ -112,7 +112,6 @@
     margin-top: 15rem;
     height: 90%;
     width: 17.7%;
-
 }
 
 .dashboard-menu-links {
@@ -173,6 +172,7 @@
 .dashboard-content span {
     font-size: 30px;
     color: var(--colorLightMain);
+    font-weight: bold;
 }
 
 .button-display {
@@ -190,8 +190,8 @@
     border: 5px solid var(--colorRedMain);
     border-radius: 10px;
     padding: 2rem;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     margin-right: 2rem;
     margin-bottom: 2rem;
     cursor: pointer;
@@ -201,7 +201,7 @@
     background-color: var(--colorRedMain);
 }
 
-.dashboard-button h2 {
+.dashboard-button p {
     padding-top: 5px;
     text-decoration: none;
     color: var(--colorLightMain);
@@ -214,5 +214,4 @@
     border-radius: 100%;
     margin-bottom: 1rem;
 }
-
 
