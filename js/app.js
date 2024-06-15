@@ -301,18 +301,33 @@ async function signup(){
   const frm = event.target  
   console.log(frm)
 
-  // Send a POST request to the signup API endpoint with the form data
-  const conn = await fetch("/api/api-signup.php", {
-    method : "POST",
-    body : new FormData(frm)
-  })
+  try {
+    // Send a POST request to the signup API endpoint with the form data
+    const conn = await fetch("/api/api-signup.php", {
+      method: "POST",
+      body: new FormData(frm)
+    });
 
-  // Get the response data as text
-  const data = await conn.text()
-  console.log(data) 
+    // Get the response data as text
+    const data = await conn.json();
+    console.log(data);
 
-  // Redirect the user to the login page after successful signup
-  location.reload(); 
+    // Check for success in the response data
+    if (data.success) {
+      // Show success alert
+      alert('Signup successful! Please log in.');
+
+      // Redirect the user to the login page after successful signup
+      location.reload();
+    } else {
+      // Handle errors (assuming the API returns an error message)
+      alert('Signup failed. Email already exists.');
+    }
+  } catch (error) {
+    // Handle network or other errors
+    console.error('Error during signup:', error);
+    alert('An error occurred during signup. Please try again.');
+  }
 
 }
 
@@ -465,6 +480,46 @@ function deleteUser(userId) {
       // Log any errors that occur
       console.error('Error deleting user:', error);
   });
+}
+
+// ##########################################################################################
+
+// DELETE //////////////////
+// Handles a profile-delete
+
+function deleteProfile() {
+  // Show a confirmation dialog to the user
+  const isConfirmed = confirm("Are you sure you want to delete your profile? This action cannot be undone.");
+
+  // If the user clicks "OK", proceed with the deletion
+  if (isConfirmed) {
+    // Get the user ID from the DOM
+    const userId = document.getElementById('user_id').innerText;
+
+    // Create a FormData object to hold the user ID
+    const formData = new FormData();
+    formData.append('user_id', userId);
+
+    // Send a POST request to delete the user
+    fetch('../api/api-delete-user.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Check for errors in the response data
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        // Redirect the user to the logout page
+        location.href = "../views/index.php";
+    })
+    .catch(error => {
+        // Log any errors that occur
+        console.error('Error deleting user:', error);
+    });
+  }
 }
 
 function createCrime() {
