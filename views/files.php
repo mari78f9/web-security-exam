@@ -45,11 +45,20 @@ if (!isset($_SESSION['user'])){
     <!-- Right side -->
     <section class="dashboard-content">
 
-        <h2>Search Files by Case ID</h2>
-        <form id="search-files">
-            <label for="search_case_id">Case ID:</label>
-            <input type="text" id="search_case_id" name="case_id">
-            <input type="submit" value="Search">
+        <div id="file-upload">
+            <?php require_once __DIR__ . '/../views/file-upload.php'  ?>
+        </div>
+
+        <button class="upload-file" onclick="uploadFile()">
+            <img src="/images/upload-file-light.png" alt="Users">
+            <p> Upload file </p> 
+        </button>
+        
+        <h2> File Registry </h2>
+
+        <form class="search-file-function" id="search-files">
+            <input type="text" id="search_case_id" name="case_id" placeholder="🔍 Search by 'Case ID'">
+            <button type="submit"> Search </button>
         </form>
 
         <div id="files-display">
