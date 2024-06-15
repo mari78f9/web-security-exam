@@ -7,8 +7,8 @@ $user = $_SESSION['user'];
 $user_id = $_SESSION['user']['user_id'];
 
 if (!isset($_SESSION['user'])){
-    header("Location: login");
-    exit; // Ensure script stops execution after redirection
+    header("Location: error.php");
+    exit();
 }
 ?>
 
@@ -80,3 +80,5 @@ if (!isset($_SESSION['user'])){
 
     
 </main>
+
+<?php require_once __DIR__ . '/_footer.php'  ?>

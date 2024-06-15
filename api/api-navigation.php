@@ -7,7 +7,7 @@
 
     <div class="dashboard-menu-links">
         <img src="/images/profile-dark.png" alt="Profile">
-        <a href="/views/view_profile.php"> View profile </a>
+        <a href="/views/view-profile.php"> View profile </a>
     </div>
 
     <!-- Admin -->

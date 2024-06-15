@@ -132,12 +132,22 @@ function addTip() {
       // Check if the response contains an error
       if (data.error) {
 
-          // Throw an error if an error message is received
-          throw new Error(data.error);
-      }
+        // Check for a specific error message indicating an invalid case ID
+        if (data.error === 'Invalid case ID') {
+            alert('The case ID is not valid.');
+        } else {
 
-      // Reload the page to reflect the changes
-      location.reload();
+            // Throw an error if any other error message is received
+            throw new Error(data.error);
+        }
+    } else {
+      
+        // Display an alert message indicating success
+        alert('Tip added successfully.');
+
+        // Reload the page to reflect the changes
+        location.reload();
+    }
   })
   .catch(error => {
 

@@ -1,4 +1,4 @@
-<a href="/views/view_profile.php">
+<a href="/views/view-profile.php">
   <button class="dashboard-button" id="dashboard-profile">
     <img src="/images/profile-light.png" alt="Profile"> <br>
     <h2> View Profile </h2>

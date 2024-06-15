@@ -7,7 +7,8 @@ $user = $_SESSION['user'];
 $user_id = $_SESSION['user']['user_id'];
 
 if (!isset($_SESSION['user'])){
-    header("Location: login");
+    header("Location: error.php");
+    exit();
 }
 ?>
 

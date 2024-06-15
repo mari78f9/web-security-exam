@@ -5,6 +5,11 @@ require_once __DIR__ . '/_header.php';
 $user = $_SESSION['user'];
 $user_id = $_SESSION['user']['user_id'];
 
+if (!isset($_SESSION['user'])){
+    header("Location: error.php");
+    exit();
+}
+
 // require_once __DIR__ . '/../api/api-authorization.php';  
 
 ?>
