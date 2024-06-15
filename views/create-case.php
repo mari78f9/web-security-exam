@@ -5,22 +5,19 @@
             <button onclick="hideNewCrime()"> X </button>
         </div>
 
-        <h1> New Case: </h1>
+        <h1> Create New Case </h1>
 
-        <form id="create-case-form" onsubmit="makeCase(); return false">
-            <label for="case_description">Description:</label>
-            <textarea id="case_description" name="case_description" required></textarea>
+        <form" class="new-case-description" id="create-case-form" onsubmit="makeCase(); return false">
+        
+            <input type="text" id="case_type" name="case_type" placeholder="Type of crime committed" required>
+            
+            <textarea class="case-description" id="case_description" name="case_description" placeholder="Write a description of the case" required></textarea>
 
-            <label for="case_suspect">Suspect:</label>
-            <input type="text" id="case_suspect" name="case_suspect" required>
+            <input type="text" id="case_suspect" name="case_suspect" placeholder="Name a suspect" required>
 
-            <label for="case_type">Type:</label>
-            <input type="text" id="case_type" name="case_type" required>
+            <input type="text" id="case_location" name="case_location" placeholder="Location of the crime scene" required>
 
-            <label for="case_location">Location:</label>
-            <input type="text" id="case_location" name="case_location" required>
-
-            <button type="submit">Create Case</button>
+            <button type="submit"> Create Case </button>
         </form>
 
     </div>

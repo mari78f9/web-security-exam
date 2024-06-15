@@ -114,14 +114,14 @@
 }
 
 .display-new-case {
-    margin-left: -19rem;
-    margin-top: -6em;
+    margin-left: -3rem;
+    margin-top: -8rem;
     z-index: 90000;
     position: absolute;
     background-color: rgba(24, 24, 24, 0.7);
     padding: 13.5rem;
     width: 50%;
-    height: 45%;
+    height: 55%;
 }
 
 .create-case {
@@ -169,6 +169,41 @@
     background-color: var(--colorLightMain);
 }
 
+.create-new-case h1 {
+    margin-bottom: 2rem;
+}
+
+.new-case-description input {
+    padding: 1rem;
+    height: 3vh;
+    width: 90%;
+    margin-bottom: 1rem;
+}
+
+.case-description {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 10vh;
+    width: 90%;
+}
+
+.new-case-description button {
+    background-color: var(--colorDarkSecondary);
+    border: 1px solid var(--colorLightMain);
+    width: 20%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 10px;
+    color: var(--colorLightMain);
+}
+
+.new-case-description button:hover {
+    background-color: var(--colorRedMain);
+    border: 1px solid var(--colorRedMain);
+}
 
 
 /* VIEW SINGLE CASES */
