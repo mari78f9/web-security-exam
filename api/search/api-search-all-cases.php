@@ -15,8 +15,6 @@
             <p> Add tip </p> 
         </button>
 
-
-
         <h2> View Cases </h2>
 
         <form class="search-data-function" id="searchForm">
@@ -33,29 +31,16 @@
 
     </div>
 
-    <div class="single-case">
+    <div class="single-case" id="singleCase">
+
+        <!-- <h3> Case 1a3055966f </h3>
+        <h1> Kidnapping of a Child </h1> -->
+        <!-- <div class="line"></div> -->
         
     </div>
 
 
     <div class="case-display" id="cases-display"></div>
-
-
-    <!-- <p><strong>Description:</strong> ${caseItem.case_description}</p>
-        <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
-        <p><strong>Type:</strong> ${caseItem.case_type}</p>
-        <p><strong>Location:</strong> ${caseItem.case_location}</p>
-        <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
-        <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span>
-            <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button>
-        </p>
-        <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
-        <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
-        <p><strong>Public:</strong> <span class="case-visibility">${caseItem.case_is_public ? 'Yes' : 'No'}</span>
-            <button class="toggle-visibility-button" onclick="toggleCaseVisibility('${caseItem.case_id}', ${caseItem.case_is_public})">Toggle</button>
-        </p>
-        <hr> -->
-
 
 
     <?php if ($user['role_id_fk'] === 4): ?>
@@ -98,6 +83,37 @@
                         document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
                     });
             }
+
+            function showCases(apiUrl) {
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        let casesDisplay = document.getElementById('singleCase');
+                        casesDisplay.innerHTML = '';
+                        if (data.error) {
+                            casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
+                            return;
+                        }
+                        data.forEach(caseItem => {
+                            let caseElement = document.createElement('div');
+                            caseElement.id = `case-${caseItem.case_id}`;
+                            caseElement.innerHTML = `
+                                <div class="single-case">
+                                    <h1> Case ${caseItem.case_id} </h1>
+                                </div>
+                                
+                            `;
+                            casesDisplay.appendChild(caseElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cases:', error);
+                        document.getElementById('cases-display').innerHTML = 'Error fetching cases.';
+                    });
+            }
+
+
+            
         </script>
     <?php elseif ($user['role_id_fk'] === 1): ?>
         <script>

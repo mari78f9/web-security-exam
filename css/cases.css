@@ -170,6 +170,40 @@
 }
 
 
+
+/* VIEW SINGLE CASES */
+
+.single-case {
+    margin-top: 10rem;
+    margin-left: 3rem;
+    padding: 3rem;
+    width: 82%;
+    height: 80vh;
+    background-color: var(--colorLightMain);
+}
+
+.single-case h3 {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.single-case h1 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.line {
+    background-color: var(--colorDarkThirdly);
+    padding: 1px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
 /* VIEW ALL CASES */
 
 .case-folder {
