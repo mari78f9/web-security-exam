@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])){
     <!-- Right side -->
     <section class="dashboard-content">
 
-        <div id="file-upload">
+        <div id="fileUpload" class="file-upload-function">
             <?php require_once __DIR__ . '/../views/file-upload.php'  ?>
         </div>
 

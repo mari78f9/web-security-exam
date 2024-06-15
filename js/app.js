@@ -557,13 +557,13 @@ function hideNewCrime() {
 
 
 function uploadFile() {
-  var element = document.getElementById("file-upload");
+  var element = document.getElementById("fileUpload");
   
   if (element.style.display === "none") {
       element.style.display = "block";
 
   } else {
-      element.style.display = "block";
+      element.style.display = "none";
   }
 
 }
