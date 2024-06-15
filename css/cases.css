@@ -8,12 +8,14 @@
 }
 
 .add-tip {
-    margin-left: 20rem;
+    right: 0;
+    margin-top: 4rem;
+    margin-right: 8rem;
     position: absolute;
     background-color: var(--colorRedMain);
     border: none;
     padding: 0.5rem;
-    width: 11%;
+    width: 12%;
     border-radius: 20px;
     color: var(--colorLightMain);
     display: grid;
@@ -27,7 +29,7 @@
 }
 
 .add-tip p {
-    padding-top: 0.3rem;
+    padding-top: 0.4rem;
     margin-left: -1rem;
     font-weight: bold;
 }
@@ -122,18 +124,31 @@
     height: 45%;
 }
 
-.create-case button {
+.create-case {
     right: 0;
-    margin-top: 10rem;
-    margin-right: 15rem;
-    border: none;
-    padding: 0.7rem;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
-    background-color: var(--colorDarkThirdly);
+    margin-top: 4rem;
+    margin-right: 18rem;
     position: absolute;
-    border-radius: 100%;
+    background-color: var(--colorRedMain);
+    border: none;
+    padding: 0.5rem;
+    width: 12%;
+    border-radius: 20px;
     color: var(--colorLightMain);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    font-size: 15px;
+}
+
+.create-case img {
+    width: 60%;
+    border-radius: 100%;
+}
+
+.create-case p {
+    padding-top: 0.4rem;
+    margin-left: -1rem;
+    font-weight: bold;
 }
 
 .cancel-case button {
@@ -164,11 +179,12 @@
     z-index: 2000;
     bottom: 0;
     border-radius: 10px 10px 0px 0px;
-    padding: 3rem;
-    width: 65%;
+    padding: 2rem;
+    width: 70%;
     text-align: left;
     font-size: 30px;
     font-weight: bold;
+    text-align: center;
     /* box-shadow: 10px 10px 5px 15px rgb(42, 42, 42); */
 }
 
@@ -179,8 +195,8 @@
     z-index: 1000;
     bottom: 0;
     border-radius: 10px 10px 0px 0px;
-    padding: 3rem;
-    width: 64%;
+    padding: 2rem;
+    width: 68%;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
@@ -189,33 +205,44 @@
 }
 
 .case-display {
-    margin-top: 21rem;
-    height: 300%;
-    overflow-y: hidden;
+    margin-left: 1.5rem;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: 6rem;
+    z-index: 1800;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
 }
 
 .case-template {
-    width: 110%;
+    font-size: 1px;
+    color: var(--colorLightMain);
     background-color: var(--colorLightMain);
-    color: var(--colorDarkBlack);
-    position: relative; /* Change from absolute to relative */
-    z-index: 1500;
-    margin-bottom: -13rem; /* Adjust margin to separate elements */
-    margin-right: 30rem;
-    margin-left: 25rem;
-    padding-top: 1rem;
-    padding-bottom: 10rem;
-    padding-left: 1rem;
-    box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
-    border-radius: 5px; /* Optional: to give rounded corners */
+    height: 5vh;
+    margin-right: -1rem;
+    border-radius: 10px 10px 0px 0px;
+    padding: 1rem;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.7);
 }
 
-.view-each-case {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-    margin-right: 25rem;
+.case-template:hover {
+    position: absolute;
+    margin-top: -1rem;
+    height: 10vh;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    font-size: 16px;
+    color: var(--colorDarkBlack);
+    text-align: center;
+}
+
+.case-template p:hover {
+    cursor: pointer;
+    color: var(--colorRedMain);
+    font-weight: bold;
 }
 
 
