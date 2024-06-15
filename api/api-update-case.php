@@ -10,20 +10,11 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Extract case ID, case solved status, case tip, and case public status from POST data
-
-    // Extract and sanitize inputs
-    // Sanitizes the input data using htmlspecialchars() to prevent XSS attacks.
-    // ENT_QUOTES and 'UTF-8' are parameters used with the 
-    // htmlspecialchars() function in PHP to ensure proper sanitization of input data.
-    $caseId = htmlspecialchars($_POST['case_id'] ?? '', ENT_QUOTES, 'UTF-8');
-    $caseTip = htmlspecialchars($_POST['case_tip'] ?? '', ENT_QUOTES, 'UTF-8');
-
-    // Used FILTER_VALIDATE_BOOLEAN to clean boolean inputs.
-    // $caseSolved = filter_var($_POST['case_solved'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-    // $caseIsPublic = filter_var($_POST['case_is_public'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-    $caseSolved = filter_input(INPUT_POST, 'case_solved', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-    $caseIsPublic = filter_input(INPUT_POST, 'case_is_public', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-
+    $caseId = $_POST['case_id'] ?? null;
+    $caseSolved = $_POST['case_solved'] ?? null;
+    $caseTip = $_POST['case_tip'] ?? null;
+    $caseIsPublic = $_POST['case_is_public'] ?? null;
+  
     // Check if the case ID is provided
     // Used preg_match to validate case_id to ensure it contains only alphanumeric characters.
     if ($caseId && preg_match('/^[a-zA-Z0-9]+$/', $caseId)) {
