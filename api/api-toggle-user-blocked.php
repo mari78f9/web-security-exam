@@ -23,9 +23,9 @@ try {
     ");
 
     // Bind values to the prepared statement
-    $q->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-    $q->bindValue(':user_is_blocked', $user_is_blocked, PDO::PARAM_INT);
-    $q->bindValue(':user_updated_at', time(), PDO::PARAM_INT); // Update with current timestamp
+    $q->bindValue(':user_id', $user_id);
+    $q->bindValue(':user_is_blocked', $user_is_blocked);
+    $q->bindValue(':user_updated_at', time()); // Update with current timestamp
 
     // Execute the prepared statement to update user's blocked status and timestamp
     $q->execute();

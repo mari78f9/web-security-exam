@@ -30,8 +30,8 @@ try {
   // PDO::PARAM_STR is used to explicitly bind the email as a string. 
   // This ensures that the data type is correctly interpreted by the database engine.
   // Explicitly specify the parameter type using PDO::PARAM_INT to bind the user ID and timestamp.
-  $q->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-  $q->bindValue(':user_deleted_at', time(), PDO::PARAM_INT);
+  $q->bindValue(':user_id', $user_id);
+  $q->bindValue(':user_deleted_at', time());
 
   // Execute the SQL statement
   $q->execute();
