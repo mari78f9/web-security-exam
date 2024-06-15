@@ -70,7 +70,7 @@ if (!isset($_SESSION['user'])){
             </div>
             
             <div>
-                <button id="delete-profile" class="delete-profile" onclick="deleteUser()"> Delete profile </button>
+                <button id="delete-profile" class="delete-profile" onclick="deleteProfile()"> Delete profile </button>
             </div>
         </section>
 

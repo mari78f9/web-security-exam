@@ -47,9 +47,11 @@ if (!isset($_SESSION['user'])){
             <?php require_once __DIR__ . '/../views/create-case.php'  ?>
         </div>
 
-        <div class="create-case">
-            <button onclick="createCrime()"> + </button>
-        </div>
+        <?php if ($user['role_id_fk'] === 4): ?>
+            <div class="create-case">
+                <button onclick="createCrime()"> + </button>
+            </div>
+        <?php endif; ?>
 
         <div class="case-folder">
             <p> Cases </p>

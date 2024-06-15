@@ -10,6 +10,9 @@ try {
       throw new Exception('User not logged in', 400);
   }
 
+   // Get the logged-in user ID
+   $loggedInUserId = $_SESSION['user']['user_id'];
+
   // Check if the user ID is provided in the POST request
   if (!isset($_POST['user_id'])) {
       throw new Exception('User ID is required', 400);
@@ -17,6 +20,15 @@ try {
 
   // Get the user ID from the POST request
   $user_id = $_POST['user_id'];
+
+  // If the logged-in user is trying to delete their own profile or if they are an admin, proceed
+  if ($loggedInUserId !== $user_id) {
+    // Here you can add a role check to ensure only admins can delete other users
+    // Assuming 'admin' role is identified by role_name field
+    if ($_SESSION['user']['role_name'] !== 'admin') {
+        throw new Exception('Unauthorized action', 403);
+    }
+  }
 
   // Connect to the database
   $db = _db();
@@ -27,9 +39,6 @@ try {
   ');
 
   // Bind the user ID and current time to the SQL statement
-  // PDO::PARAM_STR is used to explicitly bind the email as a string. 
-  // This ensures that the data type is correctly interpreted by the database engine.
-  // Explicitly specify the parameter type using PDO::PARAM_INT to bind the user ID and timestamp.
   $q->bindValue(':user_id', $user_id);
   $q->bindValue(':user_deleted_at', time());
 

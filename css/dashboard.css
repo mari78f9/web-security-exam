@@ -39,6 +39,7 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     width: 75%;
+    cursor: pointer;
 }
 
 .logout button:hover {
