@@ -9,11 +9,12 @@ try {
     // Connect to the database
     $db = _db();
 
-    // Check if there is a search query or a public only flag
+    // Check if there is a search query
     $searchQuery = isset($_GET['searchCase']) ? $_GET['searchCase'] : '';
+    // Check if public_only parameter is set
     $publicOnly = isset($_GET['public_only']) ? true : false;
 
-    // Prepare the SQL query
+    // Prepare the SQL query to fetch cases
     $sql = "SELECT * FROM cases";
     $conditions = [];
 
@@ -21,10 +22,7 @@ try {
         $conditions[] = "case_id LIKE :case_id";
     }
 
-    // Check if user is a citizen
-    $userRole = isset($_SESSION['role_id_fk']) ? $_SESSION['role_id_fk'] : null;
-    if ($userRole === 3 && $publicOnly) {
-        // If user is a citizen and requesting only public cases
+    if ($publicOnly) {
         $conditions[] = "case_is_public = 1";
     }
 

@@ -1,43 +1,33 @@
 <section class="admin-view-all-cases">
-
-    <!-- Section header with a title and a search form -->
     <div class="section-header">
         <h2> View Cases </h2>
-
-        <!-- Form for searching cases by ID -->
         <form class="search-data-function" id="searchForm">
             <input type="text" name="searchCase" id="searchInput" placeholder="🔍 Search by 'Case ID'" required>
             <button type="submit">Search</button>
             <button type="button" onclick="resetSearch()">Reset</button>
         </form>
     </div>
+    <div id="cases-display"></div>
 
-    <!-- Update this to use an ID instead of a class -->
-    <div id="cases-display"> </div>
-
-    <?php
-    // PHP conditional blocks to fetch and display cases based on user role
-    if ($user['role_id_fk'] === 4) {
-        // Admin role
-        ?>
+    <?php if ($user['role_id_fk'] === 4): ?>
         <script>
-              document.addEventListener('DOMContentLoaded', function() {
-            const searchForm = document.getElementById('searchForm');
-            searchForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(searchForm);
-                const searchQuery = formData.get('searchCase');
-                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchForm = document.getElementById('searchForm');
+                searchForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(searchForm);
+                    const searchQuery = formData.get('searchCase');
+                    fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+                });
+                fetchCases('../api/api-get-cases.php');
             });
-            fetchCases('../api/api-get-cases.php');
-        });
 
             function fetchCases(apiUrl) {
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
                         let casesDisplay = document.getElementById('cases-display');
-                        casesDisplay.innerHTML = ''; // Clear previous content
+                        casesDisplay.innerHTML = '';
                         if (data.error) {
                             casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
                             return;
@@ -71,28 +61,25 @@
                     });
             }
         </script>
-    <?php
-    } elseif ($user['role_id_fk'] === 1) {
-        // Detective role
-        ?>
+    <?php elseif ($user['role_id_fk'] === 1): ?>
         <script>
-             document.addEventListener('DOMContentLoaded', function() {
-            const searchForm = document.getElementById('searchForm');
-            searchForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(searchForm);
-                const searchQuery = formData.get('searchCase');
-                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchForm = document.getElementById('searchForm');
+                searchForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(searchForm);
+                    const searchQuery = formData.get('searchCase');
+                    fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+                });
+                fetchCases('../api/api-get-cases.php');
             });
-            fetchCases('../api/api-get-cases.php');
-        });
 
             function fetchCases(apiUrl) {
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
                         let casesDisplay = document.getElementById('cases-display');
-                        casesDisplay.innerHTML = ''; // Clear previous content
+                        casesDisplay.innerHTML = '';
                         if (data.error) {
                             casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
                             return;
@@ -123,28 +110,25 @@
                     });
             }
         </script>
-    <?php
-    } elseif ($user['role_id_fk'] === 2) {
-        // Lawyer role
-        ?>
+    <?php elseif ($user['role_id_fk'] === 2): ?>
         <script>
-             document.addEventListener('DOMContentLoaded', function() {
-            const searchForm = document.getElementById('searchForm');
-            searchForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(searchForm);
-                const searchQuery = formData.get('searchCase');
-                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchForm = document.getElementById('searchForm');
+                searchForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(searchForm);
+                    const searchQuery = formData.get('searchCase');
+                    fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}`);
+                });
+                fetchCases('../api/api-get-cases.php');
             });
-            fetchCases('../api/api-get-cases.php');
-        });
 
             function fetchCases(apiUrl) {
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
                         let casesDisplay = document.getElementById('cases-display');
-                        casesDisplay.innerHTML = ''; // Clear previous content
+                        casesDisplay.innerHTML = '';
                         if (data.error) {
                             casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
                             return;
@@ -172,28 +156,25 @@
                     });
             }
         </script>
-    <?php
-    } elseif ($user['role_id_fk'] === 3) {
-        // Citizen role
-        ?>
+    <?php elseif ($user['role_id_fk'] === 3): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-            const searchForm = document.getElementById('searchForm');
-            searchForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(searchForm);
-                const searchQuery = formData.get('searchCase');
-                fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}&public_only=true`);
+                const searchForm = document.getElementById('searchForm');
+                searchForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(searchForm);
+                    const searchQuery = formData.get('searchCase');
+                    fetchCases(`../api/api-get-cases.php?searchCase=${encodeURIComponent(searchQuery)}&public_only=true`);
+                });
+                fetchCases('../api/api-get-cases.php?public_only=true');
             });
-            fetchCases('../api/api-get-cases.php?public_only=true');
-        });
 
             function fetchCases(apiUrl) {
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
                         let casesDisplay = document.getElementById('cases-display');
-                        casesDisplay.innerHTML = ''; // Clear previous content
+                        casesDisplay.innerHTML = '';
                         if (data.error) {
                             casesDisplay.innerHTML = `<p>Error fetching cases: ${data.error}</p>`;
                             return;
@@ -218,15 +199,16 @@
                     });
             }
         </script>
-    <?php
-    }
-    ?>
+    <?php endif; ?>
 
     <script>
-         // Function to reset search and display all cases
-         function resetSearch() {
-            document.getElementById('searchInput').value = ''; // Clear search input
-            fetchCases('../api/api-get-cases.php'); // Fetch all cases
+        function resetSearch() {
+            document.getElementById('searchInput').value = '';
+            <?php if ($user['role_id_fk'] === 3): ?>
+                fetchCases('../api/api-get-cases.php?public_only=true');
+            <?php else: ?>
+                fetchCases('../api/api-get-cases.php');
+            <?php endif; ?>
         }
     </script>
 </section>
