@@ -567,3 +567,14 @@ function uploadFile() {
   }
 
 }
+
+function hideFileUpload() {
+  var element = document.getElementById("fileUpload");
+  
+  if (element.style.display === "block") {
+      element.style.display = "none";
+
+  } else {
+      element.style.display = "none";
+  }
+}

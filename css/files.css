@@ -114,21 +114,7 @@
     height: 48%;
 }
 
-.create-case button {
-    right: 0;
-    margin-top: 10rem;
-    margin-right: 15rem;
-    border: none;
-    padding: 0.7rem;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
-    background-color: var(--colorDarkThirdly);
-    position: absolute;
-    border-radius: 100%;
-    color: var(--colorLightMain);
-}
-
-.cancel-case button {
+.cancel-upload button {
     right: 0;
     margin-right: 15rem;
     border: none;
@@ -139,11 +125,6 @@
     position: absolute;
     border-radius: 100%;
     color: var(--colorLightMain);
-}
-
-.create-new-case {
-    padding: 2rem;
-    background-color: var(--colorLightMain);
 }
 
 

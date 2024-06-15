@@ -1,14 +1,24 @@
 <div class="display-file-upload" id="displayFileUpload">
-    <h2>File Upload</h2>
-    
-    <form id="file-upload" method="post" enctype="multipart/form-data">
-        <label for="file_name">File Name:</label>
-        <input type="text" id="file_name" name="file_name">
-        <label for="case_id">Case ID:</label>
-        <input type="text" id="case_id" name="case_id">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
+
+    <div class="upload-new-file">
+
+        <div class="cancel-upload">
+            <button onclick="hideFileUpload()"> X </button>
+        </div>
+
+        <h2>File Upload</h2>
+        
+        <form id="file-upload" method="post" enctype="multipart/form-data">
+            <label for="file_name">File Name:</label>
+            <input type="text" id="file_name" name="file_name">
+            <label for="case_id">Case ID:</label>
+            <input type="text" id="case_id" name="case_id">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+
+    </div>
+
 </div>
 
 <script>
