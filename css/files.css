@@ -90,6 +90,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .upload-file img {
@@ -125,6 +126,7 @@
     position: absolute;
     border-radius: 100%;
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .upload-new-file {
@@ -146,6 +148,7 @@
 .file-upload input {
     padding: 1rem;
     margin-bottom: 0.5rem;
+    cursor: pointer;
 }
 
 .file-upload button {
@@ -158,6 +161,7 @@
     padding-right: 1rem;
     border-radius: 10px;
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .file-upload button:hover {

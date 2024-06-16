@@ -21,6 +21,7 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .add-tip img {
@@ -56,6 +57,7 @@
     position: absolute;
     border-radius: 100%;
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .display-add-tip {
@@ -99,6 +101,7 @@
     padding-right: 1rem;
     border-radius: 10px;
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .tip-upload button:hover {
@@ -138,6 +141,7 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .create-case img {
@@ -162,6 +166,7 @@
     position: absolute;
     border-radius: 100%;
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .create-new-case {
@@ -198,6 +203,7 @@
     padding-right: 1rem;
     border-radius: 10px;
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .new-case-description button:hover {

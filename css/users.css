@@ -45,6 +45,7 @@
     background-color: var(--colorDarkMain);
     border: 1px solid var(--colorLightMain);
     color: var(--colorLightMain);
+    cursor: pointer;
 }
 
 .search-data-function button:hover {
@@ -64,6 +65,7 @@
     border-radius: 100%;
     margin-left: 0.5rem;
     font-size: 30px;
+    cursor: pointer;
 }
 
 .reset-users button:hover {
