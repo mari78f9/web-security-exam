@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Update case tip if provided
             if ($caseTip !== null) {
-                $q = $db->prepare('UPDATE cases SET case_tip = :case_tip, case_updated_at = :updated_at WHERE case_id = :case_id');
-                $q->execute([':case_tip' => $caseTip, ':updated_at' => time(), ':case_id' => $caseId]);
+                $q = $db->prepare('UPDATE cases SET case_tip = CONCAT(COALESCE(case_tip, \'\'), :case_tip), case_updated_at = :updated_at WHERE case_id = :case_id');
+                $q->execute([':case_tip' => "\n".$caseTip, ':updated_at' => time(), ':case_id' => $caseId]);
             }
 
             // Update case public status if provided
