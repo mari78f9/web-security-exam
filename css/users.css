@@ -3,7 +3,7 @@
     top: 0;
     margin-left: -3rem;
     background-color: var(--colorDarkMain);
-    width: 80%;
+    width: 75%;
     z-index: 8000;
     position: fixed;
     padding-left: 3rem;
@@ -22,7 +22,6 @@
     right: 0;
     top: 0;
     margin-top: 3rem;
-    margin-right: 5rem; 
     position: absolute;
     display: grid;
     grid-template-columns: 4fr 1.5fr 1fr;
