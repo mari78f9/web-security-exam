@@ -1,3 +1,15 @@
+<?php
+
+// Connects to the master-file, which contains the database connection and validation
+require_once __DIR__.'/../_.php';
+
+// Check if the user is logged in
+if (!isset($_SESSION['user'])) {
+  header("Location: /views/error.php");
+  exit();
+}
+?>
+
 <a href="/views/view-profile.php">
   <button class="dashboard-button" id="dashboard-profile">
     <img src="/images/profile-light.png" alt="Profile"> <br>

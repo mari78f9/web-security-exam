@@ -3,6 +3,12 @@
 // Connects to the master-file, which contains the database connection and validation
 require_once __DIR__.'/../_.php';
 
+// Check if the user is logged in
+if (!isset($_SESSION['user'])) {
+    header("Location: /views/error.php");
+    exit();
+}
+
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
