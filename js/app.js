@@ -453,33 +453,36 @@ async function updateUser() {
 
 function deleteUser(userId) {
 
-  // Create a FormData object to hold the user ID
-  const formData = new FormData();
-  formData.append('user_id', userId);
+ // Show a confirmation dialog to the admin
+ const isConfirmed = confirm("Are you sure you want to delete this user? This action cannot be undone.");
 
-  // Send a POST request to delete the user
-  fetch('../api/api-delete-user.php', {
-      method: 'POST',
-      body: formData
-  })
+ // If the admin clicks "OK", proceed with the deletion
+ if (isConfirmed) {
+   // Create a FormData object to hold the user ID
+   const formData = new FormData();
+   formData.append('user_id', userId);
 
-  // Parse the response as JSON
-  .then(response => response.json())
-  .then(data => {
+   // Send a POST request to delete the user
+   fetch('../api/api-delete-user.php', {
+       method: 'POST',
+       body: formData
+   })
+   // Parse the response as JSON
+   .then(response => response.json())
+   .then(data => {
+       // Check for errors in the response data
+       if (data.error) {
+           throw new Error(data.error);
+       }
 
-      // Check for errors in the response data
-      if (data.error) {
-          throw new Error(data.error);
-      }
-
-      // Remove the user element from the DOM
-      document.getElementById(`user-${userId}`).remove();
-  })
-  .catch(error => {
-
-      // Log any errors that occur
-      console.error('Error deleting user:', error);
-  });
+       // Remove the user element from the DOM
+       document.getElementById(`user-${userId}`).remove();
+   })
+   .catch(error => {
+       // Log any errors that occur
+       console.error('Error deleting user:', error);
+   });
+ }
 }
 
 // ##########################################################################################
