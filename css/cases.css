@@ -175,6 +175,7 @@
 
 .create-new-case h1 {
     margin-bottom: 2rem;
+    font-size: 30px;
 }
 
 .new-case-description input {
@@ -226,12 +227,12 @@
     margin-bottom: 1rem;
 }
 
-.case-description {
+.case-case-description {
     font-size: 30px;
-    margin-left: -1rem;
     font-weight: bold;
     /* margin-top: 1rem; */
-    margin-bottom: -1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 .case-top {

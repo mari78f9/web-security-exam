@@ -86,7 +86,7 @@ if (!isset($_SESSION['user'])) {
                                     </div>
                                 </div>
                                
-                                <p class="case-description"> ${caseItem.case_description}</p>
+                                <p class="case-case-description"> ${caseItem.case_description}</p>
                                 
                                 <div class="case-info">
                                     <div class="case-left">
