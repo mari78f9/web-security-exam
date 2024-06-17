@@ -8,9 +8,9 @@
 }
 
 .add-tip {
-    right: 0;
-    margin-top: 4rem;
-    margin-right: 8rem;
+    left: 0;
+    /* margin-top: 1rem; */
+    margin-left: 25rem;
     position: absolute;
     background-color: var(--colorRedMain);
     border: none;
@@ -128,9 +128,8 @@
 }
 
 .create-case {
-    right: 0;
-    margin-top: 4rem;
-    margin-right: 18rem;
+    left: 0;
+    margin-left: 16rem;
     position: absolute;
     background-color: var(--colorRedMain);
     border: none;
