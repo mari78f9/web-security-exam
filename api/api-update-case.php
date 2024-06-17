@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 
 // Check if the user is logged in
 if (!isset($_SESSION['user'])) {
-    header("Location: /../views/error.php");
+    header("Location: /views/error.php");
     exit();
 }
 
