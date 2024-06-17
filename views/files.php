@@ -49,10 +49,12 @@ if (!isset($_SESSION['user'])){
             <?php require_once __DIR__ . '/../views/file-upload.php'  ?>
         </div>
 
+        <?php if (in_array($user['role_id_fk'], [1, 4])): ?>
         <button class="upload-file" onclick="uploadFile()">
             <img src="/images/upload-file-light.png" alt="Users">
             <p> Upload file </p> 
         </button>
+        <?php endif; ?>
         
         <h2> File Registry </h2>
 
