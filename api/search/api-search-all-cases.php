@@ -70,7 +70,7 @@
                                 <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
                                 <p><strong>Type:</strong> ${caseItem.case_type}</p>
                                 <p><strong>Location:</strong> ${caseItem.case_location}</p>
-                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
+                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip.replace(/\n/g, '<br>') : 'No tips yet'}</p>
                                 <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span>
                                     <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button>
                                 </p>
