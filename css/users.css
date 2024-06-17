@@ -117,9 +117,9 @@
 }
 
 .delete-button button {
-    background-color: var(--colorDarkSecondary);
-    color: var(--colorDarkBlack);
-    border: 1px solid var(--colorDarkBlack);
+    background-color: var(--colorDarkMain);
+    color: var(--colorLightMain);
+    border: 1px solid var(--colorLightMain);
     border-radius: 5px;
     padding: 0.7rem;
     margin-top: 5px;
