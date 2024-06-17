@@ -50,14 +50,6 @@ if (!isset($_SESSION['user'])){
         <div id="newCase" class="new-case">
             <?php require_once __DIR__ . '/../views/create-case.php'  ?>
         </div>
-
-        <div class="case-folder">
-            <p> Cases </p>
-        </div>
-
-        <div class="case-folder-back">
-            <p> . </p>
-        </div>
         
         <?php require_once __DIR__ . '/../api/search/api-search-all-cases.php'  ?>
     
