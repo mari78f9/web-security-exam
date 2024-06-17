@@ -3,6 +3,8 @@
 // Connects to the database
 require_once __DIR__.'/database.php';
 
+require_once __DIR__.'/routes.php';
+
 // Enable error display
 ini_set('display_errors', 1);
 
@@ -138,16 +140,4 @@ function _validate_user_confirm_password(){
   if( $_POST['user_password'] != $_POST['user_confirm_password']){
     throw new Exception($error, 400); 
   }
-}
-
-// ##############################
-/**
- * Output text safely.
- * 
- * This function echoes the given text after converting special characters to HTML entities.
- * 
- * param string $text The text to be output.
- */
-function out($text){
-  echo htmlspecialchars($text);
 }

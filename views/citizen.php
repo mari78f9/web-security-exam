@@ -13,6 +13,7 @@ require_once __DIR__ . '/../_.php';
     <div id="signupForm" class="signup">
         <h4 class="header-form" id="signup-header">Signup</h4>
         <form class="signup-form" onsubmit="validate(signup); return false">
+        <?php set_csrf(); ?>
 
             <div class="name-input">
                 
