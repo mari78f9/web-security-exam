@@ -41,12 +41,11 @@ function toggleCaseSolved(caseId, currentStatus) {
       const caseElement = document.getElementById(`case-${caseId}`);
       if (caseElement) {
 
-          // If the case element exists, update the solved status display
-          const solvedStatusElement = caseElement.querySelector('.case-solved');
-          solvedStatusElement.textContent = newStatus ? 'Yes' : 'No';
-
           // Update the onclick attribute of the toggle button to reflect the new status
           const toggleButton = caseElement.querySelector('.toggle-button');
+          toggleButton.textContent = newStatus ? 'Solved' : 'Unsolved';
+
+          // Update the onclick attribute of the toggle button to reflect the new status
           toggleButton.setAttribute('onclick', `toggleCaseSolved('${caseId}', ${newStatus})`);
       } else {
 
@@ -197,11 +196,10 @@ function toggleCaseVisibility(caseId, currentStatus) {
       if (caseElement) {
 
           // Update the visibility status element text content
-          const visibilityStatusElement = caseElement.querySelector('.case-visibility');
-          visibilityStatusElement.textContent = newStatus ? 'Yes' : 'No';
+          const toggleVisibilityButton = caseElement.querySelector('.toggle-visibility-button');
+          toggleVisibilityButton.textContent = newStatus ? 'Public' : 'Private';
 
           // Update the toggle visibility button onclick attribute
-          const toggleVisibilityButton = caseElement.querySelector('.toggle-visibility-button');
           toggleVisibilityButton.setAttribute('onclick', `toggleCaseVisibility('${caseId}', ${newStatus})`);
       } else {
 
