@@ -8,6 +8,11 @@ header('Content-Type: application/json');
 
 try {
 
+   // Validate CSRF token
+   if (!is_csrf_valid()) {
+    throw new Exception('CSRF token validation failed', 403);
+  }
+
   // Validate user email using function from the master-file
   _validate_user_email();   
   

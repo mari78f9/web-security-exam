@@ -49,6 +49,7 @@ if (!isset($_SESSION['user'])){
 
             <div class="view-profile-form">
                 <form class="view-profile-form-input" onsubmit="validate(updateUser); return false">
+                <?php set_csrf(); ?>
 
                     <label class="profile-form-label" for="user_id"> ID </label> 
                         <div class="profile-form-input"><p id="user_id"> <?= $user['user_id'] ?> </p></div>

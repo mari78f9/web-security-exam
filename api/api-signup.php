@@ -6,6 +6,12 @@ require_once __DIR__.'/../_.php';
 header('Content-Type: application/json');
 
 try {
+
+    // Validate CSRF token
+    if (!is_csrf_valid()) {
+        throw new Exception('CSRF token validation failed', 403);
+    }
+    
     // Validate user inputs (you might have additional validation functions)
     _validate_user_name();   
     _validate_user_last_name();    

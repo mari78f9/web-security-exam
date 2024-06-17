@@ -17,6 +17,7 @@ if (!isset($_SESSION['user'])){
         <h2> Upload new file </h2>
         
         <form class="file-upload" id="file-upload" method="post" enctype="multipart/form-data">
+        <?php set_csrf(); ?>
             <input type="text" id="file_name" name="file_name" placeholder="Name the file">
             <input type="text" id="case_id" name="case_id" placeholder="Insert case-id">
             <input type="file" name="file">

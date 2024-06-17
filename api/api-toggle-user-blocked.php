@@ -13,6 +13,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 try {
+    
     // Extract user ID and blocked status from POST data
     $user_id = $_POST['user_id'];
     $user_is_blocked = $_POST['user_is_blocked'];

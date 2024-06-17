@@ -12,6 +12,11 @@ if (!isset($_SESSION['user'])) {
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // Validate CSRF token
+    if (!is_csrf_valid()) {
+        throw new Exception('CSRF token validation failed', 403);
+    }
+
     // Check if all required fields are provided in the POST data
     if (
         isset($_POST['case_description']) &&

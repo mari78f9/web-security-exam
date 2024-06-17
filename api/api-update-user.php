@@ -12,6 +12,11 @@ if (!isset($_SESSION['user'])) {
 
 try {
 
+   // Validate CSRF token
+   if (!is_csrf_valid()) {
+    throw new Exception('CSRF token validation failed', 403);
+  }
+
   // Check if the user is logged in
   if ( ! isset($_SESSION['user']['user_id']) ) {
     throw new Exception('user not logged in', 400);

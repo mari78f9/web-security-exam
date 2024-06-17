@@ -34,6 +34,11 @@ function handleFileUpload($file_name, $file, $case_id) {
 header('Content-Type: application/json');
 
 try {
+     // Validate CSRF token
+    if (!is_csrf_valid()) {
+        throw new Exception('CSRF token validation failed', 403);
+    }
+
     // Check if a file was uploaded and there were no errors
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
 

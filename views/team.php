@@ -15,6 +15,7 @@ require_once __DIR__ . '/../_.php';
         <h4 class="header-form" id="team-login-header">Login</h4>
 
         <form class="login-form" method="post" onsubmit="validate(login); return false">
+        <?php set_csrf(); ?>
 
             <div class="form-login-grid" id="email">
                 <label class="form-label" for="user_email">Email</label>

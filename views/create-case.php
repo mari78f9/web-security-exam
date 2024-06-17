@@ -17,6 +17,7 @@ if (!isset($_SESSION['user'])){
         <h1> Create New Case </h1>
         
         <form id="create-case-form" class="new-case-description" onsubmit="makeCase(); return false">
+        <?php set_csrf(); ?>
             
             <input type="text" id="case_type" name="case_type" placeholder="Type of crime committed" required>
             
