@@ -151,13 +151,3 @@ function _validate_user_confirm_password(){
 function out($text){
   echo htmlspecialchars($text);
 }
-
-// ##########################################################################################
-
-// TOKEN ON API //////////////////
-
-// Function to validate the API token
-function validate_token($token) {
-  // Replace 'your-secret-key' with your actual secret key or token validation logic
-  return $token === 'kea';
-}

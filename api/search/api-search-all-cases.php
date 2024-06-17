@@ -77,14 +77,12 @@ if (!isset($_SESSION['user'])) {
                             let caseElement = document.createElement('div');
                             caseElement.id = `case-${caseItem.case_id}`;
                             caseElement.innerHTML = `
-                                <div>
-
                                 <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
-                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
                                 <p><strong>Description:</strong> ${caseItem.case_description}</p>
                                 <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
+                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
                                 <p><strong>Location:</strong> ${caseItem.case_location}</p>
-                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip.replace(/\n/g, '<br>') : 'No tips yet'}</p>
+                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip : 'No tips yet'}</p>
                                 <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span>
                                     <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button>
                                 </p>
@@ -93,8 +91,7 @@ if (!isset($_SESSION['user'])) {
                                 <p><strong>Public:</strong> <span class="case-visibility">${caseItem.case_is_public ? 'Yes' : 'No'}</span>
                                     <button class="toggle-visibility-button" onclick="toggleCaseVisibility('${caseItem.case_id}', ${caseItem.case_is_public})">Toggle</button>
                                 </p>
-                                
-                                </div>
+                                <hr>
                             `;
                             casesDisplay.appendChild(caseElement);
                         });
