@@ -9,7 +9,18 @@ require_once __DIR__.'/routes.php';
 ini_set('display_errors', 1);
 
 // Start the session
-session_start();
+session_start([
+  'cookie_lifetime' => 0, // Session cookie will expire when the browser closes
+  'cookie_secure' => true, // Send the cookie over HTTPS only
+  'cookie_httponly' => true, // Prevent JavaScript access to the cookie
+  'cookie_samesite' => 'Strict', // Restrict the cookie to the same site
+  'use_strict_mode' => true, // Strict session ID mode
+  'use_cookies' => true, // Use cookies for session management
+  'use_only_cookies' => true // Do not use URL-based session IDs
+]);
+
+// Regenerate the session ID
+session_regenerate_id(true);
 
 // ##############################
 // Constants for user name validation
