@@ -6,6 +6,12 @@ require_once __DIR__.'/../_.php';
 // Set response header to indicate JSON content type
 header('Content-Type: application/json');
 
+// Check if the user is logged in
+if (!isset($_SESSION['user'])) {
+    header("Location: /../views/error.php");
+    exit();
+}
+
 try {
     // Extract user ID and blocked status from POST data
     $user_id = $_POST['user_id'];

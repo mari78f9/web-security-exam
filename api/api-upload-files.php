@@ -3,6 +3,12 @@
 // Connects to the master-file, which contains the database connection and validation
 require_once __DIR__.'/../_.php';
 
+// Check if the user is logged in
+if (!isset($_SESSION['user'])) {
+    header("Location: /../views/error.php");
+    exit();
+}
+
 // Function to handle file upload
 function handleFileUpload($file_name, $file, $case_id) {
     // Connect to the database
