@@ -1,3 +1,11 @@
+<?php
+
+if (!isset($_SESSION['user'])){
+    header("Location: error.php");
+    exit();
+}
+?>
+
 <div class="display-file-upload" id="displayFileUpload">
 
     <div class="upload-new-file">

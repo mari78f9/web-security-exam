@@ -16,7 +16,7 @@ try {
     $db = _db();
 
     // Check if there is a search query
-    $searchQuery = isset($_GET['searchCase']) ? $_GET['searchCase'] : '';
+    $searchQuery = isset($_GET['searchCase']) ? trim($_GET['searchCase']) : '';
     // Check if public_only parameter is set
     $publicOnly = isset($_GET['public_only']) ? true : false;
 

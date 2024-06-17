@@ -15,7 +15,7 @@ header('Content-Type: application/json');
 try {
     $db = _db();
 
-    $searchQuery = isset($_GET['searchUser']) ? $_GET['searchUser'] : '';
+    $searchQuery = isset($_GET['searchUser']) ? trim($_GET['searchUser']) : '';
 
     if ($searchQuery) {
         $q = $db->prepare('

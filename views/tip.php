@@ -1,3 +1,11 @@
+<?php
+
+if (!isset($_SESSION['user'])){
+    header("Location: error.php");
+    exit();
+}
+?>
+
 <div class="display-tip">
 
     <div class="display-add-tip">

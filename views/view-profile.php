@@ -31,7 +31,7 @@ if (!isset($_SESSION['user'])){
         <!-- Bottom-Left -->
         <div class="dashboard-menu-bottom">
 
-        <?php require_once __DIR__ . '/../api/api-navigation.php'  ?>
+        <?php require_once __DIR__ . '/_navigation.php'  ?>
 
             <div class="logout">
                 <button onclick="logout()"> Log out </button>

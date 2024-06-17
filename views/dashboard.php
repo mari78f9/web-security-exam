@@ -36,7 +36,7 @@ if (!isset($_SESSION['user'])){
                 <button onclick="logout()"> Log out </button>
             </div>
 
-            <?php require_once __DIR__ . '/../api/api-navigation.php'  ?>
+            <?php require_once __DIR__ . '/_navigation.php'  ?>
 
         </div>
 
@@ -48,7 +48,7 @@ if (!isset($_SESSION['user'])){
 
         <div class="button-display">
 
-            <?php require_once __DIR__ . '/../api/api-authorization.php'  ?>
+            <?php require_once __DIR__ . '/_authorization.php'  ?>
 
         </div>
 

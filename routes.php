@@ -6,56 +6,46 @@ require_once __DIR__.'/router.php';
 // ##################################################
 // ##################################################
 
-// Static GET
-// In the URL -> http://localhost
-// The output -> Index
+// Define routes
 get('/', 'views/index.php');
+get('/login', 'views/login.php');
+get('/signup', 'views/signup.php');
+get('/error', 'views/error.php');
 
-// Dynamic GET. Example with 1 variable
-// The $id will be available in user.php
-get('/user/$id', 'views/user');
+get('/cases', 'views/cases.php');
+get('/citizen', 'views/citizen.php');
+get('/create-case', 'views/create-case.php');
+get('/dashboard', 'views/dashboard.php');
+get('/file-upload', 'views/file-upload.php');
+get('/files', 'views/files.php');
+get('/team', 'views/team.php');
+get('/tip', 'views/tip.php');
+get('/users', 'views/users.php');
+get('/view-profile', 'views/view-profile.php');
 
-// Dynamic GET. Example with 2 variables
-// The $name will be available in full_name.php
-// The $last_name will be available in full_name.php
-// In the browser point to: localhost/user/X/Y
-get('/user/$name/$last_name', 'views/full_name.php');
+// Define API routes
+get('/api/api-authorization', 'api/api-authorization.php');
+post('/api/api-delete-user', 'api/api-delete-user.php');
+get('/api/api-display-files', 'api/api-display-files.php');
+get('/api/api-get-cases', 'api/api-get-cases.php');
+get('/api/api-get-files', 'api/api-get-files.php');
+get('/api/api-get-users', 'api/api-get-users.php');
+get('/api/api-login', 'api/api-login.php');
+post('/api/api-make-case', 'api/api-make-case.php');
+get('/api/api-navigation', 'api/api-navigation.php');
 
-// Dynamic GET. Example with 2 variables with static
-// In the URL -> http://localhost/product/shoes/color/blue
-// The $type will be available in product.php
-// The $color will be available in product.php
-get('/product/$type/color/$color', 'product.php');
-
-// A route with a callback
+// Route with callback
 get('/callback', function(){
   echo 'Callback executed';
 });
 
-// A route with a callback passing a variable
-// To run this route, in the browser type:
-// http://localhost/user/A
 get('/callback/$name', function($name){
   echo "Callback executed. The name is $name";
 });
 
-// Route where the query string happends right after a forward slash
-get('/product', '');
-
-// A route with a callback passing 2 variables
-// To run this route, in the browser type:
-// http://localhost/callback/A/B
 get('/callback/$name/$last_name', function($name, $last_name){
   echo "Callback executed. The full name is $name $last_name";
 });
-
-// ##################################################
-// ##################################################
-// ##################################################
-// Route that will use POST data
-post('/user', '/api/save_user');
-
-
 
 // ##################################################
 // ##################################################
@@ -66,3 +56,7 @@ post('/user', '/api/save_user');
 // The 404.php which is inside the views folder will be called
 // The 404.php has access to $_GET and $_POST
 any('/404','views/404.php');
+
+// Handle the routing
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+route($path, 'views/404.php');

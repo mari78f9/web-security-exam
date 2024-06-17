@@ -4,13 +4,22 @@ RewriteEngine On
  
 #####
 RewriteRule ^$                /views/index.php [NC,L]
-RewriteRule ^admin$           /views/admin.php [NC,L]
-RewriteRule ^detective$       /views/detective.php [NC,L]
-RewriteRule ^citizen$         /views/citizen.php [NC,L]
-RewriteRule ^lawyer$          /views/lawyer.php [NC,L]
-
 RewriteRule ^login$           /views/login.php [NC,L]
 RewriteRule ^signup$          /views/signup.php [NC,L]
 RewriteRule ^error$           /views/error.php [NC,L]
-RewriteRule ^dashboard$       /views/dashboard.php [NC,L]
+
 RewriteRule ^cases$           /views/cases.php [NC,L]
+RewriteRule ^citizen$         /views/citizen.php [NC,L]
+RewriteRule ^create-case$     /views/create-case.php [NC,L]
+RewriteRule ^dashboard$       /views/dashboard.php [NC,L]
+RewriteRule ^file-upload$     /views/file-upload.php [NC,L]
+RewriteRule ^files$           /views/files.php [NC,L]
+RewriteRule ^team$            /views/team.php [NC,L]
+RewriteRule ^tip$             /views/tip.php [NC,L]
+RewriteRule ^users$           /views/users.php [NC,L]
+RewriteRule ^view-profile$    /views/view-profile.php [NC,L]
+
+# Forward all other requests to index.php for routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
