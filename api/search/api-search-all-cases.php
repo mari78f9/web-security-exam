@@ -32,7 +32,7 @@
 
     </div>
 
-    <div id="cases-display"></div>
+    <div id="cases-display" class="cases-display"></div>
 
     <?php
     // PHP conditional blocks to fetch and display cases based on user role
@@ -65,22 +65,41 @@
                             let caseElement = document.createElement('div');
                             caseElement.id = `case-${caseItem.case_id}`;
                             caseElement.innerHTML = `
-                                <div>
+                                <div class="each-case">
+                                <div class="case-top">
+                                    <div> <span style="color: #b91010; font-size: 13px;">${caseItem.case_type}</span> <span style="color: #b91010; font-size: 13px;"> | </span> <span style="color: #9c9c9c; font-size: 13px;"> ${caseItem.case_id}</span> </div>
+                                    <div class="case-top-right">
+                                        <button class="toggle-visibility-button" onclick="toggleCaseVisibility('${caseItem.case_id}', ${caseItem.case_is_public})"> ${caseItem.case_is_public ? 'Public' : 'Private'} </button>
+                                        <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})"> ${caseItem.case_solved ? 'Solved' : 'Unsolved'} </button>
+                                    </div>
+                                </div>
+                               
+                                <p class="case-description"> ${caseItem.case_description}</p>
+                                
+                                <div class="case-info">
+                                    <div class="case-left">
+                                        <p class="case-dets"> Crime Scene </p>
+                                        <p> ${caseItem.case_location} </p>
 
-                                <p><strong>Case ID:</strong> ${caseItem.case_id}</p>
-                                <p><strong>Type:</strong> ${caseItem.case_type}</p>
-                                <p><strong>Description:</strong> ${caseItem.case_description}</p>
-                                <p><strong>Suspect:</strong> ${caseItem.case_suspect}</p>
-                                <p><strong>Location:</strong> ${caseItem.case_location}</p>
-                                <p><strong>Tip:</strong> ${caseItem.case_tip ? caseItem.case_tip.replace(/\n/g, '<br>') : 'No tips yet'}</p>
-                                <p><strong>Solved:</strong> <span class="case-solved">${caseItem.case_solved ? 'Yes' : 'No'}</span>
-                                    <button class="toggle-button" onclick="toggleCaseSolved('${caseItem.case_id}', ${caseItem.case_solved})">Toggle</button>
-                                </p>
-                                <p><strong>Created At:</strong> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
-                                <p><strong>Updated at:</strong> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
-                                <p><strong>Public:</strong> <span class="case-visibility">${caseItem.case_is_public ? 'Yes' : 'No'}</span>
-                                    <button class="toggle-visibility-button" onclick="toggleCaseVisibility('${caseItem.case_id}', ${caseItem.case_is_public})">Toggle</button>
-                                </p>
+                                        <div class="case-tips"> <p class="case-dets"> New info? </p> <p class="case-tip"> ${caseItem.case_tip ? caseItem.case_tip.replace(/\n/g, '</n> <br>') : 'No tips yet'}</p></div>
+                                        
+                                        <p class="case-dets"> Case Status </p>
+                                        <div class="case-status"> 
+                                            <p class="case-status-label"> Reported </p>
+                                            <p class="case-status-info"> ${new Date(caseItem.case_created_at * 1000).toLocaleString()}</p>
+                                            <p class="case-status-label"> Updated </p>
+                                            <p class="case-status-info"> ${caseItem.case_updated_at == 0 ? 'Never' : new Date(caseItem.case_updated_at * 1000).toLocaleString()}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="case-right">
+                                        <img src="/images/profile-light.png" alt="user_profile"> <br>
+                                        <h1> ${caseItem.case_suspect} </h1>
+                                        <p> Suspect </p>
+
+                                    </div>
+                                </div>
+                                
                                 
                                 </div>
                             `;
