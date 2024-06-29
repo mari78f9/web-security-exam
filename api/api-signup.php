@@ -54,6 +54,7 @@ try {
     $user_id = bin2hex(random_bytes(5));
 
     // Bind values to the prepared statement with type specifications for security
+    // Ensure that user input is treated strictly as data and not as part of the SQL query
     $q->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $q->bindValue(':user_name', $_POST['user_name'], PDO::PARAM_STR); 
     $q->bindValue(':user_last_name', $_POST['user_last_name'], PDO::PARAM_STR);

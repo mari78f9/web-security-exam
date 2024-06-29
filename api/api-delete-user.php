@@ -1,5 +1,7 @@
 <?php 
 
+header('Content-Type: application/json');
+
 // Connects to the master-file, which contains the database connection and validation
 require_once __DIR__.'/../_.php';
 
@@ -31,7 +33,7 @@ try {
   if ($loggedInUserId !== $user_id) {
     // Here you can add a role check to ensure only admins can delete other users
     // Assuming 'admin' role is identified by role_name field
-    if ($_SESSION['user']['role_name'] !== 'admin') {
+    if ($_SESSION['user']['role_id_fk'] !== 4) {
         throw new Exception('Unauthorized action', 403);
     }
   }
